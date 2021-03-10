@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.common.holder;
+package com.github.suloginscene.accountant.context.common.value.holder;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

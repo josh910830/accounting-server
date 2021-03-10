@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.common.holder;
+package com.github.suloginscene.accountant.context.common.value.holder;
 
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

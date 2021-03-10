@@ -1,14 +1,14 @@
-package com.github.suloginscene.accountant.account;
+package com.github.suloginscene.accountant.context.account.domain.account;
 
-import com.github.suloginscene.accountant.common.holder.Holder;
-import com.github.suloginscene.accountant.common.money.Money;
-import com.github.suloginscene.accountant.common.money.NegativeMoneyException;
+import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.account.AccountType.ASSET;
+import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.ASSET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

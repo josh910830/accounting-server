@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.common.money;
+package com.github.suloginscene.accountant.context.common.value.money;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

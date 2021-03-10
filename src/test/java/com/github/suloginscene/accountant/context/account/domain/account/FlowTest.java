@@ -1,12 +1,12 @@
-package com.github.suloginscene.accountant.account;
+package com.github.suloginscene.accountant.context.account.domain.account;
 
-import com.github.suloginscene.accountant.common.holder.Holder;
-import com.github.suloginscene.accountant.common.money.Money;
+import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.account.AccountType.REVENUE;
+import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.REVENUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

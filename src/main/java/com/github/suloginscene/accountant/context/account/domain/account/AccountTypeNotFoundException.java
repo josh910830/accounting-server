@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.account;
+package com.github.suloginscene.accountant.context.account.domain.account;
 
 
 public class AccountTypeNotFoundException extends IllegalArgumentException {
