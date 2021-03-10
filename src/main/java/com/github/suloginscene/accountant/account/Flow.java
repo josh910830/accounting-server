@@ -25,8 +25,8 @@ public abstract class Flow extends Account {
     }
 
 
-    public void occur(Money amount) {
-        addSingleTransaction(new SingleTransaction());
+    public void occur(Money amount, String description) {
+        writeSingleTransaction(amount, description);
     }
 
 }

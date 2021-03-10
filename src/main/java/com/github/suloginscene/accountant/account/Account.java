@@ -62,11 +62,11 @@ public abstract class Account {
     }
 
 
-    protected void addSingleTransaction(SingleTransaction singleTransaction) {
-        singleTransactions.add(singleTransaction);
+    protected void writeSingleTransaction(Money amount, String description) {
+        singleTransactions.add(SingleTransaction.of(amount, description));
     }
 
-    public List<SingleTransaction> clonedSingleTransactions() {
+    public List<SingleTransaction> readSingleTransaction() {
         return new ArrayList<>(singleTransactions);
     }
 

@@ -28,12 +28,12 @@ class FlowTest {
 
 
     @Test
-    @DisplayName("발생 정상 - 단식 거래 추가")
-    void increase_onSuccess_addsSingleTransaction() {
+    @DisplayName("발생 정상 - 단식 거래 기록")
+    void increase_onSuccess_writesSingleTransaction() {
         Money money = Money.of(1);
-        flow.occur(money);
+        flow.occur(money, "발생");
 
-        assertThat(flow.clonedSingleTransactions()).hasSize(1);
+        assertThat(flow.readSingleTransaction()).hasSize(1);
     }
 
 }

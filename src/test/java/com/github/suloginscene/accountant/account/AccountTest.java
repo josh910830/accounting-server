@@ -69,23 +69,24 @@ class AccountTest {
 
 
     @Test
-    @DisplayName("단식 거래 추가 - 상태 변경")
-    void addSingleTransaction_onSuccess_changeState() {
+    @DisplayName("단식 거래 기록 - 상태 변경")
+    void writeSingleTransaction_onSuccess_changeState() {
         Account account = Account.create(createParam(ASSET, "신한 적금"));
 
-        SingleTransaction singleTransaction = new SingleTransaction();
-        account.addSingleTransaction(singleTransaction);
+        Money amount = Money.of(1);
+        String description = "protected 메서드이며, 하위 클래스의 public 내에서 사용됨";
+        account.writeSingleTransaction(amount, description);
 
-        assertThat(account.clonedSingleTransactions()).hasSize(1);
+        assertThat(account.readSingleTransaction()).hasSize(1);
     }
 
     @Test
     @DisplayName("단식 거래 조회 - 사본 반환")
-    void clonedSingleTransactions_onSuccess_returnsCloneList() {
+    void readSingleTransactions_onSuccess_returnsCloneList() {
         Account account = Account.create(createParam(ASSET, "신한 적금"));
 
-        List<SingleTransaction> history1 = account.clonedSingleTransactions();
-        List<SingleTransaction> history2 = account.clonedSingleTransactions();
+        List<SingleTransaction> history1 = account.readSingleTransaction();
+        List<SingleTransaction> history2 = account.readSingleTransaction();
 
         assertThat(history1).isNotSameAs(history2);
     }
