@@ -24,4 +24,9 @@ public abstract class Flow extends Account {
         this.budget = budget;
     }
 
+
+    public void occur(Money amount) {
+        addSingleTransaction(new SingleTransaction());
+    }
+
 }
