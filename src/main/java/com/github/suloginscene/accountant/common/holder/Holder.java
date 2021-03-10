@@ -15,7 +15,7 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 public class Holder {
 
-    @Column(name = "holder")
+    @Column(name = "holder_id")
     private Long id;
 
 

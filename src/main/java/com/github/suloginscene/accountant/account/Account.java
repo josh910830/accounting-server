@@ -4,11 +4,17 @@ import com.github.suloginscene.accountant.common.holder.Holder;
 import com.github.suloginscene.accountant.common.money.Money;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.InheritanceType.JOINED;
 import static lombok.AccessLevel.PROTECTED;
 
@@ -19,11 +25,16 @@ import static lombok.AccessLevel.PROTECTED;
 public abstract class Account {
 
     @Id @GeneratedValue
+    @Column(name = "account_id")
     private Long id;
 
     private Holder holder;
 
     private String name;
+
+    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @JoinColumn(name = "account_id")
+    private final List<SingleTransaction> singleTransactions = new ArrayList<>();
 
 
     protected Account(Holder holder, String name) {
@@ -48,6 +59,15 @@ public abstract class Account {
             default:
                 throw new AccountTypeNotFoundException(accountType);
         }
+    }
+
+
+    protected void addSingleTransaction(SingleTransaction singleTransaction) {
+        singleTransactions.add(singleTransaction);
+    }
+
+    public List<SingleTransaction> clonedSingleTransactions() {
+        return new ArrayList<>(singleTransactions);
     }
 
 }
