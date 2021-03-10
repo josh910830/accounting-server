@@ -6,6 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.github.suloginscene.accountant.account.AccountType.ASSET;
+import static com.github.suloginscene.accountant.account.AccountType.EXPENSE;
+import static com.github.suloginscene.accountant.account.AccountType.LIABILITY;
+import static com.github.suloginscene.accountant.account.AccountType.REVENUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -24,9 +28,8 @@ class AccountTest {
     @Test
     @DisplayName("자산 생성")
     void createAsset_onSuccess_returnsAsset() {
-        String name = "하나 자유";
-        Money balance = Money.of(1);
-        Account asset = Account.createAsset(holder, name, balance);
+        AccountCreationParameter param = createParam(ASSET, "하나 자유");
+        Account asset = Account.create(param);
 
         assertThat(asset).isInstanceOf(Asset.class);
     }
@@ -34,9 +37,8 @@ class AccountTest {
     @Test
     @DisplayName("부채 생성")
     void createLiability_onSuccess_returnsLiability() {
-        String name = "현대 신용";
-        Money balance = Money.of(1);
-        Account liability = Account.createLiability(holder, name, balance);
+        AccountCreationParameter param = createParam(LIABILITY, "현대 신용");
+        Account liability = Account.create(param);
 
         assertThat(liability).isInstanceOf(Liability.class);
     }
@@ -44,9 +46,8 @@ class AccountTest {
     @Test
     @DisplayName("수입 생성")
     void createRevenue_onSuccess_returnsRevenue() {
-        String name = "월급";
-        Money budget = Money.of(1);
-        Account revenue = Account.createRevenue(holder, name, budget);
+        AccountCreationParameter param = createParam(REVENUE, "월급");
+        Account revenue = Account.create(param);
 
         assertThat(revenue).isInstanceOf(Revenue.class);
     }
@@ -54,11 +55,14 @@ class AccountTest {
     @Test
     @DisplayName("지출 생성")
     void createExpense_onSuccess_returnsExpense() {
-        String name = "식비";
-        Money budget = Money.of(1);
-        Account expense = Account.createExpense(holder, name, budget);
+        AccountCreationParameter param = createParam(EXPENSE, "식비");
+        Account expense = Account.create(param);
 
         assertThat(expense).isInstanceOf(Expense.class);
+    }
+
+    private AccountCreationParameter createParam(AccountType type, String name) {
+        return new AccountCreationParameter(type, holder, name, Money.of(1));
     }
 
 }

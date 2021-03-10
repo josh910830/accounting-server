@@ -31,21 +31,23 @@ public abstract class Account {
         this.name = name;
     }
 
-
-    public static Account createAsset(Holder holder, String name, Money balance) {
-        return new Asset(holder, name, balance);
-    }
-
-    public static Account createLiability(Holder holder, String name, Money balance) {
-        return new Liability(holder, name, balance);
-    }
-
-    public static Account createRevenue(Holder holder, String name, Money budget) {
-        return new Revenue(holder, name, budget);
-    }
-
-    public static Account createExpense(Holder holder, String name, Money budget) {
-        return new Expense(holder, name, budget);
+    public static Account create(AccountCreationParameter parameters) {
+        AccountType accountType = parameters.getAccountType();
+        Holder holder = parameters.getHolder();
+        String name = parameters.getName();
+        Money money = parameters.getMoney();
+        switch (accountType) {
+            case ASSET:
+                return new Asset(holder, name, money);
+            case LIABILITY:
+                return new Liability(holder, name, money);
+            case REVENUE:
+                return new Revenue(holder, name, money);
+            case EXPENSE:
+                return new Expense(holder, name, money);
+            default:
+                throw new AccountTypeNotFoundException(accountType);
+        }
     }
 
 }
