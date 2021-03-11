@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ public abstract class Account {
 
     @Id @GeneratedValue
     @Column(name = "account_id")
+    @Getter
     private Long id;
 
     private Holder holder;
