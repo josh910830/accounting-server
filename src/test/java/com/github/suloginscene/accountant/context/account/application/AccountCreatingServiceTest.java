@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.AccountCreationParameter;
-import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.accountant.testing.db.RepositoryProxy;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AccountCreatingServiceTest {
 
     @Autowired AccountCreatingService accountCreatingService;
-    @Autowired AccountRepository accountRepository;
+    @Autowired RepositoryProxy repositoryProxy;
 
     AccountCreationParameter param;
 
@@ -35,9 +35,7 @@ class AccountCreatingServiceTest {
 
     @AfterEach
     void clear() {
-        // TODO refactor with proxy
-        System.out.println("clear");
-        accountRepository.deleteAll();
+        repositoryProxy.clear();
     }
 
 
