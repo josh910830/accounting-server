@@ -51,7 +51,7 @@ class RepayTransactionServiceTest {
 
     @Test
     @DisplayName("정상 - 자산 감소 & 부채 감소")
-    void repay_onSuccess_decreaseAsset() {
+    void repay_onSuccess_decreaseAssetAndDecreaseLiability() {
         repay.execute(asset, liability, amount, description);
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
