@@ -6,6 +6,8 @@ import com.github.suloginscene.accountant.context.account.domain.account.Revenue
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.NoArgsConstructor;
 
+import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toAsset;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toRevenue;
 import static lombok.AccessLevel.PACKAGE;
 
 
@@ -14,9 +16,8 @@ class SellTransactionService implements TransactionService {
 
     @Override
     public DoubleTransaction execute(Account from, Account to, Money amount, String description) {
-        // TODO create converter
-        Revenue revenue = (Revenue) from;
-        Asset asset = (Asset) to;
+        Revenue revenue = toRevenue(from);
+        Asset asset = toAsset(to);
 
         revenue.occur(amount, description);
         asset.increase(amount, description);

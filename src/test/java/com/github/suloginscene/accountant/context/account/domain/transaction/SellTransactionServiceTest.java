@@ -62,7 +62,7 @@ class SellTransactionServiceTest {
         Expense expense = DefaultAccounts.expense();
         Executable action = () -> sell.execute(expense, asset, amount, description);
 
-        assertThrows(ClassCastException.class, action);
+        assertThrows(AccountCastException.class, action);
     }
 
     @Test
@@ -71,7 +71,7 @@ class SellTransactionServiceTest {
         Liability liability = DefaultAccounts.liability(1);
         Executable action = () -> sell.execute(revenue, liability, amount, description);
 
-        assertThrows(ClassCastException.class, action);
+        assertThrows(AccountCastException.class, action);
     }
 
 }
