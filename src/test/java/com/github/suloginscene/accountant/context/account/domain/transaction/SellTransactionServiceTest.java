@@ -21,8 +21,8 @@ class SellTransactionServiceTest {
 
     TransactionService sell;
 
-    Asset asset;
     Revenue revenue;
+    Asset asset;
 
     Money amount;
     String description;
@@ -32,8 +32,8 @@ class SellTransactionServiceTest {
     void setup() {
         sell = TransactionService.create(SELL);
 
-        asset = DefaultAccounts.asset(1);
         revenue = DefaultAccounts.revenue();
+        asset = DefaultAccounts.asset(1);
 
         amount = Money.of(1);
         description = "설명";
