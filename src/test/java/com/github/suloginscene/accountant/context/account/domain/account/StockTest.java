@@ -20,8 +20,7 @@ class StockTest {
 
     @BeforeEach
     void setup() {
-        Account account = DefaultAccounts.asset(1);
-        stock = (Stock) account;
+        stock = DefaultAccounts.asset(1);
     }
 
 
@@ -31,7 +30,7 @@ class StockTest {
         Money money = Money.of(1);
         stock.increase(money, "입금");
 
-        assertThat(stock.getBalance()).isEqualTo(Money.of(2));
+        assertThat(stock.getBalance().get()).isEqualTo(2);
     }
 
     @Test
@@ -49,7 +48,7 @@ class StockTest {
         Money money = Money.of(1);
         stock.decrease(money, "출금");
 
-        assertThat(stock.getBalance()).isEqualTo(Money.of(0));
+        assertThat(stock.getBalance().get()).isEqualTo(0);
     }
 
     @Test

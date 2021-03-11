@@ -11,7 +11,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-class Liability extends Stock {
+public class Liability extends Stock {
 
     Liability(Holder holder, String name, Money balance) {
         super(holder, name, balance);

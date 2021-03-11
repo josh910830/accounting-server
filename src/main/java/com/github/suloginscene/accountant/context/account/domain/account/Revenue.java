@@ -11,7 +11,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-class Revenue extends Flow {
+public class Revenue extends Flow {
 
     Revenue(Holder holder, String name, Money budget) {
         super(holder, name, budget);

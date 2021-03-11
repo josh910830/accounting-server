@@ -17,8 +17,7 @@ class FlowTest {
 
     @BeforeEach
     void setup() {
-        Account account = DefaultAccounts.revenue();
-        flow = (Flow) account;
+        flow = DefaultAccounts.revenue();
     }
 
 
