@@ -1,14 +1,13 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
+import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.ASSET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,11 +20,7 @@ class StockTest {
 
     @BeforeEach
     void setup() {
-        Holder holder = new Holder(1L);
-        String name = "국민 예금";
-        Money base = Money.of(1);
-        AccountCreationParameter param = new AccountCreationParameter(ASSET, holder, name, base);
-        Account account = Account.create(param);
+        Account account = DefaultAccounts.asset(1);
         stock = (Stock) account;
     }
 

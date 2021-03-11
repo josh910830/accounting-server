@@ -1,12 +1,11 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.REVENUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -18,11 +17,7 @@ class FlowTest {
 
     @BeforeEach
     void setup() {
-        Holder holder = new Holder(1L);
-        String name = "월급";
-        Money base = Money.of(1);
-        AccountCreationParameter param = new AccountCreationParameter(REVENUE, holder, name, base);
-        Account account = Account.create(param);
+        Account account = DefaultAccounts.revenue();
         flow = (Flow) account;
     }
 
