@@ -34,30 +34,12 @@ class StockTest {
     }
 
     @Test
-    @DisplayName("증가 정상 - 단식 거래 기록")
-    void increase_onSuccess_writesSingleTransaction() {
-        Money money = Money.of(1);
-        stock.increase(money, "입금");
-
-        assertThat(stock.readSingleTransaction()).hasSize(1);
-    }
-
-    @Test
     @DisplayName("감소 정상 - 잔고 감소")
     void decrease_onSuccess_increasesBalance() {
         Money money = Money.of(1);
         stock.decrease(money, "출금");
 
         assertThat(stock.getBalance().get()).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("감소 정상 - 단식 거래 기록")
-    void decrease_onSuccess_writesSingleTransaction() {
-        Money money = Money.of(1);
-        stock.decrease(money, "출금");
-
-        assertThat(stock.readSingleTransaction()).hasSize(1);
     }
 
     @Test

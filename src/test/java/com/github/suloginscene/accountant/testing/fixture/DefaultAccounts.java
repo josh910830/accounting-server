@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.testing.fixture;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountCreationParameter;
+import com.github.suloginscene.accountant.context.account.domain.account.AccountFactory;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Expense;
@@ -19,19 +19,19 @@ import static com.github.suloginscene.accountant.context.account.domain.account.
 public class DefaultAccounts {
 
     public static Asset asset(int balance) {
-        return (Asset) Account.create(param("자산", ASSET, balance));
+        return (Asset) AccountFactory.create(param("자산", ASSET, balance));
     }
 
     public static Liability liability(int balance) {
-        return (Liability) Account.create(param("부채", LIABILITY, balance));
+        return (Liability) AccountFactory.create(param("부채", LIABILITY, balance));
     }
 
     public static Revenue revenue() {
-        return (Revenue) Account.create(param("수입", REVENUE));
+        return (Revenue) AccountFactory.create(param("수입", REVENUE));
     }
 
     public static Expense expense() {
-        return (Expense) Account.create(param("지출", EXPENSE));
+        return (Expense) AccountFactory.create(param("지출", EXPENSE));
     }
 
 

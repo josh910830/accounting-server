@@ -45,31 +45,12 @@ public abstract class Account {
         this.name = name;
     }
 
-    public static Account create(AccountCreationParameter parameters) {
-        AccountType accountType = parameters.getAccountType();
-        Holder holder = parameters.getHolder();
-        String name = parameters.getName();
-        Money money = parameters.getMoney();
-        switch (accountType) {
-            case ASSET:
-                return new Asset(holder, name, money);
-            case LIABILITY:
-                return new Liability(holder, name, money);
-            case REVENUE:
-                return new Revenue(holder, name, money);
-            case EXPENSE:
-                return new Expense(holder, name, money);
-            default:
-                throw new AccountTypeNotFoundException(accountType);
-        }
-    }
-
 
     protected void writeSingleTransaction(Money amount, String description) {
         singleTransactions.add(SingleTransaction.of(amount, description));
     }
 
-    public List<SingleTransaction> readSingleTransaction() {
+    public List<SingleTransaction> readSingleTransactions() {
         return new ArrayList<>(singleTransactions);
     }
 
