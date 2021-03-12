@@ -21,9 +21,9 @@ public class DoubleTransaction {
     @Column(name = "double_transaction_id")
     private Long id;
 
-    private String from;
+    private String debit;
 
-    private String to;
+    private String credit;
 
     private Money amount;
 
@@ -32,21 +32,21 @@ public class DoubleTransaction {
     private LocalDateTime createdAt;
 
 
-    private DoubleTransaction(String from, String to, Money amount, String description, LocalDateTime createdAt) {
-        this.from = from;
-        this.to = to;
+    private DoubleTransaction(String debit, String credit, Money amount, String description, LocalDateTime createdAt) {
+        this.debit = debit;
+        this.credit = credit;
         this.amount = amount;
         this.description = description;
         this.createdAt = createdAt;
     }
 
     static DoubleTransaction of(DoubleTransactionExecutedEvent event) {
-        String from = event.getFrom();
-        String to = event.getTo();
+        String credit = event.getFrom();
+        String debit = event.getTo();
         Money amount = event.getAmount();
         String description = event.getDescription();
         LocalDateTime createdAt = event.getCreatedAt();
-        return new DoubleTransaction(from, to, amount, description, createdAt);
+        return new DoubleTransaction(debit, credit, amount, description, createdAt);
     }
 
 }

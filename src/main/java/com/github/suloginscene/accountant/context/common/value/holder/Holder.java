@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -13,7 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Embeddable
 @EqualsAndHashCode @ToString
 @NoArgsConstructor(access = PROTECTED)
-public class Holder {
+public class Holder implements Serializable {
 
     @Column(name = "holder_id")
     private Long id;
