@@ -4,8 +4,13 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 
 
-public interface TransactionService {
+public abstract class TransactionService {
 
-    DoubleTransaction execute(Account from, Account to, Money amount, String description);
+    public DoubleTransaction execute(Account from, Account to, Money amount, String description) {
+        doExecute(from, to, amount, description);
+        return DoubleTransaction.of();
+    }
+
+    protected abstract void doExecute(Account from, Account to, Money amount, String description);
 
 }

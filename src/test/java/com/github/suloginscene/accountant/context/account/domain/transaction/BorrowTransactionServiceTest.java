@@ -39,7 +39,7 @@ class BorrowTransactionServiceTest {
     @Test
     @DisplayName("정상 - 부채 증가 & 자산 증가")
     void borrow_onSuccess_increaseLiabilityAndIncreaseAsset() {
-        borrow.execute(liability, asset, amount, description);
+        borrow.doExecute(liability, asset, amount, description);
 
         assertThat(liability.getBalance().get()).isEqualTo(2);
         assertThat(asset.getBalance().get()).isEqualTo(2);

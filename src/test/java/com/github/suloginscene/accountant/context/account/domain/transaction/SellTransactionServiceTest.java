@@ -39,7 +39,7 @@ class SellTransactionServiceTest {
     @Test
     @DisplayName("정상 - 자산 증가")
     void sell_onSuccess_increaseAsset() {
-        sell.execute(revenue, asset, amount, description);
+        sell.doExecute(revenue, asset, amount, description);
 
         assertThat(asset.getBalance().get()).isEqualTo(2);
     }

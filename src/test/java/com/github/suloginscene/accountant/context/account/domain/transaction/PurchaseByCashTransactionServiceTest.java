@@ -42,7 +42,7 @@ class PurchaseByCashTransactionServiceTest {
     @Test
     @DisplayName("정상 - 자산 감소")
     void purchaseByCash_onSuccess_decreaseAsset() {
-        purchaseByCash.execute(asset, expense, amount, description);
+        purchaseByCash.doExecute(asset, expense, amount, description);
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
     }
@@ -50,7 +50,7 @@ class PurchaseByCashTransactionServiceTest {
     @Test
     @DisplayName("잔액 부족 - 예외 발생")
     void purchaseByCash_onInsufficientBalance_throwsException() {
-        Executable action = () -> purchaseByCash.execute(asset, expense, Money.of(2), description);
+        Executable action = () -> purchaseByCash.doExecute(asset, expense, Money.of(2), description);
 
         assertThrows(NegativeMoneyException.class, action);
     }

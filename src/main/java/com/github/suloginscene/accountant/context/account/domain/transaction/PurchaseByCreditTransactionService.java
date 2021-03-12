@@ -12,17 +12,15 @@ import static lombok.AccessLevel.PACKAGE;
 
 
 @NoArgsConstructor(access = PACKAGE)
-class PurchaseByCreditTransactionService implements TransactionService {
+class PurchaseByCreditTransactionService extends TransactionService {
 
     @Override
-    public DoubleTransaction execute(Account from, Account to, Money amount, String description) {
+    protected void doExecute(Account from, Account to, Money amount, String description) {
         Liability liability = toLiability(from);
         Expense expense = toExpense(to);
 
         liability.increase(amount, description);
         expense.occur(amount, description);
-
-        return DoubleTransaction.of();
     }
 
 }

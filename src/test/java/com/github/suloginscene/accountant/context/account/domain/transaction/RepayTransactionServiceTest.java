@@ -42,7 +42,7 @@ class RepayTransactionServiceTest {
     @Test
     @DisplayName("정상 - 자산 감소 & 부채 감소")
     void repay_onSuccess_decreaseAssetAndDecreaseLiability() {
-        repay.execute(asset, liability, amount, description);
+        repay.doExecute(asset, liability, amount, description);
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
         assertThat(liability.getBalance().get()).isEqualTo(0);
@@ -53,7 +53,7 @@ class RepayTransactionServiceTest {
     void repay_onInsufficientBalance_throwsException() {
         Asset asset = DefaultAccounts.asset(1);
         Liability liability = DefaultAccounts.liability(10);
-        Executable action = () -> repay.execute(asset, liability, Money.of(2), description);
+        Executable action = () -> repay.doExecute(asset, liability, Money.of(2), description);
 
         assertThrows(NegativeMoneyException.class, action);
     }
@@ -63,7 +63,7 @@ class RepayTransactionServiceTest {
     void repay_onOverRepay_throwsException() {
         Asset asset = DefaultAccounts.asset(10);
         Liability liability = DefaultAccounts.liability(1);
-        Executable action = () -> repay.execute(asset, liability, Money.of(2), description);
+        Executable action = () -> repay.doExecute(asset, liability, Money.of(2), description);
 
         assertThrows(NegativeMoneyException.class, action);
     }

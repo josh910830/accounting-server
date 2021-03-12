@@ -41,7 +41,7 @@ class TransferTransactionServiceTest {
     @Test
     @DisplayName("정상 - 자산1 감소 & 자산2 증가")
     void transfer_onSuccess_decreaseAsset1AndIncreaseAsset2() {
-        transfer.execute(fromAsset, toAsset, amount, description);
+        transfer.doExecute(fromAsset, toAsset, amount, description);
 
         assertThat(fromAsset.getBalance().get()).isEqualTo(0);
         assertThat(toAsset.getBalance().get()).isEqualTo(2);
@@ -50,7 +50,7 @@ class TransferTransactionServiceTest {
     @Test
     @DisplayName("잔액 부족 - 예외 발생")
     void transfer_onInsufficientBalance_throwsException() {
-        Executable action = () -> transfer.execute(fromAsset, toAsset, Money.of(2), description);
+        Executable action = () -> transfer.doExecute(fromAsset, toAsset, Money.of(2), description);
 
         assertThrows(NegativeMoneyException.class, action);
     }

@@ -39,7 +39,7 @@ class PurchaseByCreditTransactionServiceTest {
     @Test
     @DisplayName("정상 - 부채 증가")
     void purchaseByCredit_onSuccess_increaseLiability() {
-        purchaseByCredit.execute(liability, expense, amount, description);
+        purchaseByCredit.doExecute(liability, expense, amount, description);
 
         assertThat(liability.getBalance().get()).isEqualTo(2);
     }
