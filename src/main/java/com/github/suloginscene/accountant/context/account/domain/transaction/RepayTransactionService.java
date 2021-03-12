@@ -22,7 +22,7 @@ class RepayTransactionService implements TransactionService {
         asset.decrease(amount, description);
         liability.decrease(amount, description);
 
-        return new DoubleTransaction();
+        return DoubleTransaction.of();
     }
 
 }

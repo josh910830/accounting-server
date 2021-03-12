@@ -20,7 +20,7 @@ class TransferTransactionService implements TransactionService {
         fromAsset.decrease(amount, description);
         toAsset.increase(amount, description);
 
-        return new DoubleTransaction();
+        return DoubleTransaction.of();
     }
 
 }

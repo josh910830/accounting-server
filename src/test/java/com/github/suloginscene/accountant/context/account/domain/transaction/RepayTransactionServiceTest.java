@@ -40,14 +40,6 @@ class RepayTransactionServiceTest {
 
 
     @Test
-    @DisplayName("정상 - 복식 기록 반환")
-    void repay_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = repay.execute(asset, liability, amount, description);
-
-        assertThat(doubleTransaction).isNotNull();
-    }
-
-    @Test
     @DisplayName("정상 - 자산 감소 & 부채 감소")
     void repay_onSuccess_decreaseAssetAndDecreaseLiability() {
         repay.execute(asset, liability, amount, description);

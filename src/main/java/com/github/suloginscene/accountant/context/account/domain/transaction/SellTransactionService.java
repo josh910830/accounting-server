@@ -22,7 +22,7 @@ class SellTransactionService implements TransactionService {
         revenue.occur(amount, description);
         asset.increase(amount, description);
 
-        return new DoubleTransaction();
+        return DoubleTransaction.of();
     }
 
 }

@@ -39,14 +39,6 @@ class TransferTransactionServiceTest {
 
 
     @Test
-    @DisplayName("정상 - 복식 기록 반환")
-    void transfer_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = transfer.execute(fromAsset, toAsset, amount, description);
-
-        assertThat(doubleTransaction).isNotNull();
-    }
-
-    @Test
     @DisplayName("정상 - 자산1 감소 & 자산2 증가")
     void transfer_onSuccess_decreaseAsset1AndIncreaseAsset2() {
         transfer.execute(fromAsset, toAsset, amount, description);

@@ -16,4 +16,5 @@ public class Liability extends Stock {
     Liability(Holder holder, String name, Money balance) {
         super(holder, name, balance);
     }
+
 }

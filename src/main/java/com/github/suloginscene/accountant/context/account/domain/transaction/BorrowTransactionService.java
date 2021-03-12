@@ -22,7 +22,7 @@ class BorrowTransactionService implements TransactionService {
         liability.increase(amount, description);
         asset.increase(amount, description);
 
-        return new DoubleTransaction();
+        return DoubleTransaction.of();
     }
 
 }

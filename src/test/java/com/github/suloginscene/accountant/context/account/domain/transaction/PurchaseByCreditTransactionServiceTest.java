@@ -37,14 +37,6 @@ class PurchaseByCreditTransactionServiceTest {
 
 
     @Test
-    @DisplayName("정상 - 복식 기록 반환")
-    void purchaseByCredit_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = purchaseByCredit.execute(liability, expense, amount, description);
-
-        assertThat(doubleTransaction).isNotNull();
-    }
-
-    @Test
     @DisplayName("정상 - 부채 증가")
     void purchaseByCredit_onSuccess_increaseLiability() {
         purchaseByCredit.execute(liability, expense, amount, description);

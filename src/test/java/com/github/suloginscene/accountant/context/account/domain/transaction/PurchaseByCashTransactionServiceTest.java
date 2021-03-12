@@ -40,14 +40,6 @@ class PurchaseByCashTransactionServiceTest {
 
 
     @Test
-    @DisplayName("정상 - 복식 기록 반환")
-    void purchaseByCash_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = purchaseByCash.execute(asset, expense, amount, description);
-
-        assertThat(doubleTransaction).isNotNull();
-    }
-
-    @Test
     @DisplayName("정상 - 자산 감소")
     void purchaseByCash_onSuccess_decreaseAsset() {
         purchaseByCash.execute(asset, expense, amount, description);

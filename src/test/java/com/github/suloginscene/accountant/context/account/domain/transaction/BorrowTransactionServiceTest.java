@@ -37,14 +37,6 @@ class BorrowTransactionServiceTest {
 
 
     @Test
-    @DisplayName("정상 - 복식 기록 반환")
-    void borrow_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = borrow.execute(liability, asset, amount, description);
-
-        assertThat(doubleTransaction).isNotNull();
-    }
-
-    @Test
     @DisplayName("정상 - 부채 증가 & 자산 증가")
     void borrow_onSuccess_increaseLiabilityAndIncreaseAsset() {
         borrow.execute(liability, asset, amount, description);

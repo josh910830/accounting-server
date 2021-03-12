@@ -37,14 +37,6 @@ class SellTransactionServiceTest {
 
 
     @Test
-    @DisplayName("정상 - 복식 기록 반환")
-    void sell_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = sell.execute(revenue, asset, amount, description);
-
-        assertThat(doubleTransaction).isNotNull();
-    }
-
-    @Test
     @DisplayName("정상 - 자산 증가")
     void sell_onSuccess_increaseAsset() {
         sell.execute(revenue, asset, amount, description);

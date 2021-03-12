@@ -22,7 +22,7 @@ class PurchaseByCreditTransactionService implements TransactionService {
         liability.increase(amount, description);
         expense.occur(amount, description);
 
-        return new DoubleTransaction();
+        return DoubleTransaction.of();
     }
 
 }

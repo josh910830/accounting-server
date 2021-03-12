@@ -22,7 +22,7 @@ class PurchaseByCashTransactionService implements TransactionService {
         asset.decrease(amount, description);
         expense.occur(amount, description);
 
-        return new DoubleTransaction();
+        return DoubleTransaction.of();
     }
 
 }
