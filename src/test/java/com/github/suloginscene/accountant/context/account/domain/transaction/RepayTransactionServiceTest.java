@@ -29,7 +29,7 @@ class RepayTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        repay = TransactionService.create(REPAY);
+        repay = TransactionServiceFactory.create(REPAY);
 
         asset = DefaultAccounts.asset(1);
         liability = DefaultAccounts.liability(1);

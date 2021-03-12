@@ -26,7 +26,7 @@ class PurchaseByCreditTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        purchaseByCredit = TransactionService.create(PURCHASE_BY_CREDIT);
+        purchaseByCredit = TransactionServiceFactory.create(PURCHASE_BY_CREDIT);
 
         liability = DefaultAccounts.liability(1);
         expense = DefaultAccounts.expense();

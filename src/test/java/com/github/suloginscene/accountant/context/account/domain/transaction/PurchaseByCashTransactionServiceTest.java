@@ -29,7 +29,7 @@ class PurchaseByCashTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        purchaseByCash = TransactionService.create(PURCHASE_BY_CASH);
+        purchaseByCash = TransactionServiceFactory.create(PURCHASE_BY_CASH);
 
         asset = DefaultAccounts.asset(1);
         expense = DefaultAccounts.expense();

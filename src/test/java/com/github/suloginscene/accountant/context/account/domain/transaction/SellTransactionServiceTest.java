@@ -26,7 +26,7 @@ class SellTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        sell = TransactionService.create(SELL);
+        sell = TransactionServiceFactory.create(SELL);
 
         revenue = DefaultAccounts.revenue();
         asset = DefaultAccounts.asset(1);

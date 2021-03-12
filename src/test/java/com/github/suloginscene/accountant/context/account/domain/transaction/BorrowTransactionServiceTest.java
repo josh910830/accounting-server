@@ -26,7 +26,7 @@ class BorrowTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        borrow = TransactionService.create(BORROW);
+        borrow = TransactionServiceFactory.create(BORROW);
 
         liability = DefaultAccounts.liability(1);
         asset = DefaultAccounts.asset(1);

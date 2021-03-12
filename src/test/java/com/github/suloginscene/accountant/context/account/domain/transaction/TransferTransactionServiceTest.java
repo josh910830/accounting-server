@@ -28,7 +28,7 @@ class TransferTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        transfer = TransactionService.create(TRANSFER);
+        transfer = TransactionServiceFactory.create(TRANSFER);
 
         fromAsset = DefaultAccounts.asset(1);
         toAsset = DefaultAccounts.asset(1);
