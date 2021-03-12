@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-@DisplayName("저량 계정")
+@DisplayName("계정(저량)")
 class StockTest {
 
     Stock stock;

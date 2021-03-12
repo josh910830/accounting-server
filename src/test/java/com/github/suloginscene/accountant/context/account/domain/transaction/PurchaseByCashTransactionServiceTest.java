@@ -2,8 +2,6 @@ package com.github.suloginscene.accountant.context.account.domain.transaction;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Expense;
-import com.github.suloginscene.accountant.context.account.domain.account.Liability;
-import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
@@ -55,24 +53,6 @@ class PurchaseByCashTransactionServiceTest {
         purchaseByCash.execute(asset, expense, amount, description);
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("잘못된 출처 - 예외 발생")
-    void purchaseByCash_fromInvalidAccount_throwsException() {
-        Liability liability = DefaultAccounts.liability(1);
-        Executable action = () -> purchaseByCash.execute(liability, expense, amount, description);
-
-        assertThrows(AccountCastException.class, action);
-    }
-
-    @Test
-    @DisplayName("잘못된 대상 - 예외 발생")
-    void purchaseByCash_toInvalidAccount_throwsException() {
-        Revenue revenue = DefaultAccounts.revenue();
-        Executable action = () -> purchaseByCash.execute(asset, revenue, amount, description);
-
-        assertThrows(AccountCastException.class, action);
     }
 
     @Test

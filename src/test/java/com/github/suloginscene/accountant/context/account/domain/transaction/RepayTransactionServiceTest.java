@@ -1,9 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.transaction;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Liability;
-import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
@@ -56,24 +54,6 @@ class RepayTransactionServiceTest {
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
         assertThat(liability.getBalance().get()).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("잘못된 출처 - 예외 발생")
-    void repay_fromInvalidAccount_throwsException() {
-        Revenue revenue = DefaultAccounts.revenue();
-        Executable action = () -> repay.execute(revenue, liability, amount, description);
-
-        assertThrows(AccountCastException.class, action);
-    }
-
-    @Test
-    @DisplayName("잘못된 대상 - 예외 발생")
-    void repay_toInvalidAccount_throwsException() {
-        Expense expense = DefaultAccounts.expense();
-        Executable action = () -> repay.execute(asset, expense, amount, description);
-
-        assertThrows(AccountCastException.class, action);
     }
 
     @Test

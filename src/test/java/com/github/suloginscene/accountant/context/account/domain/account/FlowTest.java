@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@DisplayName("유량 계정")
+@DisplayName("계정(유량)")
 class FlowTest {
 
     Flow flow;
