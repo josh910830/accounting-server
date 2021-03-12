@@ -32,6 +32,7 @@ public abstract class Account {
 
     private Holder holder;
 
+    @Getter
     private String name;
 
     @OneToMany(cascade = ALL, orphanRemoval = true)

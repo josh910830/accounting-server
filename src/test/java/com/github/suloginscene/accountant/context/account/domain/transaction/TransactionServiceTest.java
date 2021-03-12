@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.transaction;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
+import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,11 +36,11 @@ class TransactionServiceTest {
 
 
     @Test
-    @DisplayName("복식 거래 반환")
-    void execute_onSuccess_returnsDoubleTransaction() {
-        DoubleTransaction doubleTransaction = transactionService.execute(from, to, amount, description);
+    @DisplayName("복식 거래 이벤트 반환")
+    void execute_onSuccess_returnsDoubleTransactionEvent() {
+        DoubleTransactionExecutedEvent event = transactionService.execute(from, to, amount, description);
 
-        assertThat(doubleTransaction).isNotNull();
+        assertThat(event).isNotNull();
     }
 
 }
