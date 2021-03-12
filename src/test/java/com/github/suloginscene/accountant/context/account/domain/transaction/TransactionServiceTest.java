@@ -18,27 +18,25 @@ class TransactionServiceTest {
 
     TransactionService transactionService;
 
-    Account from;
-    Account to;
-    Money amount;
-    String description;
+    TransactionExecutionParameter param;
 
 
     @BeforeEach
     void setup() {
         transactionService = TransactionServiceFactory.create(PURCHASE_BY_CASH);
 
-        from = asset(1);
-        to = expense();
-        amount = Money.of(1);
-        description = "";
+        Account from = asset(1);
+        Account to = expense();
+        Money amount = Money.of(1);
+        String description = "설명";
+        param = new TransactionExecutionParameter(from, to, amount, description);
     }
 
 
     @Test
     @DisplayName("복식 거래 이벤트 반환")
     void execute_onSuccess_returnsDoubleTransactionEvent() {
-        DoubleTransactionExecutedEvent event = transactionService.execute(from, to, amount, description);
+        DoubleTransactionExecutedEvent event = transactionService.execute(param);
 
         assertThat(event).isNotNull();
     }
