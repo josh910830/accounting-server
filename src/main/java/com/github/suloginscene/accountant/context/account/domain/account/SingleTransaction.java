@@ -20,6 +20,7 @@ public class SingleTransaction {
     @Column(name = "single_transaction_id")
     private Long id;
 
+    // TODO make int for negative
     private Money amount;
 
     private String description;

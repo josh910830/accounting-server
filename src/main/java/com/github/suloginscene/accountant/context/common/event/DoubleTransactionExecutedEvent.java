@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 
 @Data
-public class DoubleTransactionExecutedEvent {
+public class DoubleTransactionExecutedEvent implements AccountantEvent {
 
     private final String from;
     private final String to;

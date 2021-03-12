@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.account.application;
 
-import com.github.suloginscene.accountant.context.account.domain.account.AccountCreationParameter;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.db.RepositoryProxy;
@@ -22,7 +21,7 @@ class AccountCreatingServiceTest {
     @Autowired AccountCreatingService accountCreatingService;
     @Autowired RepositoryProxy repositoryProxy;
 
-    AccountCreationParameter param;
+    AccountCreationData data;
 
 
     @BeforeEach
@@ -30,7 +29,7 @@ class AccountCreatingServiceTest {
         Holder holder = new Holder(1L);
         String name = "계정명";
         Money money = Money.of(1);
-        param = new AccountCreationParameter(ASSET, holder, name, money);
+        data = new AccountCreationData(ASSET, holder, name, money);
     }
 
     @AfterEach
@@ -42,7 +41,7 @@ class AccountCreatingServiceTest {
     @Test
     @DisplayName("생성 성공 - Id 반환")
     void createAccount_onSuccess_returnsId() {
-        Long id = accountCreatingService.createAccount(param);
+        Long id = accountCreatingService.createAccount(data);
 
         assertThat(id).isNotNull();
     }

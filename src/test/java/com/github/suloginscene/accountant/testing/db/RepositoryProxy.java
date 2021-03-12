@@ -15,8 +15,10 @@ public class RepositoryProxy {
     private final AccountRepository accountRepository;
 
 
-    public void given(Account account) {
-        accountRepository.save(account);
+    public void given(Account... accounts) {
+        for (Account account : accounts) {
+            accountRepository.save(account);
+        }
         printGivenFinished();
     }
 
