@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.testing.db;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.context.report.domain.ledger.LedgerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ public class RepositoryProxy {
     private static final String FORMAT = "======= %s =======\n";
 
     private final AccountRepository accountRepository;
+    private final LedgerRepository ledgerRepository;
 
 
     public void given(Account... accounts) {
@@ -25,6 +27,7 @@ public class RepositoryProxy {
     public void clear() {
         printClearStarted();
         accountRepository.deleteAll();
+        ledgerRepository.deleteAll();
     }
 
 

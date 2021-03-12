@@ -14,6 +14,7 @@ import static javax.persistence.CascadeType.ALL;
 import static lombok.AccessLevel.PROTECTED;
 
 
+// TODO test
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 public class Ledger {
@@ -28,6 +29,14 @@ public class Ledger {
 
     public Ledger(Holder holder) {
         this.holder = holder;
+    }
+
+    public void writeDoubleTransaction(DoubleTransaction doubleTransaction) {
+        doubleTransactions.add(doubleTransaction);
+    }
+
+    public List<DoubleTransaction> readDoubleTransactions() {
+        return new ArrayList<>(doubleTransactions);
     }
 
 }

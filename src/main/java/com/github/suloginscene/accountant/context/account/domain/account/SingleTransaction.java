@@ -28,13 +28,9 @@ public class SingleTransaction {
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
-    private SingleTransaction(Money amount, String description) {
+    SingleTransaction(Money amount, String description) {
         this.amount = amount;
         this.description = description;
-    }
-
-    static SingleTransaction of(Money amount, String description) {
-        return new SingleTransaction(amount, description);
     }
 
 }

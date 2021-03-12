@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
-import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.NoArgsConstructor;
 
@@ -32,21 +31,16 @@ public class DoubleTransaction {
     private LocalDateTime createdAt;
 
 
-    private DoubleTransaction(String debit, String credit, Money amount, String description, LocalDateTime createdAt) {
+    public DoubleTransaction(String debit,
+                             String credit,
+                             Money amount,
+                             String description,
+                             LocalDateTime createdAt) {
         this.debit = debit;
         this.credit = credit;
         this.amount = amount;
         this.description = description;
         this.createdAt = createdAt;
-    }
-
-    static DoubleTransaction of(DoubleTransactionExecutedEvent event) {
-        String credit = event.getFrom();
-        String debit = event.getTo();
-        Money amount = event.getAmount();
-        String description = event.getDescription();
-        LocalDateTime createdAt = event.getCreatedAt();
-        return new DoubleTransaction(debit, credit, amount, description, createdAt);
     }
 
 }

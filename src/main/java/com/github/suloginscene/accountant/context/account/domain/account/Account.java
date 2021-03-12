@@ -30,6 +30,7 @@ public abstract class Account {
     @Getter
     private Long id;
 
+    @Getter
     private Holder holder;
 
     @Getter
@@ -47,7 +48,7 @@ public abstract class Account {
 
 
     protected void writeSingleTransaction(Money amount, String description) {
-        singleTransactions.add(SingleTransaction.of(amount, description));
+        singleTransactions.add(new SingleTransaction(amount, description));
     }
 
     public List<SingleTransaction> readSingleTransactions() {
