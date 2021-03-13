@@ -1,11 +1,9 @@
-package com.github.suloginscene.accountant.context.report.listener;
+package com.github.suloginscene.accountant.context.report.domain.ledger;
 
 import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
-import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
-import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransactionType;
 
 
-class ContextConvertUtils {
+public class ContextConvertUtils {
 
     public static DoubleTransaction toDoubleTransaction(DoubleTransactionExecutedEvent event) {
         DoubleTransactionType type = DoubleTransactionType.valueOf(event.getType());

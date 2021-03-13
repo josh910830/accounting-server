@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -23,10 +24,13 @@ public class DoubleTransaction {
     private Long id;
 
     @Enumerated(STRING)
+    @Getter
     private DoubleTransactionType type;
 
+    @Getter
     private String debit;
 
+    @Getter
     private String credit;
 
     private Money amount;

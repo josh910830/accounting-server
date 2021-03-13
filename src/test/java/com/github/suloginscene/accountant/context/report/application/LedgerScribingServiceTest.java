@@ -1,7 +1,6 @@
 package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
-import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
@@ -13,9 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import java.time.LocalDateTime;
-
-import static com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransactionType.SELL;
+import static com.github.suloginscene.accountant.context.report.domain.ledger.ContextConvertUtils.toDoubleTransaction;
+import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.doubleTransactionExecutedEvent;
 import static org.mockito.BDDMockito.then;
 
 
@@ -37,14 +35,7 @@ class LedgerScribingServiceTest {
         holder = new Holder(1L);
         ledger = new Ledger(holder);
 
-        Money amount = Money.of(1);
-        String debit = "자산";
-        String credit = "수입";
-        String description = "설명";
-        LocalDateTime createdAt = LocalDateTime.now();
-        // TODO
-        doubleTransaction = new DoubleTransaction(
-                SELL, debit, credit, amount, description, createdAt);
+        doubleTransaction = toDoubleTransaction(doubleTransactionExecutedEvent());
     }
 
     @AfterEach
