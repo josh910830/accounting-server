@@ -4,7 +4,7 @@ import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
-import com.github.suloginscene.accountant.testing.db.RepositoryProxy;
+import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +24,7 @@ import static org.mockito.BDDMockito.then;
 class LedgerScribingServiceTest {
 
     @Autowired LedgerScribingService ledgerScribingService;
-    @Autowired RepositoryProxy repositoryProxy;
+    @Autowired RepositoryFacade repositoryFacade;
     @SpyBean LedgerProvider ledgerProvider;
 
     Holder holder;
@@ -42,14 +42,14 @@ class LedgerScribingServiceTest {
 
     @AfterEach
     void clear() {
-        repositoryProxy.clear();
+        repositoryFacade.clear();
     }
 
 
     @Test
     @DisplayName("정상 - 장부 사용")
     void scribe_onSuccess_consumesLedgerToWrite() {
-        repositoryProxy.given(ledger);
+        repositoryFacade.given(ledger);
 
         ledgerScribingService.scribeLedger(holder, doubleTransaction);
 

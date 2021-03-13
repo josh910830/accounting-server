@@ -2,7 +2,7 @@ package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
-import com.github.suloginscene.accountant.testing.db.RepositoryProxy;
+import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LedgerProviderTest {
 
     @Autowired LedgerProvider ledgerProvider;
-    @Autowired RepositoryProxy repositoryProxy;
+    @Autowired RepositoryFacade repositoryFacade;
 
     Holder holder;
 
@@ -30,14 +30,14 @@ class LedgerProviderTest {
 
     @AfterEach
     void clear() {
-        repositoryProxy.clear();
+        repositoryFacade.clear();
     }
 
 
     @Test
     @DisplayName("장부 존재 - 기존 장부 반환")
     void provide_onGivenLedger_returnsFoundLedger() {
-        repositoryProxy.given(new Ledger(holder));
+        repositoryFacade.given(new Ledger(holder));
 
         Ledger ledger = ledgerProvider.provideLedger(holder);
 

@@ -5,7 +5,7 @@ import com.github.suloginscene.accountant.context.account.domain.transaction.Tra
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
 import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import com.github.suloginscene.accountant.testing.db.RepositoryProxy;
+import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +24,7 @@ import static org.mockito.BDDMockito.then;
 class TransactionExecutingServiceTest {
 
     @Autowired TransactionExecutingService transactionExecutingService;
-    @Autowired RepositoryProxy repositoryProxy;
+    @Autowired RepositoryFacade repositoryFacade;
 
     @SpyBean AccountantEventPublisher accountantEventPublisher;
 
@@ -50,14 +50,14 @@ class TransactionExecutingServiceTest {
 
     @AfterEach
     void clear() {
-        repositoryProxy.clear();
+        repositoryFacade.clear();
     }
 
 
     @Test
     @DisplayName("성공 - 이벤트 발행")
     void executeTransaction_onSuccess_publishesEvent() {
-        repositoryProxy.given(revenue, asset);
+        repositoryFacade.given(revenue, asset);
 
         Long from = revenue.getId();
         Long to = asset.getId();

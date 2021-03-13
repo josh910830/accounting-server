@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-// TODO rename
-public class RepositoryProxy {
+public class RepositoryFacade {
 
     private static final String DOUBLE_LINE = "======= %s =======\n";
     private static final String SINGLE_LINE = "------- %s -------\n";
