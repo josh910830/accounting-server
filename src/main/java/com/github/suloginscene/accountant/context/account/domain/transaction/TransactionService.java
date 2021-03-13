@@ -33,8 +33,7 @@ public abstract class TransactionService {
         Holder toHolder = to.getHolder();
 
         if (!fromHolder.equals(toHolder)) {
-            // TODO test & custom exception
-            throw new IllegalStateException();
+            throw new HolderNotMatchedException(from, to);
         }
 
         return fromHolder;
