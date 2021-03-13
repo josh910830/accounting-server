@@ -30,6 +30,7 @@ class LedgerTest {
         String credit = "수입";
         String description = "설명";
         LocalDateTime createdAt = LocalDateTime.now();
+        // TODO
         doubleTransaction = new DoubleTransaction(
                 SELL, debit, credit, amount, description, createdAt);
     }
