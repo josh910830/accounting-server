@@ -12,6 +12,7 @@ public class DoubleTransactionExecutedEvent implements AccountantEvent {
 
     private final Holder holder;
 
+    private final String type;
     private final String from;
     private final String to;
     private final Money amount;

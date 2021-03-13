@@ -18,10 +18,12 @@ public abstract class TransactionService {
 
         doExecute(from, to, amount, description);
 
+        String type = param.getType().name();
         String fromName = from.getName();
         String toName = to.getName();
 
-        return new DoubleTransactionExecutedEvent(holder, fromName, toName, amount, description);
+        return new DoubleTransactionExecutedEvent(
+                holder, type, fromName, toName, amount, description);
     }
 
     protected abstract void doExecute(Account from, Account to, Money amount, String description);

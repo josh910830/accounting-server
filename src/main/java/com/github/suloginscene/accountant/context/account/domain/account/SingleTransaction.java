@@ -23,7 +23,7 @@ public class SingleTransaction {
     private Long id;
 
     @Enumerated(STRING)
-    private SingleTransactionType singleTransactionType;
+    private SingleTransactionType type;
 
     private Money amount;
 
@@ -32,10 +32,10 @@ public class SingleTransaction {
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
-    SingleTransaction(SingleTransactionType singleTransactionType,
+    SingleTransaction(SingleTransactionType type,
                       Money amount,
                       String description) {
-        this.singleTransactionType = singleTransactionType;
+        this.type = type;
         this.amount = amount;
         this.description = description;
     }

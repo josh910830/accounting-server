@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.context.common.event.DoubleTransaction
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.application.LedgerScribingService;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
+import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransactionType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -25,10 +26,11 @@ public class ReportEventListener {
     }
 
     private DoubleTransaction toDoubleTransaction(DoubleTransactionExecutedEvent event) {
+        DoubleTransactionType type = DoubleTransactionType.valueOf(event.getType());
         String credit = event.getFrom();
         String debit = event.getTo();
         return new DoubleTransaction(
-                debit, credit, event.getAmount(), event.getDescription(), event.getCreatedAt());
+                type, debit, credit, event.getAmount(), event.getDescription(), event.getCreatedAt());
     }
 
 }
