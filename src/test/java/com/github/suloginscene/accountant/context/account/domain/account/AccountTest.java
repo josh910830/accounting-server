@@ -18,9 +18,11 @@ class AccountTest {
     void writeSingleTransaction_onSuccess_changeState() {
         Account account = DefaultAccounts.asset(1);
 
+        SingleTransactionType type = SingleTransactionType.INCREASE;
         Money amount = Money.of(1);
         String description = "설명";
-        account.writeSingleTransaction(amount, description);
+        account.writeSingleTransaction(
+                new SingleTransaction(type, amount, description));
 
         assertThat(account.readSingleTransactions()).hasSize(1);
     }

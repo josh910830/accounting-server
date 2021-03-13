@@ -8,6 +8,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import static com.github.suloginscene.accountant.context.account.domain.account.SingleTransactionType.OCCUR;
 import static lombok.AccessLevel.PROTECTED;
 
 
@@ -26,7 +27,8 @@ public abstract class Flow extends Account {
 
 
     public void occur(Money amount, String description) {
-        writeSingleTransaction(amount, description);
+        writeSingleTransaction(
+                new SingleTransaction(OCCUR, amount, description));
     }
 
 }

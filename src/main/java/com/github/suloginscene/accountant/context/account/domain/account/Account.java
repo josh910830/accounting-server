@@ -1,7 +1,6 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
-import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -47,8 +46,8 @@ public abstract class Account {
     }
 
 
-    protected void writeSingleTransaction(Money amount, String description) {
-        singleTransactions.add(new SingleTransaction(amount, description));
+    protected void writeSingleTransaction(SingleTransaction singleTransaction) {
+        singleTransactions.add(singleTransaction);
     }
 
     public List<SingleTransaction> readSingleTransactions() {

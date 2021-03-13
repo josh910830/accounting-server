@@ -5,10 +5,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PROTECTED;
 
 
@@ -20,7 +22,9 @@ public class SingleTransaction {
     @Column(name = "single_transaction_id")
     private Long id;
 
-    // TODO make int for negative
+    @Enumerated(STRING)
+    private SingleTransactionType singleTransactionType;
+
     private Money amount;
 
     private String description;
@@ -28,7 +32,10 @@ public class SingleTransaction {
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
-    SingleTransaction(Money amount, String description) {
+    SingleTransaction(SingleTransactionType singleTransactionType,
+                      Money amount,
+                      String description) {
+        this.singleTransactionType = singleTransactionType;
         this.amount = amount;
         this.description = description;
     }

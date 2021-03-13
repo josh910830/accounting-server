@@ -9,6 +9,8 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import static com.github.suloginscene.accountant.context.account.domain.account.SingleTransactionType.DECREASE;
+import static com.github.suloginscene.accountant.context.account.domain.account.SingleTransactionType.INCREASE;
 import static lombok.AccessLevel.PROTECTED;
 
 
@@ -28,12 +30,16 @@ public abstract class Stock extends Account {
 
     public void increase(Money amount, String description) {
         balance = Money.add(balance, amount);
-        writeSingleTransaction(amount, description);
+
+        writeSingleTransaction(
+                new SingleTransaction(INCREASE, amount, description));
     }
 
     public void decrease(Money amount, String description) {
         balance = Money.subtract(balance, amount);
-        writeSingleTransaction(amount, description);
+
+        writeSingleTransaction(
+                new SingleTransaction(DECREASE, amount, description));
     }
 
 }
