@@ -14,7 +14,6 @@ import static javax.persistence.CascadeType.ALL;
 import static lombok.AccessLevel.PROTECTED;
 
 
-// TODO test
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 public class Ledger {

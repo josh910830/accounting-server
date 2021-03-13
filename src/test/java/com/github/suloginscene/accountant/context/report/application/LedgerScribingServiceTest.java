@@ -36,8 +36,14 @@ class LedgerScribingServiceTest {
     void setup() {
         holder = new Holder(1L);
         ledger = new Ledger(holder);
+
+        Money amount = Money.of(1);
+        String debit = "자산";
+        String credit = "수입";
+        String description = "설명";
+        LocalDateTime createdAt = LocalDateTime.now();
         doubleTransaction = new DoubleTransaction(
-                SELL, "자산", "수입", Money.of(1), "설명", LocalDateTime.now());
+                SELL, debit, credit, amount, description, createdAt);
     }
 
     @AfterEach

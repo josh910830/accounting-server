@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,16 +14,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("계정")
 class AccountTest {
 
-    @Test
-    @DisplayName("단식 거래 기록 - 기록 추가")
-    void writeSingleTransaction_onSuccess_changeState() {
-        Account account = DefaultAccounts.asset(1);
+    Account account;
+    SingleTransaction singleTransaction;
+
+
+    @BeforeEach
+    void setup() {
+        account = DefaultAccounts.asset(1);
 
         SingleTransactionType type = SingleTransactionType.INCREASE;
         Money amount = Money.of(1);
         String description = "설명";
-        account.writeSingleTransaction(
-                new SingleTransaction(type, amount, description));
+        singleTransaction = new SingleTransaction(type, amount, description);
+    }
+
+
+    @Test
+    @DisplayName("단식 거래 기록 - 기록 추가")
+    void writeSingleTransaction_onSuccess_changeState() {
+        account.writeSingleTransaction(singleTransaction);
 
         assertThat(account.readSingleTransactions()).hasSize(1);
     }
@@ -30,12 +40,10 @@ class AccountTest {
     @Test
     @DisplayName("단식 거래 조회 - 사본 반환")
     void readSingleTransactions_onSuccess_returnsCloneList() {
-        Account account = DefaultAccounts.asset(1);
+        List<SingleTransaction> transactions1 = account.readSingleTransactions();
+        List<SingleTransaction> transactions2 = account.readSingleTransactions();
 
-        List<SingleTransaction> history1 = account.readSingleTransactions();
-        List<SingleTransaction> history2 = account.readSingleTransactions();
-
-        assertThat(history1).isNotSameAs(history2);
+        assertThat(transactions1).isNotSameAs(transactions2);
     }
 
 }
