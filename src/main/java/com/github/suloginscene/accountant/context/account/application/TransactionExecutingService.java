@@ -39,7 +39,7 @@ public class TransactionExecutingService {
         Account to = findAccount(data.getToAccountId());
 
         return new TransactionExecutionParameter(
-                from, to, data.getAmount(), data.getDescription(), data.getType());
+                from, to, data.getAmount(), data.getDescription());
     }
 
     private Account findAccount(Long id) {

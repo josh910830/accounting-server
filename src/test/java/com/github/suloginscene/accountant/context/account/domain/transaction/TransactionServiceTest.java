@@ -30,14 +30,13 @@ class TransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        DoubleTransactionType type = PURCHASE_BY_CASH;
-        transactionService = TransactionServiceFactory.create(type);
+        transactionService = TransactionServiceFactory.create(PURCHASE_BY_CASH);
 
         Account from = asset(1);
         Account to = expense();
         Money amount = Money.of(1);
         String description = "설명";
-        param = new TransactionExecutionParameter(from, to, amount, description, type);
+        param = new TransactionExecutionParameter(from, to, amount, description);
     }
 
 
@@ -55,7 +54,7 @@ class TransactionServiceTest {
         Account from = createAccount(ASSET, 1L);
         Account to = createAccount(EXPENSE, 2L);
 
-        param = new TransactionExecutionParameter(from, to, Money.of(1), "설명", PURCHASE_BY_CASH);
+        param = new TransactionExecutionParameter(from, to, Money.of(1), "설명");
         Executable action = () -> transactionService.execute(param);
 
         assertThrows(HolderNotMatchedException.class, action);

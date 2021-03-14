@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toAsset;
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toExpense;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.PURCHASE_BY_CASH;
 import static lombok.AccessLevel.PACKAGE;
 
 
@@ -21,6 +22,11 @@ class PurchaseByCashTransactionService extends TransactionService {
 
         asset.decrease(amount, description);
         expense.occur(amount, description);
+    }
+
+    @Override
+    protected DoubleTransactionType type() {
+        return PURCHASE_BY_CASH;
     }
 
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toAsset;
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toRevenue;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.SELL;
 import static lombok.AccessLevel.PACKAGE;
 
 
@@ -21,6 +22,11 @@ class SellTransactionService extends TransactionService {
 
         revenue.occur(amount, description);
         asset.increase(amount, description);
+    }
+
+    @Override
+    protected DoubleTransactionType type() {
+        return SELL;
     }
 
 }

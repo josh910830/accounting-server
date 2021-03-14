@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toAsset;
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toLiability;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.BORROW;
 import static lombok.AccessLevel.PACKAGE;
 
 
@@ -21,6 +22,11 @@ class BorrowTransactionService extends TransactionService {
 
         liability.increase(amount, description);
         asset.increase(amount, description);
+    }
+
+    @Override
+    protected DoubleTransactionType type() {
+        return BORROW;
     }
 
 }

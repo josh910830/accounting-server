@@ -6,6 +6,7 @@ import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.NoArgsConstructor;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toAsset;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.TRANSFER;
 import static lombok.AccessLevel.PACKAGE;
 
 
@@ -19,6 +20,11 @@ class TransferTransactionService extends TransactionService {
 
         fromAsset.decrease(amount, description);
         toAsset.increase(amount, description);
+    }
+
+    @Override
+    protected DoubleTransactionType type() {
+        return TRANSFER;
     }
 
 }

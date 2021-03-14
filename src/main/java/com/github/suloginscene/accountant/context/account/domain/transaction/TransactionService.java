@@ -33,11 +33,13 @@ public abstract class TransactionService {
     protected abstract void doExecute(Account from, Account to, Money amount, String description);
 
     private DoubleTransaction toDoubleTransaction(TransactionExecutionParameter param) {
-        // TODO remove type form param (by abstract method)
-        DoubleTransactionType type = param.getType();
+        DoubleTransactionType type = type();
         String debit = param.getTo().getName();
         String credit = param.getFrom().getName();
         return new DoubleTransaction(type, debit, credit, param.getAmount(), param.getDescription());
     }
+
+    protected abstract DoubleTransactionType type();
+
 
 }
