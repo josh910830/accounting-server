@@ -19,6 +19,8 @@ public abstract class Flow extends Account {
     @AttributeOverride(name = "amount", column = @Column(name = "budget"))
     private Money budget;
 
+    // TODO transient occurSum
+
 
     protected Flow(Holder holder, String name, Money budget) {
         super(holder, name);

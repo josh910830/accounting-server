@@ -26,6 +26,7 @@ public class SingleTransaction {
     @Enumerated(STRING)
     private SingleTransactionType type;
 
+    @Getter
     private Money amount;
 
     private String description;

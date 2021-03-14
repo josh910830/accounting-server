@@ -22,18 +22,17 @@ class BalanceSheetFactoryTest {
         Asset asset2 = asset(2);
         Asset asset3 = asset(3);
         List<Asset> assets = List.of(asset1, asset2, asset3);
-        Integer assetSum = StockUtils.sumBalances(assets);
 
         Liability liability1 = liability(4);
         Liability liability2 = liability(5);
         Liability liability3 = liability(6);
         List<Liability> liabilities = List.of(liability1, liability2, liability3);
-        Integer liabilitySum = StockUtils.sumBalances(liabilities);
 
         BalanceSheet balanceSheet = BalanceSheetFactory.create(assets, liabilities);
-        assertThat(balanceSheet.getNet()).isEqualTo(assetSum - liabilitySum);
-        assertThat(balanceSheet.getAssetSum()).isEqualTo(assetSum);
-        assertThat(balanceSheet.getLiabilitySum()).isEqualTo(liabilitySum);
+
+        assertThat(balanceSheet.getNet()).isEqualTo((1 + 2 + 3) - (4 + 5 + 6));
+        assertThat(balanceSheet.getAssetSum()).isEqualTo(1 + 2 + 3);
+        assertThat(balanceSheet.getLiabilitySum()).isEqualTo(4 + 5 + 6);
     }
 
 }

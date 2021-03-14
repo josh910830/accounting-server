@@ -21,6 +21,7 @@ public class BalanceSheet {
 
     private final List<Liability> liabilities;
 
+
     public Integer getNet() {
         return total.get(NET);
     }
