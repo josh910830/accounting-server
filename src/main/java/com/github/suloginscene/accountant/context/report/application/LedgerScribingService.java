@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.context.report.application;
 
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransaction;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
-import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

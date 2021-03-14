@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.report.domain.ledger;
+package com.github.suloginscene.accountant.context.account.domain.transaction;
 
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.Getter;
@@ -37,21 +37,19 @@ public class DoubleTransaction {
 
     private String description;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt = LocalDateTime.now();
 
 
     public DoubleTransaction(DoubleTransactionType type,
                              String debit,
                              String credit,
                              Money amount,
-                             String description,
-                             LocalDateTime createdAt) {
+                             String description) {
         this.type = type;
         this.debit = debit;
         this.credit = credit;
         this.amount = amount;
         this.description = description;
-        this.createdAt = createdAt;
     }
 
 }

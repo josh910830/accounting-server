@@ -2,11 +2,11 @@ package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutionParameter;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionService;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionServiceFactory;
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
-import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class TransactionExecutingService {
     }
 
     private TransactionService toService(TransactionExecutionData data) {
-        return TransactionServiceFactory.create(data.getTransactionType());
+        return TransactionServiceFactory.create(data.getType());
     }
 
     private TransactionExecutionParameter toParam(TransactionExecutionData data) {
@@ -39,7 +39,7 @@ public class TransactionExecutingService {
         Account to = findAccount(data.getToAccountId());
 
         return new TransactionExecutionParameter(
-                from, to, data.getAmount(), data.getDescription(), data.getTransactionType());
+                from, to, data.getAmount(), data.getDescription(), data.getType());
     }
 
     private Account findAccount(Long id) {

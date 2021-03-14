@@ -4,7 +4,6 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.account.domain.account.AccountCreationParameter;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountFactory;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
-import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.ASSET;
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.EXPENSE;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.PURCHASE_BY_CASH;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.PURCHASE_BY_CASH;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,14 +30,14 @@ class TransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        TransactionType transactionType = PURCHASE_BY_CASH;
-        transactionService = TransactionServiceFactory.create(transactionType);
+        DoubleTransactionType type = PURCHASE_BY_CASH;
+        transactionService = TransactionServiceFactory.create(type);
 
         Account from = asset(1);
         Account to = expense();
         Money amount = Money.of(1);
         String description = "설명";
-        param = new TransactionExecutionParameter(from, to, amount, description, transactionType);
+        param = new TransactionExecutionParameter(from, to, amount, description, type);
     }
 
 

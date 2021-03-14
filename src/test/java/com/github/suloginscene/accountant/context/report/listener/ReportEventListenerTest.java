@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.context.report.listener;
 
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
-import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.report.application.LedgerScribingService;
 import com.github.suloginscene.accountant.testing.fixture.DefaultEvents;
 import org.junit.jupiter.api.BeforeEach;

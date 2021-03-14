@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
-import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType;
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
-import com.github.suloginscene.accountant.context.common.event.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
@@ -28,7 +28,7 @@ class TransactionExecutingServiceTest {
 
     @SpyBean AccountantEventPublisher accountantEventPublisher;
 
-    TransactionType sell;
+    DoubleTransactionType sell;
 
     Account revenue;
     Account asset;
@@ -39,7 +39,7 @@ class TransactionExecutingServiceTest {
 
     @BeforeEach
     void setup() {
-        sell = TransactionType.SELL;
+        sell = DoubleTransactionType.SELL;
 
         revenue = DefaultAccounts.revenue();
         asset = DefaultAccounts.asset(1);

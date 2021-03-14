@@ -3,8 +3,8 @@ package com.github.suloginscene.accountant.context.account.domain.transaction;
 
 public class TransactionServiceFactory {
 
-    public static TransactionService create(TransactionType transactionType) {
-        switch (transactionType) {
+    public static TransactionService create(DoubleTransactionType doubleTransactionType) {
+        switch (doubleTransactionType) {
             case SELL:
                 return new SellTransactionService();
             case PURCHASE_BY_CASH:
@@ -18,7 +18,7 @@ public class TransactionServiceFactory {
             case TRANSFER:
                 return new TransferTransactionService();
             default:
-                throw new TransactionTypeNotFoundException(transactionType);
+                throw new DoubleTransactionTypeNotFoundException(doubleTransactionType);
         }
     }
 

@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.context.account.application;
 
-import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class TransactionExecutionData {
 
-    private final TransactionType transactionType;
+    private final DoubleTransactionType type;
 
     private final Long fromAccountId;
     private final Long toAccountId;

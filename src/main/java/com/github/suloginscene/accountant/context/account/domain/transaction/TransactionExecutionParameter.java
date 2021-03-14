@@ -13,6 +13,6 @@ public class TransactionExecutionParameter {
     private final Money amount;
     private final String description;
 
-    private final TransactionType type;
+    private final DoubleTransactionType type;
 
 }

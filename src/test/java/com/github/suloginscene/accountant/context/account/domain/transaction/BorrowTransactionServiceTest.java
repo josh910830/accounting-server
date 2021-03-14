@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.BORROW;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.BORROW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

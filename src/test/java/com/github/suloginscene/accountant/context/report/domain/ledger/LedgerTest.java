@@ -1,14 +1,15 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransaction;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.testing.fixture.DefaultEvents;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.github.suloginscene.accountant.context.report.domain.ledger.ContextConvertUtils.toDoubleTransaction;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.doubleTransactionExecutedEvent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -24,7 +25,8 @@ class LedgerTest {
         Holder holder = new Holder(1L);
         ledger = new Ledger(holder);
 
-        doubleTransaction = toDoubleTransaction(doubleTransactionExecutedEvent());
+        DoubleTransactionExecutedEvent event = DefaultEvents.doubleTransactionExecutedEvent();
+        doubleTransaction = event.getDoubleTransaction();
     }
 
 

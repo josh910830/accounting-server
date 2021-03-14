@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.TRANSFER;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.TRANSFER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
