@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
@@ -18,18 +18,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("손익계산서 팩토리")
 class IncomeStatementFactoryTest {
 
+    Revenue r1;
+    Revenue r2;
+    List<Revenue> revenues;
+
+    Expense e1;
+    Expense e2;
+    Expense e3;
+    List<Expense> expenses;
+
     Money amount;
     String description;
 
-    Revenue revenue1;
-    Revenue revenue2;
-    Revenue revenue3;
-    List<Revenue> revenues;
-
-    Expense expense1;
-    Expense expense2;
-    Expense expense3;
-    List<Expense> expenses;
+    LocalDate today;
+    LocalDate yesterday;
 
 
     @BeforeEach
@@ -37,36 +39,50 @@ class IncomeStatementFactoryTest {
         amount = Money.of(1);
         description = "설명";
 
-        revenue1 = revenue();
-        revenue2 = revenue();
-        revenue3 = revenue();
-        revenues = List.of(revenue1, revenue2, revenue3);
+        r1 = revenue();
+        r2 = revenue();
+        revenues = List.of(r1, r2);
 
-        expense1 = expense();
-        expense2 = expense();
-        expense3 = expense();
-        expenses = List.of(expense1, expense2, expense3);
+        e1 = expense();
+        e2 = expense();
+        e3 = expense();
+        expenses = List.of(e1, e2, e3);
+
+        today = LocalDate.now();
+        yesterday = today.minusDays(1);
     }
 
 
     @Test
     @DisplayName("손익계산서 생성")
     void create_onSuccess_returnsBalanceSheet() {
-        revenue1.occur(amount, description);
-        LocalDateTime from = LocalDateTime.now();
-        revenue2.occur(amount, description);
-        revenue3.occur(amount, description);
+        r1.occur(amount, description);
+        r2.occur(amount, description);
 
-        expense1.occur(amount, description);
-        LocalDateTime to = LocalDateTime.now();
-        expense2.occur(amount, description);
-        expense3.occur(amount, description);
+        e1.occur(amount, description);
+        e2.occur(amount, description);
+        e3.occur(amount, description);
 
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, from, to);
+        TargetPeriod period = TargetPeriod.of(today);
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, period);
 
-        assertThat(incomeStatement.getProfit()).isEqualTo(2 - 1);
+        assertThat(incomeStatement.getProfit()).isEqualTo(2 - 3);
         assertThat(incomeStatement.getRevenueSum()).isEqualTo(2);
-        assertThat(incomeStatement.getExpenseSum()).isEqualTo(1);
+        assertThat(incomeStatement.getExpenseSum()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("날짜 필터링")
+    void create_onFilter_returnsEmptyBalanceSheet() {
+        r1.occur(amount, description);
+        e1.occur(amount, description);
+
+        TargetPeriod period = TargetPeriod.of(yesterday);
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, period);
+
+        assertThat(incomeStatement.getProfit()).isEqualTo(0);
+        assertThat(incomeStatement.getRevenueSum()).isEqualTo(0);
+        assertThat(incomeStatement.getExpenseSum()).isEqualTo(0);
     }
 
 }

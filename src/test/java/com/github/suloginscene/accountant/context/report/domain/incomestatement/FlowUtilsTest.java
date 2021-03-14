@@ -31,7 +31,7 @@ class FlowUtilsTest {
 
 
     @Test
-    @DisplayName("발생 금액 합")
+    @DisplayName("기간 내 발생 금액 합")
     void sumAmount_onSuccess_returnsSum() {
         flow.occur(amount, description);
         LocalDateTime from = LocalDateTime.now();

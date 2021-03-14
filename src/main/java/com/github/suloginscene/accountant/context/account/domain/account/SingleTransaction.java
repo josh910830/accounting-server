@@ -31,7 +31,6 @@ public class SingleTransaction {
 
     private String description;
 
-    @Getter(PROTECTED)
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
@@ -44,7 +43,6 @@ public class SingleTransaction {
     }
 
     public boolean isCreatedDuring(LocalDateTime from, LocalDateTime to) {
-        LocalDateTime createdAt = getCreatedAt();
         return (createdAt.isEqual(from) || createdAt.isAfter(from)) && createdAt.isBefore(to);
     }
 

@@ -15,18 +15,18 @@ import static com.github.suloginscene.accountant.context.report.domain.incomesta
 public class IncomeStatementFactory {
     private static int i = 0;
 
-    // TODO usePeriod
-    public static IncomeStatement create(List<Revenue> revenues, List<Expense> expenses,
-                                         LocalDateTime from, LocalDateTime to) {
-        Map<String, Integer> revenueMap = flowTable(revenues, from, to);
-        Map<String, Integer> expenseMap = flowTable(expenses, from, to);
+    public static IncomeStatement create(List<Revenue> revenues, List<Expense> expenses, TargetPeriod period) {
+        Map<String, Integer> revenueMap = flowTable(revenues, period);
+        Map<String, Integer> expenseMap = flowTable(expenses, period);
         Map<IncomeStatementKey, Integer> total = totalTable(revenueMap, expenseMap);
 
         return new IncomeStatement(total, revenueMap, expenseMap);
     }
 
-    private static Map<String, Integer> flowTable(List<? extends Flow> flows,
-                                                  LocalDateTime from, LocalDateTime to) {
+    private static Map<String, Integer> flowTable(List<? extends Flow> flows, TargetPeriod period) {
+        LocalDateTime from = period.startOfFrom();
+        LocalDateTime to = period.endOfTo();
+
         Map<String, Integer> flowTable = new HashMap<>();
         for (Flow flow : flows) {
             String name = flow.getName();

@@ -10,32 +10,32 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.spy;
 
 
 @DisplayName("계정")
 class AccountTest {
 
     Account account;
-    SingleTransaction singleTransaction;
+
+    SingleTransactionType type;
+    Money amount;
+    String description;
 
 
     @BeforeEach
     void setup() {
         account = DefaultAccounts.asset(1);
 
-        SingleTransactionType type = SingleTransactionType.INCREASE;
-        Money amount = Money.of(1);
-        String description = "설명";
-        singleTransaction = new SingleTransaction(type, amount, description);
+        type = SingleTransactionType.INCREASE;
+        amount = Money.of(1);
+        description = "설명";
     }
 
 
     @Test
     @DisplayName("단식 거래 기록 - 기록 추가")
     void writeSingleTransaction_onSuccess_changeState() {
-        account.writeSingleTransaction(singleTransaction);
+        account.writeSingleTransaction(new SingleTransaction(type, amount, description));
 
         assertThat(account.readSingleTransactions()).hasSize(1);
     }
@@ -52,26 +52,15 @@ class AccountTest {
     @Test
     @DisplayName("기간 내 거래 조회 - 필터")
     void readSingleTransactionsDuringParams_onSuccess_returnsFilteredList() {
-        LocalDateTime now = LocalDateTime.now();
+        account.writeSingleTransaction(new SingleTransaction(type, amount, description));
+        LocalDateTime from = LocalDateTime.now();
+        account.writeSingleTransaction(new SingleTransaction(type, amount, description));
+        LocalDateTime to = LocalDateTime.now();
+        account.writeSingleTransaction(new SingleTransaction(type, amount, description));
 
-        LocalDateTime before = now.minusHours(1);
-        LocalDateTime mid = now.minusSeconds(1);
-        LocalDateTime after = now.plusHours(1);
+        List<SingleTransaction> transactions = account.readSingleTransactions(from, to);
 
-        writeMockTransaction(before);
-        writeMockTransaction(mid);
-        writeMockTransaction(after);
-
-        List<SingleTransaction> transactions = account.readSingleTransactions(before, now);
-
-        assertThat(transactions).hasSize(2);
-    }
-
-    private void writeMockTransaction(LocalDateTime createdAt) {
-        SingleTransaction transaction = spy(SingleTransaction.class);
-        given(transaction.getCreatedAt()).willReturn(createdAt);
-
-        account.writeSingleTransaction(transaction);
+        assertThat(transactions).hasSize(1);
     }
 
 }
