@@ -1,21 +1,26 @@
 package com.github.suloginscene.accountant.context.report.domain.incomestatement;
 
+import com.github.suloginscene.accountant.context.account.domain.account.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DisplayName("유량 계정 유틸리티")
 class FlowUtilsTest {
 
-    Flow flow;
+    Expense expense1;
+    Expense expense2;
+    Expense expense3;
+    List<Flow> expenses;
 
     Money amount;
     String description;
@@ -23,7 +28,10 @@ class FlowUtilsTest {
 
     @BeforeEach
     void setup() {
-        flow = DefaultAccounts.expense();
+        expense1 = expense();
+        expense2 = expense();
+        expense3 = expense();
+        expenses = List.of(expense1, expense2, expense3);
 
         amount = Money.of(1);
         description = "설명";
@@ -31,17 +39,18 @@ class FlowUtilsTest {
 
 
     @Test
-    @DisplayName("기간 내 발생 금액 합")
-    void sumAmount_onSuccess_returnsSum() {
-        flow.occur(amount, description);
+    @DisplayName("발생 비용 합")
+    void sumIndividualOccurredAmounts_onSuccess_returnsSum() {
         LocalDateTime from = LocalDateTime.now();
-        flow.occur(amount, description);
+        expense1.occur(amount, description);
+        expense2.occur(amount, description);
+        expense3.occur(amount, description);
         LocalDateTime to = LocalDateTime.now();
-        flow.occur(amount, description);
 
-        Integer sum = FlowUtils.sumAmount(flow, from, to);
+        expenses.forEach(e -> e.memorizeOccurredInPeriod(from, to));
+        Integer sum = FlowUtils.sumIndividualOccurredAmounts(expenses);
 
-        assertThat(sum).isEqualTo(1);
+        assertThat(sum).isEqualTo(3);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.github.suloginscene.accountant.context.report.domain.incomestatement;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Expense;
-import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
 
 import java.time.LocalDateTime;
@@ -9,41 +8,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.suloginscene.accountant.context.report.domain.incomestatement.FlowUtils.sumAmount;
+import static com.github.suloginscene.accountant.context.report.domain.incomestatement.FlowUtils.sumIndividualOccurredAmounts;
 
 
 public class IncomeStatementFactory {
-    private static int i = 0;
 
     public static IncomeStatement create(List<Revenue> revenues, List<Expense> expenses, TargetPeriod period) {
-        Map<String, Integer> revenueMap = flowTable(revenues, period);
-        Map<String, Integer> expenseMap = flowTable(expenses, period);
-        Map<IncomeStatementKey, Integer> total = totalTable(revenueMap, expenseMap);
+        collectivelyMemorizeOccurredInPeriod(revenues, expenses, period);
 
-        return new IncomeStatement(total, revenueMap, expenseMap);
+        Map<IncomeStatementKey, Integer> total = totalTable(revenues, expenses);
+        return new IncomeStatement(total, revenues, expenses);
     }
 
-    private static Map<String, Integer> flowTable(List<? extends Flow> flows, TargetPeriod period) {
+    private static void collectivelyMemorizeOccurredInPeriod(List<Revenue> revenues, List<Expense> expenses, TargetPeriod period) {
         LocalDateTime from = period.startOfFrom();
         LocalDateTime to = period.endOfTo();
 
-        Map<String, Integer> flowTable = new HashMap<>();
-        for (Flow flow : flows) {
-            String name = flow.getName();
-            Integer sum = sumAmount(flow, from, to);
-            // TODO process same name
-            if (flowTable.containsKey(name)) {
-                name += i++;
-            }
-            flowTable.put(name, sum);
-        }
-        return flowTable;
+        revenues.forEach(f -> f.memorizeOccurredInPeriod(from, to));
+        expenses.forEach(f -> f.memorizeOccurredInPeriod(from, to));
     }
 
-    private static Map<IncomeStatementKey, Integer> totalTable(Map<String, Integer> revenueMap,
-                                                               Map<String, Integer> expenseMap) {
-        Integer revenueSum = revenueMap.values().stream().reduce(0, Integer::sum);
-        Integer expenseSum = expenseMap.values().stream().reduce(0, Integer::sum);
+    private static Map<IncomeStatementKey, Integer> totalTable(List<Revenue> revenues, List<Expense> expenses) {
+        Integer revenueSum = sumIndividualOccurredAmounts(revenues);
+        Integer expenseSum = sumIndividualOccurredAmounts(expenses);
         Integer profit = revenueSum - expenseSum;
 
         Map<IncomeStatementKey, Integer> total = new HashMap<>();

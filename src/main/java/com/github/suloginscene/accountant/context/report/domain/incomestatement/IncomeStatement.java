@@ -1,7 +1,10 @@
 package com.github.suloginscene.accountant.context.report.domain.incomestatement;
 
+import com.github.suloginscene.accountant.context.account.domain.account.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatementKey.EXPENSE_SUM;
@@ -14,10 +17,9 @@ public class IncomeStatement {
 
     private final Map<IncomeStatementKey, Integer> total;
 
-    // TODO
-    private final Map<String, Integer> revenues;
+    private final List<Revenue> revenues;
 
-    private final Map<String, Integer> expenses;
+    private final List<Expense> expenses;
 
 
     public Integer getProfit() {
