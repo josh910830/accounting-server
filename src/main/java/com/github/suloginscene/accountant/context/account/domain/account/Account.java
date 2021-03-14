@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.InheritanceType.JOINED;
 import static lombok.AccessLevel.PROTECTED;
@@ -54,6 +56,12 @@ public abstract class Account {
 
     public List<SingleTransaction> readSingleTransactions() {
         return new ArrayList<>(singleTransactions);
+    }
+
+    public List<SingleTransaction> readSingleTransactions(LocalDateTime from, LocalDateTime to) {
+        return readSingleTransactions().stream()
+                .filter(transaction -> transaction.isCreatedDuring(from, to))
+                .collect(toList());
     }
 
 }

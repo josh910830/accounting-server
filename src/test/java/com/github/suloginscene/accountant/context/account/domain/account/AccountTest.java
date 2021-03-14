@@ -6,9 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.spy;
 
 
 @DisplayName("계정")
@@ -44,6 +47,31 @@ class AccountTest {
         List<SingleTransaction> transactions2 = account.readSingleTransactions();
 
         assertThat(transactions1).isNotSameAs(transactions2);
+    }
+
+    @Test
+    @DisplayName("기간 내 거래 조회 - 필터")
+    void readSingleTransactionsDuringParams_onSuccess_returnsFilteredList() {
+        LocalDateTime now = LocalDateTime.now();
+
+        LocalDateTime before = now.minusHours(1);
+        LocalDateTime mid = now.minusSeconds(1);
+        LocalDateTime after = now.plusHours(1);
+
+        writeMockTransaction(before);
+        writeMockTransaction(mid);
+        writeMockTransaction(after);
+
+        List<SingleTransaction> transactions = account.readSingleTransactions(before, now);
+
+        assertThat(transactions).hasSize(2);
+    }
+
+    private void writeMockTransaction(LocalDateTime createdAt) {
+        SingleTransaction transaction = spy(SingleTransaction.class);
+        given(transaction.getCreatedAt()).willReturn(createdAt);
+
+        account.writeSingleTransaction(transaction);
     }
 
 }

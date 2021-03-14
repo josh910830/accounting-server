@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -29,6 +30,7 @@ public class SingleTransaction {
 
     private String description;
 
+    @Getter(PROTECTED)
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
@@ -38,6 +40,11 @@ public class SingleTransaction {
         this.type = type;
         this.amount = amount;
         this.description = description;
+    }
+
+    public boolean isCreatedDuring(LocalDateTime from, LocalDateTime to) {
+        LocalDateTime createdAt = getCreatedAt();
+        return (createdAt.isEqual(from) || createdAt.isAfter(from)) && createdAt.isBefore(to);
     }
 
 }
