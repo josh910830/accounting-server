@@ -48,8 +48,8 @@ public class RepositoryFacade {
 
     public void clear() {
         printClearStarted();
-        accountRepository.deleteAll();
         ledgerRepository.deleteAll();
+        accountRepository.deleteAll();
     }
 
     private void printClearStarted() {

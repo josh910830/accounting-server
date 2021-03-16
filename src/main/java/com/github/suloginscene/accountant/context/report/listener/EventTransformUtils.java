@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.report.listener;
 
+import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.transaction.AccountPair;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType;
@@ -14,9 +15,8 @@ public class EventTransformUtils {
         DoubleTransactionType type = mapType(event.getType());
 
         AccountPair pair = event.getPair();
-        // TODO string?
-        String debit = mapDebit(pair);
-        String credit = mapCredit(pair);
+        Account debit = pair.getDestination();
+        Account credit = pair.getSource();
 
         Money amount = event.getAmount();
         String description = event.getDescription();
@@ -26,14 +26,6 @@ public class EventTransformUtils {
 
     private static DoubleTransactionType mapType(TransactionType type) {
         return DoubleTransactionType.valueOf(type.name());
-    }
-
-    private static String mapDebit(AccountPair pair) {
-        return pair.getDestination().getName();
-    }
-
-    private static String mapCredit(AccountPair pair) {
-        return pair.getSource().getName();
     }
 
 }

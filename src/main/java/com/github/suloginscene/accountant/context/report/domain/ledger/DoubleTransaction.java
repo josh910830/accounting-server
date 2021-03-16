@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
+import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 
@@ -27,11 +30,13 @@ public class DoubleTransaction {
     @Getter
     private DoubleTransactionType type;
 
+    @ManyToOne(fetch = LAZY)
     @Getter
-    private String debit;
+    private Account debit;
 
+    @ManyToOne(fetch = LAZY)
     @Getter
-    private String credit;
+    private Account credit;
 
     private Money amount;
 
@@ -41,8 +46,8 @@ public class DoubleTransaction {
 
 
     public DoubleTransaction(DoubleTransactionType type,
-                             String debit,
-                             String credit,
+                             Account debit,
+                             Account credit,
                              Money amount,
                              String description) {
         this.type = type;

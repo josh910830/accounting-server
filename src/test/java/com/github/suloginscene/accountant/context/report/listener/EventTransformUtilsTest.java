@@ -34,8 +34,8 @@ class EventTransformUtilsTest {
         DoubleTransaction transaction = EventTransformUtils.toDoubleTransaction(event);
 
         assertThat(transaction.getType().name()).isEqualTo(type.name());
-        assertThat(transaction.getDebit()).isEqualTo(destination.getName());
-        assertThat(transaction.getCredit()).isEqualTo(source.getName());
+        assertThat(transaction.getDebit()).isEqualTo(destination);
+        assertThat(transaction.getCredit()).isEqualTo(source);
     }
 
 }
