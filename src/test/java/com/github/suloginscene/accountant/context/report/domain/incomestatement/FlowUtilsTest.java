@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.report.domain.incomestatement
 
 import com.github.suloginscene.accountant.context.account.domain.account.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
+import com.github.suloginscene.accountant.context.account.domain.account.TimeRange;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,7 +48,8 @@ class FlowUtilsTest {
         expense3.occur(amount, description);
         LocalDateTime end = LocalDateTime.now();
 
-        expenses.forEach(e -> e.memorizeOccurredInPeriod(begin, end));
+        TimeRange timeRange = new TimeRange(begin, end);
+        expenses.forEach(e -> e.memorizeOccurredDuring(timeRange));
         Integer sum = FlowUtils.sumIndividualOccurredAmounts(expenses);
 
         assertThat(sum).isEqualTo(3);

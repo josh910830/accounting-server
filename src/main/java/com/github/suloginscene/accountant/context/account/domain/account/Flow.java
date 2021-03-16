@@ -9,8 +9,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
-import java.time.LocalDateTime;
-import java.util.List;
 
 import static com.github.suloginscene.accountant.context.account.domain.account.SingleTransactionType.OCCUR;
 import static lombok.AccessLevel.PROTECTED;
@@ -24,8 +22,8 @@ public abstract class Flow extends Account {
     private Money budget;
 
     @Transient
-    @Getter
-    private Money occurredInPeriod;
+    @Getter // TODO if null
+    private Money occurred;
 
 
     protected Flow(Holder holder, String name, Money budget) {
@@ -39,13 +37,12 @@ public abstract class Flow extends Account {
                 new SingleTransaction(OCCUR, amount, description));
     }
 
-    public void memorizeOccurredInPeriod(LocalDateTime begin, LocalDateTime end) {
-        List<SingleTransaction> transactionsInPeriod = readSingleTransactions(begin, end);
-        Integer occurredInPeriodValue = transactionsInPeriod.stream()
+    public void memorizeOccurredDuring(TimeRange timeRange) {
+        Integer sum = readSingleTransactions(timeRange).stream()
                 .map(SingleTransaction::getAmount)
                 .map(Money::get)
                 .reduce(0, Integer::sum);
-        occurredInPeriod = Money.of(occurredInPeriodValue);
+        occurred = Money.of(sum);
     }
 
 }

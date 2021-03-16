@@ -31,16 +31,17 @@ class FlowTest {
 
     @Test
     @DisplayName("기간 내 발생 금액 합 기억")
-    void memorizeOccurredInPeriod_onSuccess_memorizeSum() {
+    void memorizeOccurredDuringRange_onSuccess_memorizeSum() {
         flow.occur(amount, description);
         LocalDateTime begin = LocalDateTime.now();
         flow.occur(amount, description);
         LocalDateTime end = LocalDateTime.now();
         flow.occur(amount, description);
 
-        flow.memorizeOccurredInPeriod(begin, end);
+        TimeRange timeRange = new TimeRange(begin, end);
+        flow.memorizeOccurredDuring(timeRange);
 
-        assertThat(flow.getOccurredInPeriod().get()).isEqualTo(1);
+        assertThat(flow.getOccurred().get()).isEqualTo(1);
     }
 
 }

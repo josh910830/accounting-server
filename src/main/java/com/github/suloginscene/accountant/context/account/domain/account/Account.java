@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +57,9 @@ public abstract class Account {
         return new ArrayList<>(singleTransactions);
     }
 
-    public List<SingleTransaction> readSingleTransactions(LocalDateTime begin, LocalDateTime end) {
+    public List<SingleTransaction> readSingleTransactions(TimeRange timeRange) {
         return readSingleTransactions().stream()
-                .filter(transaction -> transaction.isCreatedDuring(begin, end))
+                .filter(transaction -> transaction.isCreatedDuring(timeRange))
                 .collect(toList());
     }
 

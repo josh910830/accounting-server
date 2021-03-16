@@ -63,8 +63,8 @@ class IncomeStatementFactoryTest {
         e2.occur(amount, description);
         e3.occur(amount, description);
 
-        TargetPeriod period = TargetPeriod.of(today);
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, period);
+        DateRange range = DateRange.of(today);
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, range);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(2 - 3);
         assertThat(incomeStatement.getRevenueSum()).isEqualTo(2);
@@ -77,8 +77,8 @@ class IncomeStatementFactoryTest {
         r1.occur(amount, description);
         e1.occur(amount, description);
 
-        TargetPeriod period = TargetPeriod.of(yesterday);
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, period);
+        DateRange range = DateRange.of(yesterday);
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, range);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(0);
         assertThat(incomeStatement.getRevenueSum()).isEqualTo(0);

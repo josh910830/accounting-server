@@ -10,7 +10,7 @@ public class FlowUtils {
 
     public static Integer sumIndividualOccurredAmounts(List<? extends Flow> flows) {
         return flows.stream()
-                .map(Flow::getOccurredInPeriod)
+                .map(Flow::getOccurred)
                 .map(Money::get)
                 .reduce(0, Integer::sum);
     }

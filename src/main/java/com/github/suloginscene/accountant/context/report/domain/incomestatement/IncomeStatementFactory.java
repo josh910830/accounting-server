@@ -2,8 +2,8 @@ package com.github.suloginscene.accountant.context.report.domain.incomestatement
 
 import com.github.suloginscene.accountant.context.account.domain.account.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
+import com.github.suloginscene.accountant.context.account.domain.account.TimeRange;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,19 +13,13 @@ import static com.github.suloginscene.accountant.context.report.domain.incomesta
 
 public class IncomeStatementFactory {
 
-    public static IncomeStatement create(List<Revenue> revenues, List<Expense> expenses, TargetPeriod period) {
-        collectivelyMemorizeOccurredInPeriod(revenues, expenses, period);
+    public static IncomeStatement create(List<Revenue> revenues, List<Expense> expenses, DateRange dateRange) {
+        TimeRange timeRange = dateRange.toTimeRange();
+        revenues.forEach(f -> f.memorizeOccurredDuring(timeRange));
+        expenses.forEach(f -> f.memorizeOccurredDuring(timeRange));
 
         Map<IncomeStatementKey, Integer> total = totalTable(revenues, expenses);
         return new IncomeStatement(total, revenues, expenses);
-    }
-
-    private static void collectivelyMemorizeOccurredInPeriod(List<Revenue> revenues, List<Expense> expenses, TargetPeriod period) {
-        LocalDateTime begin = period.beginDateTime();
-        LocalDateTime end = period.endDateTime();
-
-        revenues.forEach(f -> f.memorizeOccurredInPeriod(begin, end));
-        expenses.forEach(f -> f.memorizeOccurredInPeriod(begin, end));
     }
 
     private static Map<IncomeStatementKey, Integer> totalTable(List<Revenue> revenues, List<Expense> expenses) {
