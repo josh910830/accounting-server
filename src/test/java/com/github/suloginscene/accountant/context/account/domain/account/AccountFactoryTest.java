@@ -1,5 +1,9 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.DisplayName;

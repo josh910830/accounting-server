@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.account;
+package com.github.suloginscene.accountant.context.common.value.range;
 
 import lombok.Data;
 

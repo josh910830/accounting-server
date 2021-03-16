@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.context.report.domain.balanceSheet;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

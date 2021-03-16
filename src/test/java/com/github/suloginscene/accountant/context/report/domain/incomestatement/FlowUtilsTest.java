@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.context.report.domain.incomestatement;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
-import com.github.suloginscene.accountant.context.account.domain.account.TimeRange;
+import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

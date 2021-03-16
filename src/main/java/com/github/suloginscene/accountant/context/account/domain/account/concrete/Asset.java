@@ -1,5 +1,6 @@
-package com.github.suloginscene.accountant.context.account.domain.account;
+package com.github.suloginscene.accountant.context.account.domain.account.concrete;
 
+import com.github.suloginscene.accountant.context.account.domain.account.Stock;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,10 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-public class Revenue extends Flow {
+public class Asset extends Stock {
 
-    Revenue(Holder holder, String name, Money budget) {
-        super(holder, name, budget);
+    public Asset(Holder holder, String name, Money balance) {
+        super(holder, name, balance);
     }
 
 }

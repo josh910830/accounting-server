@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
+import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -31,7 +31,7 @@ public class AccountPair {
         Holder holder2 = b.getHolder();
 
         if (!holder1.equals(holder2)) {
-            throw new HolderNotMatchedException(a, b);
+            throw new AccountPairHolderNotMatchedException(a, b);
         }
     }
 

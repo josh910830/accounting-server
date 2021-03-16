@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.context.report.domain.balanceSheet;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.Liability;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

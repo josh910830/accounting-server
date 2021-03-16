@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

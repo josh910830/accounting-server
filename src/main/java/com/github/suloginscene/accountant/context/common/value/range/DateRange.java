@@ -1,6 +1,4 @@
-package com.github.suloginscene.accountant.context.report.domain.incomestatement;
-
-import com.github.suloginscene.accountant.context.account.domain.account.TimeRange;
+package com.github.suloginscene.accountant.context.common.value.range;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,7 +20,7 @@ public class DateRange {
         return new DateRange(date, nextDate);
     }
 
-    TimeRange toTimeRange() {
+    public TimeRange toTimeRange() {
         LocalDateTime begin = beginDate.atStartOfDay();
         LocalDateTime end = endDate.atStartOfDay();
         return new TimeRange(begin, end);

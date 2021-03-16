@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

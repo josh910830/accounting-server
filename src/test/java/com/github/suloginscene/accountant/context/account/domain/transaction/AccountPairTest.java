@@ -4,8 +4,8 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.account.domain.account.AccountCreationParameter;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountFactory;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
-import com.github.suloginscene.accountant.context.account.domain.account.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +40,7 @@ class AccountPairTest {
         Account destination = createAccount(EXPENSE, 2L);
         Executable action = () -> AccountPair.of(source, destination);
 
-        assertThrows(HolderNotMatchedException.class, action);
+        assertThrows(AccountPairHolderNotMatchedException.class, action);
     }
 
     private Account createAccount(AccountType type, long holderId) {

@@ -3,10 +3,10 @@ package com.github.suloginscene.accountant.testing.fixture;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountCreationParameter;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountFactory;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
-import com.github.suloginscene.accountant.context.account.domain.account.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.Expense;
-import com.github.suloginscene.accountant.context.account.domain.account.Liability;
-import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 

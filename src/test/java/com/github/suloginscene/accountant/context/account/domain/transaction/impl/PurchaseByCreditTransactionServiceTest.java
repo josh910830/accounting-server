@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Expense;
-import com.github.suloginscene.accountant.context.account.domain.account.Liability;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.BeforeEach;

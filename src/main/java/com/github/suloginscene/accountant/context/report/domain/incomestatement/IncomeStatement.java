@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.context.report.domain.incomestatement;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Expense;
-import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
