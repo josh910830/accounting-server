@@ -21,11 +21,11 @@ public class IncomeStatementFactory {
     }
 
     private static void collectivelyMemorizeOccurredInPeriod(List<Revenue> revenues, List<Expense> expenses, TargetPeriod period) {
-        LocalDateTime from = period.startOfFrom();
-        LocalDateTime to = period.endOfTo();
+        LocalDateTime begin = period.beginDateTime();
+        LocalDateTime end = period.endDateTime();
 
-        revenues.forEach(f -> f.memorizeOccurredInPeriod(from, to));
-        expenses.forEach(f -> f.memorizeOccurredInPeriod(from, to));
+        revenues.forEach(f -> f.memorizeOccurredInPeriod(begin, end));
+        expenses.forEach(f -> f.memorizeOccurredInPeriod(begin, end));
     }
 
     private static Map<IncomeStatementKey, Integer> totalTable(List<Revenue> revenues, List<Expense> expenses) {

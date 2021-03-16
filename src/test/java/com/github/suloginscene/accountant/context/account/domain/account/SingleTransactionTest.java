@@ -14,11 +14,11 @@ class SingleTransactionTest {
     @Test
     @DisplayName("생성시간 확인 - 참")
     void isCreatedDuring_onSuccess_returnsTrue() {
-        LocalDateTime before = LocalDateTime.now();
+        LocalDateTime begin = LocalDateTime.now();
         SingleTransaction transaction = new SingleTransaction();
-        LocalDateTime after = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
 
-        boolean isCreatedDuring = transaction.isCreatedDuring(before, after);
+        boolean isCreatedDuring = transaction.isCreatedDuring(begin, end);
 
         assertThat(isCreatedDuring).isTrue();
     }
@@ -26,11 +26,11 @@ class SingleTransactionTest {
     @Test
     @DisplayName("생성시간 확인(전) - 거짓")
     void isCreatedDuring_onQueryBefore_returnsFalse() {
-        LocalDateTime before1 = LocalDateTime.now();
-        LocalDateTime before2 = LocalDateTime.now();
+        LocalDateTime begin = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
         SingleTransaction transaction = new SingleTransaction();
 
-        boolean isCreatedDuring = transaction.isCreatedDuring(before1, before2);
+        boolean isCreatedDuring = transaction.isCreatedDuring(begin, end);
 
         assertThat(isCreatedDuring).isFalse();
     }
@@ -39,10 +39,10 @@ class SingleTransactionTest {
     @DisplayName("생성시간 확인(후) - 거짓")
     void isCreatedDuring_onQueryAfter_returnsFalse() {
         SingleTransaction transaction = new SingleTransaction();
-        LocalDateTime after1 = LocalDateTime.now();
-        LocalDateTime after2 = LocalDateTime.now();
+        LocalDateTime begin = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
 
-        boolean isCreatedDuring = transaction.isCreatedDuring(after1, after2);
+        boolean isCreatedDuring = transaction.isCreatedDuring(begin, end);
 
         assertThat(isCreatedDuring).isFalse();
     }

@@ -33,12 +33,12 @@ class FlowTest {
     @DisplayName("기간 내 발생 금액 합 기억")
     void memorizeOccurredInPeriod_onSuccess_memorizeSum() {
         flow.occur(amount, description);
-        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime begin = LocalDateTime.now();
         flow.occur(amount, description);
-        LocalDateTime to = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
         flow.occur(amount, description);
 
-        flow.memorizeOccurredInPeriod(from, to);
+        flow.memorizeOccurredInPeriod(begin, end);
 
         assertThat(flow.getOccurredInPeriod().get()).isEqualTo(1);
     }

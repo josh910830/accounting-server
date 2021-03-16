@@ -53,12 +53,12 @@ class AccountTest {
     @DisplayName("기간 내 거래 조회 - 필터")
     void readSingleTransactionsDuringParams_onSuccess_returnsFilteredList() {
         account.writeSingleTransaction(new SingleTransaction(type, amount, description));
-        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime begin = LocalDateTime.now();
         account.writeSingleTransaction(new SingleTransaction(type, amount, description));
-        LocalDateTime to = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
         account.writeSingleTransaction(new SingleTransaction(type, amount, description));
 
-        List<SingleTransaction> transactions = account.readSingleTransactions(from, to);
+        List<SingleTransaction> transactions = account.readSingleTransactions(begin, end);
 
         assertThat(transactions).hasSize(1);
     }

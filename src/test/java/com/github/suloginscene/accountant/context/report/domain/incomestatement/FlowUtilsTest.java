@@ -41,13 +41,13 @@ class FlowUtilsTest {
     @Test
     @DisplayName("발생 비용 합")
     void sumIndividualOccurredAmounts_onSuccess_returnsSum() {
-        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime begin = LocalDateTime.now();
         expense1.occur(amount, description);
         expense2.occur(amount, description);
         expense3.occur(amount, description);
-        LocalDateTime to = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
 
-        expenses.forEach(e -> e.memorizeOccurredInPeriod(from, to));
+        expenses.forEach(e -> e.memorizeOccurredInPeriod(begin, end));
         Integer sum = FlowUtils.sumIndividualOccurredAmounts(expenses);
 
         assertThat(sum).isEqualTo(3);

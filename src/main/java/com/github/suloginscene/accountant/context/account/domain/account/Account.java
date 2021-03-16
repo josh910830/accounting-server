@@ -58,9 +58,9 @@ public abstract class Account {
         return new ArrayList<>(singleTransactions);
     }
 
-    public List<SingleTransaction> readSingleTransactions(LocalDateTime from, LocalDateTime to) {
+    public List<SingleTransaction> readSingleTransactions(LocalDateTime begin, LocalDateTime end) {
         return readSingleTransactions().stream()
-                .filter(transaction -> transaction.isCreatedDuring(from, to))
+                .filter(transaction -> transaction.isCreatedDuring(begin, end))
                 .collect(toList());
     }
 

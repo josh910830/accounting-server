@@ -39,8 +39,8 @@ public abstract class Flow extends Account {
                 new SingleTransaction(OCCUR, amount, description));
     }
 
-    public void memorizeOccurredInPeriod(LocalDateTime from, LocalDateTime to) {
-        List<SingleTransaction> transactionsInPeriod = readSingleTransactions(from, to);
+    public void memorizeOccurredInPeriod(LocalDateTime begin, LocalDateTime end) {
+        List<SingleTransaction> transactionsInPeriod = readSingleTransactions(begin, end);
         Integer occurredInPeriodValue = transactionsInPeriod.stream()
                 .map(SingleTransaction::getAmount)
                 .map(Money::get)

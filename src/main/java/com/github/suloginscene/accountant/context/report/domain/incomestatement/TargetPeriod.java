@@ -6,24 +6,17 @@ import java.time.LocalDateTime;
 
 public class TargetPeriod {
 
-    private final LocalDate from;
-    private final LocalDate to;
+    private final LocalDate beginDate;
+    private final LocalDate endDate;
 
 
-    private TargetPeriod(LocalDate from, LocalDate to) {
-        this.from = from;
-        this.to = to;
+    private TargetPeriod(LocalDate beginDate, LocalDate endDate) {
+        this.beginDate = beginDate;
+        this.endDate = endDate;
     }
 
-
-    public static TargetPeriod of(LocalDate from, LocalDate to) {
-        return new TargetPeriod(from, to);
-    }
-
-    public static TargetPeriod of(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
-        LocalDate from = fromDateTime.toLocalDate();
-        LocalDate to = toDateTime.toLocalDate();
-        return new TargetPeriod(from, to);
+    public static TargetPeriod of(LocalDate beginDate, LocalDate endDate) {
+        return new TargetPeriod(beginDate, endDate);
     }
 
     public static TargetPeriod of(LocalDate date) {
@@ -31,12 +24,12 @@ public class TargetPeriod {
     }
 
 
-    public LocalDateTime startOfFrom() {
-        return from.atStartOfDay();
+    LocalDateTime beginDateTime() {
+        return beginDate.atStartOfDay();
     }
 
-    public LocalDateTime endOfTo() {
-        return to.plusDays(1).atStartOfDay();
+    LocalDateTime endDateTime() {
+        return endDate.plusDays(1).atStartOfDay();
     }
 
 }

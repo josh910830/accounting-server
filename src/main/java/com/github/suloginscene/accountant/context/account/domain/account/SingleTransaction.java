@@ -42,8 +42,8 @@ public class SingleTransaction {
         this.description = description;
     }
 
-    public boolean isCreatedDuring(LocalDateTime from, LocalDateTime to) {
-        return (createdAt.isEqual(from) || createdAt.isAfter(from)) && createdAt.isBefore(to);
+    public boolean isCreatedDuring(LocalDateTime begin, LocalDateTime end) {
+        return (createdAt.isEqual(begin) || createdAt.isAfter(begin)) && createdAt.isBefore(end);
     }
 
 }
