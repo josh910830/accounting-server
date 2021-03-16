@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;

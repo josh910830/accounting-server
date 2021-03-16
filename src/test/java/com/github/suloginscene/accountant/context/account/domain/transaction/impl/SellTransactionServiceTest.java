@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Revenue;
@@ -8,14 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.SELL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DisplayName("거래 도메인 서비스(판매)")
 class SellTransactionServiceTest {
 
-    TransactionService sell;
+    SellTransactionService sell;
 
     Revenue revenue;
     Asset asset;
@@ -26,7 +25,7 @@ class SellTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        sell = TransactionServiceFactory.create(SELL);
+        sell = new SellTransactionService();
 
         revenue = DefaultAccounts.revenue();
         asset = DefaultAccounts.asset(1);

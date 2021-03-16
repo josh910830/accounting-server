@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.TRANSFER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DisplayName("거래 도메인 서비스(이체)")
 class TransferTransactionServiceTest {
 
-    TransactionService transfer;
+    TransferTransactionService transfer;
 
     Asset fromAsset;
     Asset toAsset;
@@ -28,7 +27,7 @@ class TransferTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        transfer = TransactionServiceFactory.create(TRANSFER);
+        transfer = new TransferTransactionService();
 
         fromAsset = DefaultAccounts.asset(1);
         toAsset = DefaultAccounts.asset(1);

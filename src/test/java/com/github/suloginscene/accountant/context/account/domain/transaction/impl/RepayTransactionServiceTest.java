@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Liability;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.REPAY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DisplayName("거래 도메인 서비스(상환)")
 class RepayTransactionServiceTest {
 
-    TransactionService repay;
+    RepayTransactionService repay;
 
     Asset asset;
     Liability liability;
@@ -29,7 +28,7 @@ class RepayTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        repay = TransactionServiceFactory.create(REPAY);
+        repay = new RepayTransactionService();
 
         asset = DefaultAccounts.asset(1);
         liability = DefaultAccounts.liability(1);

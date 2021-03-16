@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Liability;
@@ -8,14 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.PURCHASE_BY_CREDIT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DisplayName("거래 도메인 서비스(신용구매)")
 class PurchaseByCreditTransactionServiceTest {
 
-    TransactionService purchaseByCredit;
+    PurchaseByCreditTransactionService purchaseByCredit;
 
     Liability liability;
     Expense expense;
@@ -26,7 +25,7 @@ class PurchaseByCreditTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        purchaseByCredit = TransactionServiceFactory.create(PURCHASE_BY_CREDIT);
+        purchaseByCredit = new PurchaseByCreditTransactionService();
 
         liability = DefaultAccounts.liability(1);
         expense = DefaultAccounts.expense();

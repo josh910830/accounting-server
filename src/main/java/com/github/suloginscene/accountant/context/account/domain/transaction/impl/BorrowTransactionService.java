@@ -1,19 +1,18 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Liability;
+import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionService;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import lombok.NoArgsConstructor;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toAsset;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.AccountCastUtils.toLiability;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.impl.AccountCastUtils.toAsset;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.impl.AccountCastUtils.toLiability;
 import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.BORROW;
-import static lombok.AccessLevel.PACKAGE;
 
 
-@NoArgsConstructor(access = PACKAGE)
-class BorrowTransactionService extends TransactionService {
+public class BorrowTransactionService extends TransactionService {
 
     @Override
     protected void doExecute(Account from, Account to, Money amount, String description) {

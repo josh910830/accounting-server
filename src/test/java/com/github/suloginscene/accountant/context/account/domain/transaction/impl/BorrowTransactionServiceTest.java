@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.Liability;
@@ -8,14 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.BORROW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DisplayName("거래 도메인 서비스(대출)")
 class BorrowTransactionServiceTest {
 
-    TransactionService borrow;
+    BorrowTransactionService borrow;
 
     Liability liability;
     Asset asset;
@@ -26,7 +25,7 @@ class BorrowTransactionServiceTest {
 
     @BeforeEach
     void setup() {
-        borrow = TransactionServiceFactory.create(BORROW);
+        borrow = new BorrowTransactionService();
 
         liability = DefaultAccounts.liability(1);
         asset = DefaultAccounts.asset(1);
