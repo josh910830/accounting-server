@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.PURCHASE_BY_CASH;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.PURCHASE_BY_CASH;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +38,7 @@ class TransactionServiceTest {
     @DisplayName("복식 거래 이벤트 반환")
     void execute_onSuccess_returnsDoubleTransactionEvent() {
         TransactionExecutionParameter param = new TransactionExecutionParameter(pair, amount, description);
-        DoubleTransactionExecutedEvent event = transaction.execute(param);
+        TransactionExecutedEvent event = transaction.execute(param);
 
         assertThat(event).isNotNull();
     }

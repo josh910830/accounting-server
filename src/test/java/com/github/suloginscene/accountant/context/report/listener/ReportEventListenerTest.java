@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.context.report.listener;
 
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.report.application.LedgerScribingService;
 import com.github.suloginscene.accountant.testing.fixture.DefaultEvents;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,12 +24,12 @@ class ReportEventListenerTest {
     @MockBean LedgerScribingService ledgerScribingService;
     @Autowired AccountantEventPublisher accountantEventPublisher;
 
-    DoubleTransactionExecutedEvent event;
+    TransactionExecutedEvent event;
 
 
     @BeforeEach
     void setup() {
-        event = DefaultEvents.doubleTransactionExecutedEvent();
+        event = DefaultEvents.transactionExecutedEvent();
     }
 
 
@@ -38,7 +38,7 @@ class ReportEventListenerTest {
     void onDoubleTransactionExecutedEvent_onSuccess_listens() {
         accountantEventPublisher.publish(event);
 
-        then(reportEventListener).should().on(any(DoubleTransactionExecutedEvent.class));
+        then(reportEventListener).should().on(any(TransactionExecutedEvent.class));
 
         then(ledgerScribingService).should().scribeLedger(any(), any());
     }

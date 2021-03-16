@@ -7,33 +7,24 @@ import com.github.suloginscene.accountant.context.common.value.money.Money;
 
 public abstract class TransactionService {
 
-    public DoubleTransactionExecutedEvent execute(TransactionExecutionParameter param) {
-        // TODO refine
-        AccountPair accountPair = param.getAccountPair();
+    public TransactionExecutedEvent execute(TransactionExecutionParameter param) {
+        AccountPair pair = param.getAccountPair();
         Money amount = param.getAmount();
         String description = param.getDescription();
 
-        Account source = accountPair.getSource();
-        Account destination = accountPair.getDestination();
+        doExecute(pair.getSource(), pair.getDestination(), amount, description);
 
-        doExecute(source, destination, amount, description);
-
-        Holder holder = accountPair.getHolder();
-        // TODO replace
-        DoubleTransaction doubleTransaction = toDoubleTransaction(source, destination, amount, description);
-
-        return new DoubleTransactionExecutedEvent(holder, doubleTransaction);
+        return createEvent(pair, amount, description);
     }
 
-    protected abstract void doExecute(Account from, Account to, Money amount, String description);
-
-    private DoubleTransaction toDoubleTransaction(Account source, Account destination, Money amount, String description) {
-        DoubleTransactionType type = type();
-        String debit = destination.getName();
-        String credit = source.getName();
-        return new DoubleTransaction(type, debit, credit, amount, description);
+    private TransactionExecutedEvent createEvent(AccountPair pair, Money amount, String description) {
+        Holder holder = pair.getHolder();
+        TransactionType type = type();
+        return new TransactionExecutedEvent(holder, type, pair, amount, description);
     }
 
-    protected abstract DoubleTransactionType type();
+    protected abstract void doExecute(Account source, Account destination, Money amount, String description);
+
+    protected abstract TransactionType type();
 
 }

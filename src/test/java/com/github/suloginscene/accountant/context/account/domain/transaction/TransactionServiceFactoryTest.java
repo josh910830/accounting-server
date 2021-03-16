@@ -9,12 +9,12 @@ import com.github.suloginscene.accountant.context.account.domain.transaction.imp
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.BORROW;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.PURCHASE_BY_CASH;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.PURCHASE_BY_CREDIT;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.REPAY;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.SELL;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType.TRANSFER;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.BORROW;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.PURCHASE_BY_CASH;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.PURCHASE_BY_CREDIT;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.REPAY;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.SELL;
+import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.TRANSFER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

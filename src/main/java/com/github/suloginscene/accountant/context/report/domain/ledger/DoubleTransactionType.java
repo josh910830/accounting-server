@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.report.domain.ledger;
 
 
 public enum DoubleTransactionType {

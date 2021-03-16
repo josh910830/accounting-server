@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransaction;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.report.listener.EventTransformUtils;
 import com.github.suloginscene.accountant.testing.fixture.DefaultEvents;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,8 +25,8 @@ class LedgerTest {
         Holder holder = new Holder(1L);
         ledger = new Ledger(holder);
 
-        DoubleTransactionExecutedEvent event = DefaultEvents.doubleTransactionExecutedEvent();
-        doubleTransaction = event.getDoubleTransaction();
+        TransactionExecutedEvent event = DefaultEvents.transactionExecutedEvent();
+        doubleTransaction = EventTransformUtils.toDoubleTransaction(event);
     }
 
 

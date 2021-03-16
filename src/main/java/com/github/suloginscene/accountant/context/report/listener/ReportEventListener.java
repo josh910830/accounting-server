@@ -1,12 +1,14 @@
 package com.github.suloginscene.accountant.context.report.listener;
 
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransaction;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.application.LedgerScribingService;
+import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
 
 
 @Component
@@ -17,9 +19,9 @@ public class ReportEventListener {
 
 
     @EventListener
-    public void on(DoubleTransactionExecutedEvent event) {
+    public void on(TransactionExecutedEvent event) {
         Holder holder = event.getHolder();
-        DoubleTransaction doubleTransaction = event.getDoubleTransaction();
+        DoubleTransaction doubleTransaction = toDoubleTransaction(event);
 
         ledgerScribingService.scribeLedger(holder, doubleTransaction);
     }

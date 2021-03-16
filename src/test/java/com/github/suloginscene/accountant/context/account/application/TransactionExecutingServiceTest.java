@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType;
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
@@ -28,7 +28,7 @@ class TransactionExecutingServiceTest {
 
     @SpyBean AccountantEventPublisher accountantEventPublisher;
 
-    DoubleTransactionType sell;
+    TransactionType sell;
 
     Account revenue;
     Account asset;
@@ -39,7 +39,7 @@ class TransactionExecutingServiceTest {
 
     @BeforeEach
     void setup() {
-        sell = DoubleTransactionType.SELL;
+        sell = TransactionType.SELL;
 
         revenue = DefaultAccounts.revenue();
         asset = DefaultAccounts.asset(1);
@@ -59,12 +59,12 @@ class TransactionExecutingServiceTest {
     void executeTransaction_onSuccess_publishesEvent() {
         repositoryFacade.given(revenue, asset);
 
-        Long from = revenue.getId();
-        Long to = asset.getId();
-        TransactionExecutionData data = new TransactionExecutionData(sell, from, to, amount, description);
+        Long source = revenue.getId();
+        Long destination = asset.getId();
+        TransactionExecutionData data = new TransactionExecutionData(sell, source, destination, amount, description);
         transactionExecutingService.executeTransaction(data);
 
-        then(accountantEventPublisher).should().publish(any(DoubleTransactionExecutedEvent.class));
+        then(accountantEventPublisher).should().publish(any(TransactionExecutedEvent.class));
     }
 
 }

@@ -18,8 +18,8 @@ class TransferTransactionServiceTest {
 
     TransferTransactionService transfer;
 
-    Asset fromAsset;
-    Asset toAsset;
+    Asset sourceAsset;
+    Asset destinationAsset;
 
     Money amount;
     String description;
@@ -29,8 +29,8 @@ class TransferTransactionServiceTest {
     void setup() {
         transfer = new TransferTransactionService();
 
-        fromAsset = DefaultAccounts.asset(1);
-        toAsset = DefaultAccounts.asset(1);
+        sourceAsset = DefaultAccounts.asset(1);
+        destinationAsset = DefaultAccounts.asset(1);
 
         amount = Money.of(1);
         description = "설명";
@@ -40,16 +40,16 @@ class TransferTransactionServiceTest {
     @Test
     @DisplayName("정상 - 자산1 감소 & 자산2 증가")
     void transfer_onSuccess_decreaseAsset1AndIncreaseAsset2() {
-        transfer.doExecute(fromAsset, toAsset, amount, description);
+        transfer.doExecute(sourceAsset, destinationAsset, amount, description);
 
-        assertThat(fromAsset.getBalance().get()).isEqualTo(0);
-        assertThat(toAsset.getBalance().get()).isEqualTo(2);
+        assertThat(sourceAsset.getBalance().get()).isEqualTo(0);
+        assertThat(destinationAsset.getBalance().get()).isEqualTo(2);
     }
 
     @Test
     @DisplayName("잔액 부족 - 예외 발생")
     void transfer_onInsufficientBalance_throwsException() {
-        Executable action = () -> transfer.doExecute(fromAsset, toAsset, Money.of(2), description);
+        Executable action = () -> transfer.doExecute(sourceAsset, destinationAsset, Money.of(2), description);
 
         assertThrows(NegativeMoneyException.class, action);
     }

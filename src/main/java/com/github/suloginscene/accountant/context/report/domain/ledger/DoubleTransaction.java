@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction;
+package com.github.suloginscene.accountant.context.report.domain.ledger;
 
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.Getter;

@@ -1,23 +1,24 @@
 package com.github.suloginscene.accountant.testing.fixture;
 
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransaction;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
-import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionType;
+import com.github.suloginscene.accountant.context.account.domain.transaction.AccountPair;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
 
 
 public class DefaultEvents {
 
-    public static DoubleTransactionExecutedEvent doubleTransactionExecutedEvent() {
+    public static TransactionExecutedEvent transactionExecutedEvent() {
         Holder holder = new Holder(1L);
-        DoubleTransactionType type = DoubleTransactionType.SELL;
-        String from = "수입";
-        String to = "자산";
+        TransactionType type = TransactionType.SELL;
+        AccountPair pair = AccountPair.of(revenue(), asset(1));
         Money amount = Money.of(1);
         String description = "설명";
-        DoubleTransaction doubleTransaction = new DoubleTransaction(type, from, to, amount, description);
-        return new DoubleTransactionExecutedEvent(holder, doubleTransaction);
+        return new TransactionExecutedEvent(holder, type, pair, amount, description);
     }
 
 }
