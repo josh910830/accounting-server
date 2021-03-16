@@ -10,8 +10,8 @@ public class TransactionExecutionData {
 
     private final DoubleTransactionType type;
 
-    private final Long fromAccountId;
-    private final Long toAccountId;
+    private final Long sourceId;
+    private final Long destinationId;
 
     private final Money amount;
     private final String description;

@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.context.account.domain.transaction.AccountPair;
 import com.github.suloginscene.accountant.context.account.domain.transaction.DoubleTransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutionParameter;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionService;
@@ -22,24 +23,15 @@ public class TransactionExecutingService {
 
 
     public void executeTransaction(TransactionExecutionData data) {
-        TransactionService transactionService = toService(data);
-        TransactionExecutionParameter param = toParam(data);
+        Account source = findAccount(data.getSourceId());
+        Account destination = findAccount(data.getDestinationId());
+        AccountPair pair = AccountPair.of(source, destination);
 
-        DoubleTransactionExecutedEvent event = transactionService.execute(param);
+        TransactionService transaction = TransactionServiceFactory.create(data.getType());
+        TransactionExecutionParameter param = new TransactionExecutionParameter(pair, data.getAmount(), data.getDescription());
+        DoubleTransactionExecutedEvent event = transaction.execute(param);
 
         accountantEventPublisher.publish(event);
-    }
-
-    private TransactionService toService(TransactionExecutionData data) {
-        return TransactionServiceFactory.create(data.getType());
-    }
-
-    private TransactionExecutionParameter toParam(TransactionExecutionData data) {
-        Account from = findAccount(data.getFromAccountId());
-        Account to = findAccount(data.getToAccountId());
-
-        return new TransactionExecutionParameter(
-                from, to, data.getAmount(), data.getDescription());
     }
 
     private Account findAccount(Long id) {

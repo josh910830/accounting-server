@@ -8,38 +8,32 @@ import com.github.suloginscene.accountant.context.common.value.money.Money;
 public abstract class TransactionService {
 
     public DoubleTransactionExecutedEvent execute(TransactionExecutionParameter param) {
-        Account from = param.getFrom();
-        Account to = param.getTo();
-        checkEqualHolder(from, to);
-
+        // TODO refine
+        AccountPair accountPair = param.getAccountPair();
         Money amount = param.getAmount();
         String description = param.getDescription();
-        doExecute(from, to, amount, description);
 
-        Holder holder = from.getHolder();
-        DoubleTransaction doubleTransaction = toDoubleTransaction(param);
+        Account source = accountPair.getSource();
+        Account destination = accountPair.getDestination();
+
+        doExecute(source, destination, amount, description);
+
+        Holder holder = accountPair.getHolder();
+        // TODO replace
+        DoubleTransaction doubleTransaction = toDoubleTransaction(source, destination, amount, description);
+
         return new DoubleTransactionExecutedEvent(holder, doubleTransaction);
-    }
-
-    private void checkEqualHolder(Account from, Account to) {
-        Holder fromHolder = from.getHolder();
-        Holder toHolder = to.getHolder();
-
-        if (!fromHolder.equals(toHolder)) {
-            throw new HolderNotMatchedException(from, to);
-        }
     }
 
     protected abstract void doExecute(Account from, Account to, Money amount, String description);
 
-    private DoubleTransaction toDoubleTransaction(TransactionExecutionParameter param) {
+    private DoubleTransaction toDoubleTransaction(Account source, Account destination, Money amount, String description) {
         DoubleTransactionType type = type();
-        String debit = param.getTo().getName();
-        String credit = param.getFrom().getName();
-        return new DoubleTransaction(type, debit, credit, param.getAmount(), param.getDescription());
+        String debit = destination.getName();
+        String credit = source.getName();
+        return new DoubleTransaction(type, debit, credit, amount, description);
     }
 
     protected abstract DoubleTransactionType type();
-
 
 }
