@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -18,8 +20,12 @@ public class AccountFindingService {
     private final AccountRepository accountRepository;
 
 
-    public List<Account> findAccounts(Holder holder) {
-        return accountRepository.findByHolder(holder);
+    public List<AccountSimpleData> findAccounts(Holder holder) {
+        List<Account> accounts = accountRepository.findByHolder(holder);
+
+        return accounts.stream()
+                .map(AccountSimpleData::new)
+                .collect(toList());
     }
 
 }

@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.account.application;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
@@ -46,7 +45,7 @@ class AccountFindingServiceTest {
     void find_onSuccess_returnsList() {
         repositoryFacade.given(asset(1), liability(1), revenue(), expense());
 
-        List<Account> accounts = accountFindingService.findAccounts(holder);
+        List<AccountSimpleData> accounts = accountFindingService.findAccounts(holder);
 
         assertThat(accounts).hasSize(4);
     }
