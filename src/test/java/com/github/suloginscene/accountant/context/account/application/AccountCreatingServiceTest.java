@@ -28,7 +28,7 @@ class AccountCreatingServiceTest {
     void setup() {
         String name = "계정명";
         Money money = Money.of(1);
-        input = new AccountCreationInput(ASSET, HOLDER, name, money);
+        input = new AccountCreationInput(HOLDER, ASSET, name, money);
     }
 
     @AfterEach

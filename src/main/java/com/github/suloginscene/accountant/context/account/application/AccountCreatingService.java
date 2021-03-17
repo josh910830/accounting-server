@@ -28,7 +28,7 @@ public class AccountCreatingService {
 
     private AccountCreationParameter toParam(AccountCreationInput input) {
         return new AccountCreationParameter(
-                input.getAccountType(), input.getHolder(), input.getName(), input.getMoney());
+                input.getType(), input.getHolder(), input.getName(), input.getMoney());
     }
 
 }

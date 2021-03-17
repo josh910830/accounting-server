@@ -9,9 +9,9 @@ import lombok.Data;
 @Data
 public class AccountCreationInput {
 
-    private final AccountType accountType;
-
     private final Holder holder;
+
+    private final AccountType type;
     private final String name;
     private final Money money;
 
