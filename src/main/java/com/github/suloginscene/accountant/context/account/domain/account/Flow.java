@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
+import com.github.suloginscene.accountant.context.common.exception.NullTransientFieldException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.AttributeOverride;
@@ -23,13 +23,20 @@ public abstract class Flow extends Account {
     private Money budget;
 
     @Transient
-    @Getter // TODO if null
     private Money occurred;
 
 
     protected Flow(Holder holder, String name, Money budget) {
         super(holder, name);
         this.budget = budget;
+    }
+
+
+    public Money occurred() {
+        if (occurred == null) {
+            throw new NullTransientFieldException(Money.class, "occurred");
+        }
+        return occurred;
     }
 
 
