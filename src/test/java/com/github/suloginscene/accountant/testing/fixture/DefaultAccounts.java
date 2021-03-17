@@ -18,6 +18,9 @@ import static com.github.suloginscene.accountant.context.account.domain.account.
 
 public class DefaultAccounts {
 
+    public static final Holder HOLDER = new Holder(1L);
+
+
     public static Asset asset(int balance) {
         return (Asset) AccountFactory.create(param("자산", ASSET, balance));
     }
@@ -35,12 +38,12 @@ public class DefaultAccounts {
     }
 
 
-    private static AccountCreationParameter param(String name, AccountType asset) {
-        return param(name, asset, 1);
+    private static AccountCreationParameter param(String name, AccountType type) {
+        return param(name, type, 1);
     }
 
-    private static AccountCreationParameter param(String name, AccountType asset, int balance) {
-        return new AccountCreationParameter(asset, new Holder(1L), name, Money.of(balance));
+    private static AccountCreationParameter param(String name, AccountType type, int amount) {
+        return new AccountCreationParameter(type, HOLDER, name, Money.of(amount));
     }
 
 }

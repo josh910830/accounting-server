@@ -4,7 +4,6 @@ import com.github.suloginscene.accountant.context.account.domain.account.concret
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import static com.github.suloginscene.accountant.context.account.domain.account.
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.EXPENSE;
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.LIABILITY;
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.REVENUE;
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -56,10 +56,9 @@ class AccountFactoryTest {
     }
 
     private AccountCreationParameter createParam(AccountType type) {
-        Holder holder = new Holder(1L);
         String name = "계정명";
         Money money = Money.of(1);
-        return new AccountCreationParameter(type, holder, name, money);
+        return new AccountCreationParameter(type, HOLDER, name, money);
     }
 
 }

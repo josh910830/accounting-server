@@ -2,7 +2,6 @@ package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
@@ -15,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.transactionExecutedEvent;
 import static org.mockito.BDDMockito.then;
 
@@ -27,7 +27,6 @@ class LedgerScribingServiceTest {
     @Autowired RepositoryFacade repositoryFacade;
     @SpyBean LedgerProvider ledgerProvider;
 
-    Holder holder;
     Ledger ledger;
 
     DoubleTransaction doubleTransaction;
@@ -38,8 +37,7 @@ class LedgerScribingServiceTest {
 
     @BeforeEach
     void setup() {
-        holder = new Holder(1L);
-        ledger = new Ledger(holder);
+        ledger = new Ledger(HOLDER);
 
         TransactionExecutedEvent event = transactionExecutedEvent();
         doubleTransaction = toDoubleTransaction(event);
@@ -59,9 +57,9 @@ class LedgerScribingServiceTest {
     void scribe_onSuccess_consumesLedgerToWrite() {
         repositoryFacade.given(source, destination, ledger);
 
-        ledgerScribingService.scribeLedger(holder, doubleTransaction);
+        ledgerScribingService.scribeLedger(HOLDER, doubleTransaction);
 
-        then(ledgerProvider).should().provideLedger(holder);
+        then(ledgerProvider).should().provideLedger(HOLDER);
     }
 
 }

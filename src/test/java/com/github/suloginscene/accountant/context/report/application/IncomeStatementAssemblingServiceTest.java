@@ -2,7 +2,6 @@ package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.range.DateRange;
 import com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatement;
@@ -16,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,8 +28,6 @@ class IncomeStatementAssemblingServiceTest {
     @Autowired IncomeStatementAssemblingService incomeStatementAssemblingService;
     @Autowired RepositoryFacade repositoryFacade;
 
-    Holder holder;
-
     Money amount;
     String description;
 
@@ -38,8 +36,6 @@ class IncomeStatementAssemblingServiceTest {
 
     @BeforeEach
     void setup() {
-        holder = new Holder(1L);
-
         amount = Money.of(1);
         description = "";
 
@@ -64,7 +60,7 @@ class IncomeStatementAssemblingServiceTest {
         repositoryFacade.given(revenue1, revenue2, expense1);
 
         DateRange duringToday = DateRange.of(today);
-        IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(holder, duringToday);
+        IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(HOLDER, duringToday);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(1);
     }

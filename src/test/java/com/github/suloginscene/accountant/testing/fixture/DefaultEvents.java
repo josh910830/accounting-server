@@ -13,7 +13,7 @@ import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts
 public class DefaultEvents {
 
     public static TransactionExecutedEvent transactionExecutedEvent() {
-        Holder holder = new Holder(1L);
+        Holder holder = DefaultAccounts.HOLDER;
         TransactionType type = TransactionType.SELL;
         AccountPair pair = AccountPair.of(revenue(), asset(1));
         Money amount = Money.of(1);

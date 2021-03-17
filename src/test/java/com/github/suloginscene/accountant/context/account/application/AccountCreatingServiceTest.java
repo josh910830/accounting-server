@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.account.application;
 
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.ASSET;
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -26,10 +26,9 @@ class AccountCreatingServiceTest {
 
     @BeforeEach
     void setup() {
-        Holder holder = new Holder(1L);
         String name = "계정명";
         Money money = Money.of(1);
-        data = new AccountCreationData(ASSET, holder, name, money);
+        data = new AccountCreationData(ASSET, HOLDER, name, money);
     }
 
     @AfterEach
