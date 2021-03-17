@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.account.api;
 
+import com.github.suloginscene.accountant.config.Authenticated;
 import com.github.suloginscene.accountant.context.account.application.AccountCreatingService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreationInput;
 import com.github.suloginscene.accountant.context.account.application.AccountFindingService;
@@ -9,7 +10,6 @@ import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +28,8 @@ public class AccountRestController {
 
 
     @PostMapping
-    ResponseEntity<?> createAccount(@AuthenticationPrincipal String username, // TODO sp-el
-                                    @RequestBody AccountCreationRequest request) {
-        AccountCreationInput input = toInput(username, request);
+    ResponseEntity<Void> postAccount(@Authenticated Long memberId, @RequestBody AccountCreationRequest request) {
+        AccountCreationInput input = toInput(memberId, request);
 
         Long id = accountCreatingService.createAccount(input);
 
@@ -38,8 +37,8 @@ public class AccountRestController {
         return ResponseEntity.created(uri).build();
     }
 
-    private AccountCreationInput toInput(String username, AccountCreationRequest request) {
-        Holder holder = new Holder(Long.parseLong(username));
+    private AccountCreationInput toInput(Long memberId, AccountCreationRequest request) {
+        Holder holder = new Holder(memberId);
         AccountType type = AccountType.valueOf(request.getType());
         String name = request.getName();
         Money money = Money.of(request.getMoney());

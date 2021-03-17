@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class AccountCreationParameter {
 
-    private final AccountType accountType;
+    private final AccountType type;
 
     private final Holder holder;
     private final String name;

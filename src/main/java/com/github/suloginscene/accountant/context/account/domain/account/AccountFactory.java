@@ -11,11 +11,11 @@ import com.github.suloginscene.accountant.context.common.value.money.Money;
 public class AccountFactory {
 
     public static Account create(AccountCreationParameter parameters) {
-        AccountType accountType = parameters.getAccountType();
+        AccountType type = parameters.getType();
         Holder holder = parameters.getHolder();
         String name = parameters.getName();
         Money money = parameters.getMoney();
-        switch (accountType) {
+        switch (type) {
             case ASSET:
                 return new Asset(holder, name, money);
             case LIABILITY:
@@ -25,7 +25,7 @@ public class AccountFactory {
             case EXPENSE:
                 return new Expense(holder, name, money);
             default:
-                throw new AccountTypeNotFoundException(accountType);
+                throw new AccountTypeNotFoundException(type);
         }
     }
 

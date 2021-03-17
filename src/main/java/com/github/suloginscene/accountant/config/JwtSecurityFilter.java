@@ -4,7 +4,6 @@ import com.github.suloginscene.jjwthelper.InvalidJwtException;
 import com.github.suloginscene.jjwthelper.JwtReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
 
 
 @Component
@@ -58,7 +56,8 @@ public class JwtSecurityFilter extends GenericFilterBean {
 
     private Authentication toAuthentication(String token) throws InvalidJwtException {
         String audience = jwtReader.getAudience(token);
-        return new UsernamePasswordAuthenticationToken(audience, "", Collections.emptySet());
+        Principal principal = Principal.of(audience);
+        return principal.token();
     }
 
     private void sendForbiddenError(ServletResponse servletResponse, String message) {
