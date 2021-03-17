@@ -16,9 +16,12 @@ import static com.github.suloginscene.accountant.context.account.domain.account.
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.REVENUE;
 
 
+// TODO
 public class DefaultAccounts {
 
     public static final Holder HOLDER = new Holder(1L);
+    public static final String NAME = "계정이름";
+    public static final Money MONEY = Money.of(1);
 
 
     public static Asset asset(int balance) {

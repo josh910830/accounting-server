@@ -5,56 +5,43 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.context.report.domain.ledger.LedgerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class RepositoryFacade {
-
-    private static final String DOUBLE_LINE = "======= %s =======\n";
-    private static final String SINGLE_LINE = "------- %s -------\n";
 
     private final AccountRepository accountRepository;
     private final LedgerRepository ledgerRepository;
 
 
     public void given(Object... objects) {
+        log.info("\n====== given started ======");
         for (Object object : objects) {
             if (object instanceof Account) {
-                printSave("account");
+                log.info("\n[ save - {} ]", object);
                 accountRepository.save((Account) object);
                 continue;
             }
             if (object instanceof Ledger) {
-                printSave("ledger");
+                log.info("\n[ save - {} ]", object);
                 ledgerRepository.save((Ledger) object);
                 continue;
             }
             throw new IllegalArgumentException(object + " has no repository");
         }
-        printGivenFinished();
-    }
-
-    private void printSave(String type) {
-        System.out.printf(SINGLE_LINE, "save " + type);
-    }
-
-    private void printGivenFinished() {
-        System.out.printf(DOUBLE_LINE, "given finished");
-        System.out.println();
+        log.info("\n====== given finished ======\n");
     }
 
 
     public void clear() {
-        printClearStarted();
+        log.info("\n====== clear started ======");
         ledgerRepository.deleteAll();
         accountRepository.deleteAll();
-    }
-
-    private void printClearStarted() {
-        System.out.println();
-        System.out.printf(DOUBLE_LINE, "clear started");
+        log.info("\n====== clear finished ======\n");
     }
 
 }

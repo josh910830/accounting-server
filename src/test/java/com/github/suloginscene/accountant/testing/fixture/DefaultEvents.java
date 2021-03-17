@@ -10,6 +10,7 @@ import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
 
 
+// TODO
 public class DefaultEvents {
 
     public static TransactionExecutedEvent transactionExecutedEvent() {

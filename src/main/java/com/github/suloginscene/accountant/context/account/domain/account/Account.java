@@ -26,7 +26,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Inheritance(strategy = JOINED)
 @NoArgsConstructor(access = PROTECTED)
-@ToString(of = {"id"})
+@ToString(of = {"id", "holder", "name"})
 public abstract class Account {
 
     @Id @GeneratedValue

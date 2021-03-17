@@ -1,50 +1,36 @@
 package com.github.suloginscene.accountant.context.report.application;
 
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import com.github.suloginscene.accountant.context.report.domain.balanceSheet.BalanceSheet;
-import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
-import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.liability;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@SpringBootTest
 @DisplayName("재무상태표 조립 서비스")
-class BalanceSheetAssemblingServiceTest {
+class BalanceSheetAssemblingServiceTest extends IntegrationTest {
 
     @Autowired BalanceSheetAssemblingService balanceSheetAssemblingService;
-    @Autowired RepositoryFacade repositoryFacade;
-
-    Holder holder;
-
-
-    @BeforeEach
-    void setup() {
-        holder = DefaultAccounts.HOLDER;
-    }
-
-    @AfterEach
-    void clear() {
-        repositoryFacade.clear();
-    }
 
 
     @Test
     @DisplayName("정상")
     void assemble_onSuccess_returnsBalanceSheet() {
-        repositoryFacade.given(asset(1), asset(1), liability(1));
+        Asset asset1 = asset(1);
+        Asset asset2 = asset(1);
+        Liability liability = liability(1);
+        repositoryFacade.given(asset1, asset2, liability);
 
-        BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(holder);
+        BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(HOLDER);
 
-        assertThat(balanceSheet.getNet()).isEqualTo(1);
+        assertThat(balanceSheet.getNet()).isEqualTo(2 - 1);
     }
 
 }

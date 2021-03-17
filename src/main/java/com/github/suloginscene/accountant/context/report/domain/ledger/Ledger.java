@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.report.domain.ledger;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
+@ToString(of = "holder")
 public class Ledger {
 
     @Id

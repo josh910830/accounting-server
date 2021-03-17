@@ -1,16 +1,11 @@
 package com.github.suloginscene.accountant.filter;
 
-import com.github.suloginscene.accountant.testing.config.TestJwtConfig;
+import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import com.github.suloginscene.jjwthelper.TestJwtFactory;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
@@ -18,27 +13,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@Import(TestJwtConfig.class)
 @DisplayName("JWT 필터")
-public class JwtSecurityFilterTest {
+public class JwtSecurityFilterTest extends ControllerTest {
 
     static final String URL = "/";
 
-    @Autowired MockMvc mockMvc;
     @Autowired TestJwtFactory testJwtFactory;
 
     Long id;
 
-
     @BeforeEach
     void setup() {
         id = 1L;
-    }
-
-    @AfterEach
-    void clear() {
     }
 
 

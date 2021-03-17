@@ -4,13 +4,10 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
-import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
@@ -19,43 +16,23 @@ import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.t
 import static org.mockito.BDDMockito.then;
 
 
-@SpringBootTest
 @DisplayName("장부 기록 서비스")
-class LedgerScribingServiceTest {
+class LedgerScribingServiceTest extends IntegrationTest {
 
     @Autowired LedgerScribingService ledgerScribingService;
-    @Autowired RepositoryFacade repositoryFacade;
     @SpyBean LedgerProvider ledgerProvider;
-
-    Ledger ledger;
-
-    DoubleTransaction doubleTransaction;
-
-    Account source;
-    Account destination;
-
-
-    @BeforeEach
-    void setup() {
-        ledger = new Ledger(HOLDER);
-
-        TransactionExecutedEvent event = transactionExecutedEvent();
-        doubleTransaction = toDoubleTransaction(event);
-
-        source = event.getPair().getSource();
-        destination = event.getPair().getDestination();
-    }
-
-    @AfterEach
-    void clear() {
-        repositoryFacade.clear();
-    }
 
 
     @Test
     @DisplayName("정상 - 장부 사용")
     void scribe_onSuccess_consumesLedgerToWrite() {
-        repositoryFacade.given(source, destination, ledger);
+        TransactionExecutedEvent event = transactionExecutedEvent();
+        DoubleTransaction doubleTransaction = toDoubleTransaction(event);
+
+        Account debit = doubleTransaction.getDebit();
+        Account credit = doubleTransaction.getCredit();
+        Ledger ledger = new Ledger(HOLDER);
+        repositoryFacade.given(debit, credit, ledger);
 
         ledgerScribingService.scribeLedger(HOLDER, doubleTransaction);
 
