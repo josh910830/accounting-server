@@ -27,7 +27,7 @@ class AccountPairTest {
     @DisplayName("정상 생성")
     void create_onSuccess_returnsAccountPair() {
         Asset source = asset(1);
-        Expense destination = expense();
+        Expense destination = expense(1);
         AccountPair pair = AccountPair.of(source, destination);
 
         assertThat(pair).isNotNull();

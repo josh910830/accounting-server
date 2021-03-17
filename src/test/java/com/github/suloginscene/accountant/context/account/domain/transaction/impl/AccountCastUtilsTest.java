@@ -28,8 +28,8 @@ class AccountCastUtilsTest {
     void setup() {
         asset = DefaultAccounts.asset(1);
         liability = DefaultAccounts.liability(1);
-        revenue = DefaultAccounts.revenue();
-        expense = DefaultAccounts.expense();
+        revenue = DefaultAccounts.revenue(1);
+        expense = DefaultAccounts.expense(1);
     }
 
 

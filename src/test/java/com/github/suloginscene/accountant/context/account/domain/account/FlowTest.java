@@ -27,7 +27,7 @@ class FlowTest {
 
     @BeforeEach
     void setup() {
-        flow = DefaultAccounts.revenue();
+        flow = DefaultAccounts.revenue(1);
 
         amount = Money.of(1);
         description = "설명";

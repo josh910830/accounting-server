@@ -37,13 +37,13 @@ class IncomeStatementFactoryTest {
         amount = Money.of(1);
         description = "설명";
 
-        r1 = revenue();
-        r2 = revenue();
+        r1 = revenue(1);
+        r2 = revenue(1);
         revenues = List.of(r1, r2);
 
-        e1 = expense();
-        e2 = expense();
-        e3 = expense();
+        e1 = expense(1);
+        e2 = expense(1);
+        e3 = expense(1);
         expenses = List.of(e1, e2, e3);
     }
 

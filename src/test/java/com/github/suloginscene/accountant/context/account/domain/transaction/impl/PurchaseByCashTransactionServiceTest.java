@@ -31,7 +31,7 @@ class PurchaseByCashTransactionServiceTest {
         purchaseByCash = new PurchaseByCashTransactionService();
 
         asset = DefaultAccounts.asset(1);
-        expense = DefaultAccounts.expense();
+        expense = DefaultAccounts.expense(1);
 
         amount = Money.of(1);
         description = "설명";

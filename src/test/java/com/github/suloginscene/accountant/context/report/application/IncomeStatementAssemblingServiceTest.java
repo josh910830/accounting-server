@@ -45,9 +45,9 @@ class IncomeStatementAssemblingServiceTest {
     @Test
     @DisplayName("정상")
     void assemble_onSuccess_returnsIncomeStatement() {
-        Revenue revenue1 = revenue();
-        Revenue revenue2 = revenue();
-        Expense expense1 = expense();
+        Revenue revenue1 = revenue(1);
+        Revenue revenue2 = revenue(1);
+        Expense expense1 = expense(1);
         revenue1.occur(amount, description);
         revenue2.occur(amount, description);
         expense1.occur(amount, description);

@@ -29,9 +29,9 @@ class FlowUtilsTest {
 
     @BeforeEach
     void setup() {
-        expense1 = expense();
-        expense2 = expense();
-        expense3 = expense();
+        expense1 = expense(1);
+        expense2 = expense(1);
+        expense3 = expense(1);
         expenses = List.of(expense1, expense2, expense3);
 
         amount = Money.of(1);

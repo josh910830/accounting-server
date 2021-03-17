@@ -27,7 +27,7 @@ class TransactionServiceTest {
         transaction = TransactionServiceFactory.create(PURCHASE_BY_CASH);
 
         Account source = asset(1);
-        Account destination = expense();
+        Account destination = expense(1);
         pair = AccountPair.of(source, destination);
         amount = Money.of(1);
         description = "설명";

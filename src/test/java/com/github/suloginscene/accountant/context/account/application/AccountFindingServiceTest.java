@@ -43,7 +43,7 @@ class AccountFindingServiceTest {
     @Test
     @DisplayName("정상 - 계정 리스트 반환")
     void find_onSuccess_returnsList() {
-        repositoryFacade.given(asset(1), liability(1), revenue(), expense());
+        repositoryFacade.given(asset(1), liability(1), revenue(1), expense(1));
 
         List<AccountSimpleData> accounts = accountFindingService.findAccounts(holder);
 

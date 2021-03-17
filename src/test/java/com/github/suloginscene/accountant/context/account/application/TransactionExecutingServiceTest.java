@@ -41,7 +41,7 @@ class TransactionExecutingServiceTest {
     void setup() {
         sell = TransactionType.SELL;
 
-        revenue = DefaultAccounts.revenue();
+        revenue = DefaultAccounts.revenue(1);
         asset = DefaultAccounts.asset(1);
 
         amount = Money.of(1);

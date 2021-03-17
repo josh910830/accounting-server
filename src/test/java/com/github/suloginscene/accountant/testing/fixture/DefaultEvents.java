@@ -15,7 +15,7 @@ public class DefaultEvents {
     public static TransactionExecutedEvent transactionExecutedEvent() {
         Holder holder = DefaultAccounts.HOLDER;
         TransactionType type = TransactionType.SELL;
-        AccountPair pair = AccountPair.of(revenue(), asset(1));
+        AccountPair pair = AccountPair.of(revenue(1), asset(1));
         Money amount = Money.of(1);
         String description = "설명";
         return new TransactionExecutedEvent(holder, type, pair, amount, description);

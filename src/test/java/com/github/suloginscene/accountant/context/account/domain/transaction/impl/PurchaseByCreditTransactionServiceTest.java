@@ -28,7 +28,7 @@ class PurchaseByCreditTransactionServiceTest {
         purchaseByCredit = new PurchaseByCreditTransactionService();
 
         liability = DefaultAccounts.liability(1);
-        expense = DefaultAccounts.expense();
+        expense = DefaultAccounts.expense(1);
 
         amount = Money.of(1);
         description = "설명";
