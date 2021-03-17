@@ -1,6 +1,8 @@
 package com.github.suloginscene.accountant.context.report.application;
 
+import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
 import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
@@ -14,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.NoSuchElementException;
 
+import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
+import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.transactionExecutedEvent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,11 +30,13 @@ class LedgerFindingServiceTest {
     @Autowired RepositoryFacade repositoryFacade;
 
     Holder holder;
+    DoubleTransaction doubleTransaction;
 
 
     @BeforeEach
     void setup() {
         holder = DefaultAccounts.HOLDER;
+        doubleTransaction = toDoubleTransaction(transactionExecutedEvent());
     }
 
     @AfterEach
@@ -40,14 +46,17 @@ class LedgerFindingServiceTest {
 
 
     @Test
-    @DisplayName("성공 - 장부 반환")
+    @DisplayName("성공 - 장부 데이터 반환")
     void find_onSuccess_returnsLedger() {
         Ledger ledger = new Ledger(holder);
-        repositoryFacade.given(ledger);
+        ledger.writeDoubleTransaction(doubleTransaction);
+        Account debit = doubleTransaction.getDebit();
+        Account credit = doubleTransaction.getCredit();
+        repositoryFacade.given(debit, credit, ledger);
 
-        Ledger found = ledgerFindingService.findLedger(holder);
+        LedgerData ledgerData = ledgerFindingService.findLedger(holder);
 
-        assertThat(found).isNotNull();
+        assertThat(ledgerData.getDoubleTransactions()).hasSize(1);
     }
 
     @Test

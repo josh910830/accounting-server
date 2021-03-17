@@ -25,6 +25,7 @@ public abstract class Flow extends Account {
     @Transient
     private Money occurred;
 
+    // TODO transient current budget usage
 
     protected Flow(Holder holder, String name, Money budget) {
         super(holder, name);

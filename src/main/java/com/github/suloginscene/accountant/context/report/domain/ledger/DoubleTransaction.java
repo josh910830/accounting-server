@@ -38,10 +38,13 @@ public class DoubleTransaction {
     @Getter
     private Account credit;
 
+    @Getter
     private Money amount;
 
+    @Getter
     private String description;
 
+    @Getter
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
