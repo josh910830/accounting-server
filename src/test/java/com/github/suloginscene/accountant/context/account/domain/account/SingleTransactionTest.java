@@ -19,7 +19,7 @@ class SingleTransactionTest {
         SingleTransaction transaction = new SingleTransaction();
         LocalDateTime end = LocalDateTime.now();
 
-        TimeRange timeRange = new TimeRange(begin, end);
+        TimeRange timeRange = TimeRange.of(begin, end);
         boolean isCreatedDuring = transaction.isCreatedDuring(timeRange);
 
         assertThat(isCreatedDuring).isTrue();
@@ -32,7 +32,7 @@ class SingleTransactionTest {
         LocalDateTime end = LocalDateTime.now();
         SingleTransaction transaction = new SingleTransaction();
 
-        TimeRange timeRange = new TimeRange(begin, end);
+        TimeRange timeRange = TimeRange.of(begin, end);
         boolean isCreatedDuring = transaction.isCreatedDuring(timeRange);
 
         assertThat(isCreatedDuring).isFalse();
@@ -45,7 +45,7 @@ class SingleTransactionTest {
         LocalDateTime begin = LocalDateTime.now();
         LocalDateTime end = LocalDateTime.now();
 
-        TimeRange timeRange = new TimeRange(begin, end);
+        TimeRange timeRange = TimeRange.of(begin, end);
         boolean isCreatedDuring = transaction.isCreatedDuring(timeRange);
 
         assertThat(isCreatedDuring).isFalse();

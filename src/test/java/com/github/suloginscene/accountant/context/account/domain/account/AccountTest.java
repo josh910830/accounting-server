@@ -59,7 +59,7 @@ class AccountTest {
         LocalDateTime end = LocalDateTime.now();
         account.writeSingleTransaction(new SingleTransaction(type, amount, description));
 
-        TimeRange timeRange = new TimeRange(begin, end);
+        TimeRange timeRange = TimeRange.of(begin, end);
         List<SingleTransaction> transactions = account.readSingleTransactions(timeRange);
 
         assertThat(transactions).hasSize(1);

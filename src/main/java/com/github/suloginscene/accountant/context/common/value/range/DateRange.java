@@ -1,18 +1,22 @@
 package com.github.suloginscene.accountant.context.common.value.range;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
+@EqualsAndHashCode @ToString
 public class DateRange {
 
-    private final LocalDate beginDate;
-    private final LocalDate endDate;
+    private final LocalDate begin;
+    private final LocalDate end;
 
 
-    private DateRange(LocalDate beginDate, LocalDate endDate) {
-        this.beginDate = beginDate;
-        this.endDate = endDate;
+    private DateRange(LocalDate begin, LocalDate end) {
+        this.begin = begin;
+        this.end = end;
     }
 
     public static DateRange of(LocalDate date) {
@@ -20,10 +24,15 @@ public class DateRange {
         return new DateRange(date, nextDate);
     }
 
+    public static DateRange of(LocalDate begin, LocalDate exclusiveEnd) {
+        return new DateRange(begin, exclusiveEnd);
+    }
+
+
     public TimeRange toTimeRange() {
-        LocalDateTime begin = beginDate.atStartOfDay();
-        LocalDateTime end = endDate.atStartOfDay();
-        return new TimeRange(begin, end);
+        LocalDateTime beginTime = begin.atStartOfDay();
+        LocalDateTime endTime = end.atStartOfDay();
+        return TimeRange.of(beginTime, endTime);
     }
 
 }

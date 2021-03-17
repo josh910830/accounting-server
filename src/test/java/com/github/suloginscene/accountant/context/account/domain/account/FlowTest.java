@@ -42,7 +42,7 @@ class FlowTest {
         LocalDateTime end = LocalDateTime.now();
         flow.occur(amount, description);
 
-        TimeRange timeRange = new TimeRange(begin, end);
+        TimeRange timeRange = TimeRange.of(begin, end);
         flow.memorizeOccurredDuring(timeRange);
 
         assertThat(flow.occurred().get()).isEqualTo(1);

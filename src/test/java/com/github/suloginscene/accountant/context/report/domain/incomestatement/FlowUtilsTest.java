@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.context.report.domain.incomestatement;
 
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
-import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,7 +48,7 @@ class FlowUtilsTest {
         expense3.occur(amount, description);
         LocalDateTime end = LocalDateTime.now();
 
-        TimeRange timeRange = new TimeRange(begin, end);
+        TimeRange timeRange = TimeRange.of(begin, end);
         expenses.forEach(e -> e.memorizeOccurredDuring(timeRange));
         Integer sum = FlowUtils.sumIndividualOccurredAmounts(expenses);
 
