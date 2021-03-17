@@ -5,6 +5,7 @@ import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,7 @@ public abstract class Account {
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "account_id")
+    @BatchSize(size = 100)
     private final List<SingleTransaction> singleTransactions = new ArrayList<>();
 
 

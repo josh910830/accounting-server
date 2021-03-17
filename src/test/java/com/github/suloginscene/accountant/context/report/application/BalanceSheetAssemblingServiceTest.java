@@ -1,7 +1,5 @@
 package com.github.suloginscene.accountant.context.report.application;
 
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.domain.balanceSheet.BalanceSheet;
 import com.github.suloginscene.accountant.testing.db.RepositoryFacade;
@@ -25,18 +23,11 @@ class BalanceSheetAssemblingServiceTest {
     @Autowired RepositoryFacade repositoryFacade;
 
     Holder holder;
-    Asset asset1;
-    Asset asset2;
-    Liability liability1;
 
 
     @BeforeEach
     void setup() {
         holder = new Holder(1L);
-
-        asset1 = asset(1);
-        asset2 = asset(1);
-        liability1 = liability(1);
     }
 
     @AfterEach
@@ -48,7 +39,7 @@ class BalanceSheetAssemblingServiceTest {
     @Test
     @DisplayName("정상")
     void assemble_onSuccess_returnsBalanceSheet() {
-        repositoryFacade.given(asset1, asset2, liability1);
+        repositoryFacade.given(asset(1), asset(1), liability(1));
 
         BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(holder);
 
