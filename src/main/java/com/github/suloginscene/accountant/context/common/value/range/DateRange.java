@@ -28,10 +28,16 @@ public class DateRange {
         return new DateRange(begin, exclusiveEnd);
     }
 
+    // TODO use
+    public static DateRange today() {
+        LocalDate today = LocalDate.now();
+        return of(today);
+    }
+
 
     public TimeRange toTimeRange() {
         LocalDateTime beginTime = begin.atStartOfDay();
-        LocalDateTime endTime = end.atStartOfDay();
+        LocalDateTime endTime = end.atStartOfDay().minusNanos(1L);
         return TimeRange.of(beginTime, endTime);
     }
 

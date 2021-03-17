@@ -29,18 +29,19 @@ public class DefaultAccounts {
         return (Liability) AccountFactory.create(param("부채", LIABILITY, balance));
     }
 
+    // TODO getParam
     public static Revenue revenue() {
-        return (Revenue) AccountFactory.create(param("수입", REVENUE));
+        return (Revenue) AccountFactory.create(param("수입", REVENUE, 100));
+    }
+
+    public static Revenue revenue(int budget) {
+        return (Revenue) AccountFactory.create(param("수입", REVENUE, budget));
     }
 
     public static Expense expense() {
-        return (Expense) AccountFactory.create(param("지출", EXPENSE));
+        return (Expense) AccountFactory.create(param("지출", EXPENSE, 100));
     }
 
-
-    private static AccountCreationParameter param(String name, AccountType type) {
-        return param(name, type, 1);
-    }
 
     private static AccountCreationParameter param(String name, AccountType type, int amount) {
         return new AccountCreationParameter(type, HOLDER, name, Money.of(amount));

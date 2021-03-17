@@ -4,7 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 
 @EqualsAndHashCode @ToString
@@ -24,6 +26,14 @@ public class TimeRange {
 
     public static TimeRange of(LocalDateTime begin, LocalDateTime end) {
         return new TimeRange(begin, end);
+    }
+
+
+    public int inclusiveDays() {
+        LocalDate beginDate = begin.toLocalDate();
+        LocalDate inclusiveEndDate = end.toLocalDate().plusDays(1);
+
+        return (int) ChronoUnit.DAYS.between(beginDate, inclusiveEndDate);
     }
 
 }
