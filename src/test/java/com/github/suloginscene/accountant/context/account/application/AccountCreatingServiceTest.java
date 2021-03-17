@@ -21,14 +21,14 @@ class AccountCreatingServiceTest {
     @Autowired AccountCreatingService accountCreatingService;
     @Autowired RepositoryFacade repositoryFacade;
 
-    AccountCreationData data;
+    AccountCreationInput input;
 
 
     @BeforeEach
     void setup() {
         String name = "계정명";
         Money money = Money.of(1);
-        data = new AccountCreationData(ASSET, HOLDER, name, money);
+        input = new AccountCreationInput(ASSET, HOLDER, name, money);
     }
 
     @AfterEach
@@ -40,7 +40,7 @@ class AccountCreatingServiceTest {
     @Test
     @DisplayName("생성 성공 - Id 반환")
     void createAccount_onSuccess_returnsId() {
-        Long id = accountCreatingService.createAccount(data);
+        Long id = accountCreatingService.createAccount(input);
 
         assertThat(id).isNotNull();
     }

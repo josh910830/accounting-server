@@ -7,7 +7,7 @@ import lombok.Data;
 
 
 @Data
-public class AccountCreationData {
+public class AccountCreationInput {
 
     private final AccountType accountType;
 

@@ -17,8 +17,8 @@ public class AccountCreatingService {
     private final AccountRepository accountRepository;
 
 
-    public Long createAccount(AccountCreationData data) {
-        AccountCreationParameter param = toParam(data);
+    public Long createAccount(AccountCreationInput input) {
+        AccountCreationParameter param = toParam(input);
 
         Account created = AccountFactory.create(param);
         Account saved = accountRepository.save(created);
@@ -26,9 +26,9 @@ public class AccountCreatingService {
         return saved.getId();
     }
 
-    private AccountCreationParameter toParam(AccountCreationData data) {
+    private AccountCreationParameter toParam(AccountCreationInput input) {
         return new AccountCreationParameter(
-                data.getAccountType(), data.getHolder(), data.getName(), data.getMoney());
+                input.getAccountType(), input.getHolder(), input.getName(), input.getMoney());
     }
 
 }

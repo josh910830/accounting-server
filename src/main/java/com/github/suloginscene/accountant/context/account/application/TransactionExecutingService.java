@@ -22,24 +22,24 @@ public class TransactionExecutingService {
     private final AccountantEventPublisher accountantEventPublisher;
 
 
-    public void executeTransaction(TransactionExecutionData data) {
-        TransactionService transaction = toTransaction(data);
-        TransactionExecutionParameter param = toParam(data);
+    public void executeTransaction(TransactionExecutionInput input) {
+        TransactionService transaction = toTransaction(input);
+        TransactionExecutionParameter param = toParam(input);
 
         TransactionExecutedEvent event = transaction.execute(param);
 
         accountantEventPublisher.publish(event);
     }
 
-    private TransactionService toTransaction(TransactionExecutionData data) {
-        return TransactionServiceFactory.create(data.getType());
+    private TransactionService toTransaction(TransactionExecutionInput input) {
+        return TransactionServiceFactory.create(input.getType());
     }
 
-    private TransactionExecutionParameter toParam(TransactionExecutionData data) {
-        Account source = findAccount(data.getSourceId());
-        Account destination = findAccount(data.getDestinationId());
+    private TransactionExecutionParameter toParam(TransactionExecutionInput input) {
+        Account source = findAccount(input.getSourceId());
+        Account destination = findAccount(input.getDestinationId());
         AccountPair pair = AccountPair.of(source, destination);
-        return new TransactionExecutionParameter(pair, data.getAmount(), data.getDescription());
+        return new TransactionExecutionParameter(pair, input.getAmount(), input.getDescription());
     }
 
     private Account findAccount(Long id) {

@@ -6,7 +6,7 @@ import lombok.Data;
 
 
 @Data
-public class TransactionExecutionData {
+public class TransactionExecutionInput {
 
     private final TransactionType type;
 

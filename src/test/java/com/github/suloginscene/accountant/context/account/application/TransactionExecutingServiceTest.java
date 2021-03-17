@@ -61,8 +61,8 @@ class TransactionExecutingServiceTest {
 
         Long source = revenue.getId();
         Long destination = asset.getId();
-        TransactionExecutionData data = new TransactionExecutionData(sell, source, destination, amount, description);
-        transactionExecutingService.executeTransaction(data);
+        TransactionExecutionInput input = new TransactionExecutionInput(sell, source, destination, amount, description);
+        transactionExecutingService.executeTransaction(input);
 
         then(accountantEventPublisher).should().publish(any(TransactionExecutedEvent.class));
     }
