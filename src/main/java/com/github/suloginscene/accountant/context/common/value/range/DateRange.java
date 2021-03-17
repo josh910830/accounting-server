@@ -28,7 +28,6 @@ public class DateRange {
         return new DateRange(begin, exclusiveEnd);
     }
 
-    // TODO use
     public static DateRange today() {
         LocalDate today = LocalDate.now();
         return of(today);

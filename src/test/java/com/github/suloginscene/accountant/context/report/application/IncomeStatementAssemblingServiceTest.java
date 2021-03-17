@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
 import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
@@ -31,15 +29,11 @@ class IncomeStatementAssemblingServiceTest {
     Money amount;
     String description;
 
-    LocalDate today;
-
 
     @BeforeEach
     void setup() {
         amount = Money.of(1);
         description = "";
-
-        today = LocalDate.now();
     }
 
     @AfterEach
@@ -59,7 +53,7 @@ class IncomeStatementAssemblingServiceTest {
         expense1.occur(amount, description);
         repositoryFacade.given(revenue1, revenue2, expense1);
 
-        DateRange duringToday = DateRange.of(today);
+        DateRange duringToday = DateRange.today();
         IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(HOLDER, duringToday);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(1);

@@ -31,9 +31,6 @@ class IncomeStatementFactoryTest {
     Money amount;
     String description;
 
-    LocalDate today;
-    LocalDate yesterday;
-
 
     @BeforeEach
     void setup() {
@@ -48,9 +45,6 @@ class IncomeStatementFactoryTest {
         e2 = expense();
         e3 = expense();
         expenses = List.of(e1, e2, e3);
-
-        today = LocalDate.now();
-        yesterday = today.minusDays(1);
     }
 
 
@@ -64,8 +58,8 @@ class IncomeStatementFactoryTest {
         e2.occur(amount, description);
         e3.occur(amount, description);
 
-        DateRange range = DateRange.of(today);
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, range);
+        DateRange today = DateRange.today();
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, today);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(2 - 3);
         assertThat(incomeStatement.getRevenueSum()).isEqualTo(2);
@@ -78,8 +72,8 @@ class IncomeStatementFactoryTest {
         r1.occur(amount, description);
         e1.occur(amount, description);
 
-        DateRange range = DateRange.of(yesterday);
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, range);
+        DateRange yesterday = DateRange.of(LocalDate.now().minusDays(1));
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, yesterday);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(0);
         assertThat(incomeStatement.getRevenueSum()).isEqualTo(0);
