@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -22,19 +22,19 @@ class IncomeStatementFactoryTest {
     @Test
     @DisplayName("손익계산서 생성")
     void create_onSuccess_returnsBalanceSheet() {
-        Revenue r1 = revenue(1);
-        Revenue r2 = revenue(1);
+        Revenue r1 = revenue();
+        Revenue r2 = revenue();
         List<Revenue> revenues = List.of(r1, r2);
-        r1.occur(AMOUNT, DESCRIPTION);
-        r2.occur(AMOUNT, DESCRIPTION);
+        r1.occur(MONEY_ONE, DESCRIPTION);
+        r2.occur(MONEY_ONE, DESCRIPTION);
 
-        Expense e1 = expense(1);
-        Expense e2 = expense(1);
-        Expense e3 = expense(1);
+        Expense e1 = expense();
+        Expense e2 = expense();
+        Expense e3 = expense();
         List<Expense> expenses = List.of(e1, e2, e3);
-        e1.occur(AMOUNT, DESCRIPTION);
-        e2.occur(AMOUNT, DESCRIPTION);
-        e3.occur(AMOUNT, DESCRIPTION);
+        e1.occur(MONEY_ONE, DESCRIPTION);
+        e2.occur(MONEY_ONE, DESCRIPTION);
+        e3.occur(MONEY_ONE, DESCRIPTION);
 
         DateRange today = DateRange.today();
         IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, today);
@@ -47,13 +47,13 @@ class IncomeStatementFactoryTest {
     @Test
     @DisplayName("날짜 필터링")
     void create_onFilter_returnsEmptyBalanceSheet() {
-        Revenue r1 = revenue(1);
+        Revenue r1 = revenue();
         List<Revenue> revenues = List.of(r1);
-        r1.occur(AMOUNT, DESCRIPTION);
+        r1.occur(MONEY_ONE, DESCRIPTION);
 
-        Expense e1 = expense(1);
+        Expense e1 = expense();
         List<Expense> expenses = List.of(e1);
-        e1.occur(AMOUNT, DESCRIPTION);
+        e1.occur(MONEY_ONE, DESCRIPTION);
 
         DateRange yesterday = DateRange.of(LocalDate.now().minusDays(1));
         IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, yesterday);

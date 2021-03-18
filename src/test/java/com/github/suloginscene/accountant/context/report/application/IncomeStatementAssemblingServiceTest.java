@@ -9,11 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -26,16 +26,16 @@ class IncomeStatementAssemblingServiceTest extends IntegrationTest {
     @Test
     @DisplayName("정상")
     void assemble_onSuccess_returnsIncomeStatement() {
-        Revenue revenue1 = revenue(1);
-        Revenue revenue2 = revenue(1);
-        Expense expense = expense(1);
-        revenue1.occur(AMOUNT, DESCRIPTION);
-        revenue2.occur(AMOUNT, DESCRIPTION);
-        expense.occur(AMOUNT, DESCRIPTION);
+        Revenue revenue1 = revenue();
+        Revenue revenue2 = revenue();
+        Expense expense = expense();
+        revenue1.occur(MONEY_ONE, DESCRIPTION);
+        revenue2.occur(MONEY_ONE, DESCRIPTION);
+        expense.occur(MONEY_ONE, DESCRIPTION);
         repositoryFacade.given(revenue1, revenue2, expense);
 
         DateRange duringToday = DateRange.today();
-        IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(HOLDER, duringToday);
+        IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(TESTING_HOLDER, duringToday);
 
         assertThat(incomeStatement.getProfit()).isEqualTo(2 - 1);
     }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

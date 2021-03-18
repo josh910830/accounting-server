@@ -8,9 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -28,7 +28,7 @@ class BalanceSheetAssemblingServiceTest extends IntegrationTest {
         Liability liability = liability(1);
         repositoryFacade.given(asset1, asset2, liability);
 
-        BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(HOLDER);
+        BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(TESTING_HOLDER);
 
         assertThat(balanceSheet.getNet()).isEqualTo(2 - 1);
     }

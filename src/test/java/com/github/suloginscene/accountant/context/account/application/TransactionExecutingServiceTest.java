@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.SELL;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
 
@@ -26,13 +26,13 @@ class TransactionExecutingServiceTest extends IntegrationTest {
     @Test
     @DisplayName("성공 - 이벤트 발행")
     void executeTransaction_onSuccess_publishesEvent() {
-        Revenue revenue = revenue(1);
-        Asset asset = asset(1);
+        Revenue revenue = revenue();
+        Asset asset = asset();
         repositoryFacade.given(revenue, asset);
 
         Long source = revenue.getId();
         Long destination = asset.getId();
-        TransactionExecutionInput input = new TransactionExecutionInput(SELL, source, destination, AMOUNT, DESCRIPTION);
+        TransactionExecutionInput input = new TransactionExecutionInput(SELL, source, destination, MONEY_ONE, DESCRIPTION);
         transactionExecutingService.executeTransaction(input);
 
         then(accountantEventPublisher).should().publish(any(TransactionExecutedEvent.class));

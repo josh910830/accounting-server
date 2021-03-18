@@ -5,7 +5,7 @@ import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTra
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

@@ -5,10 +5,10 @@ import com.github.suloginscene.accountant.context.account.domain.account.concret
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -22,7 +22,7 @@ class SellTransactionServiceTest {
         Asset asset = asset(1);
 
         SellTransactionService sell = new SellTransactionService();
-        sell.doExecute(revenue, asset, AMOUNT, DESCRIPTION);
+        sell.doExecute(revenue, asset, MONEY_ONE, DESCRIPTION);
 
         assertThat(asset.getBalance().get()).isEqualTo(2);
     }

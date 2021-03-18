@@ -13,10 +13,10 @@ import org.junit.jupiter.api.function.Executable;
 
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.ASSET;
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.EXPENSE;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.NAME;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.ACCOUNT_NAME;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,8 +27,8 @@ class AccountPairTest {
     @Test
     @DisplayName("정상 생성")
     void create_onSuccess_returnsAccountPair() {
-        Asset source = asset(1);
-        Expense destination = expense(1);
+        Asset source = asset();
+        Expense destination = expense();
         AccountPair pair = AccountPair.of(source, destination);
 
         assertThat(pair).isNotNull();
@@ -46,7 +46,7 @@ class AccountPairTest {
 
     private Account createAccount(AccountType type, long holderId) {
         Holder holder = new Holder(holderId);
-        AccountCreationParameter param = new AccountCreationParameter(type, holder, NAME, AMOUNT);
+        AccountCreationParameter param = new AccountCreationParameter(type, holder, ACCOUNT_NAME, MONEY_ONE);
         return AccountFactory.create(param);
     }
 

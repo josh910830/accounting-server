@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.mockito.BDDMockito.then;
 
 
@@ -31,12 +31,12 @@ class LedgerScribingServiceTest extends IntegrationTest {
 
         Account debit = doubleTransaction.getDebit();
         Account credit = doubleTransaction.getCredit();
-        Ledger ledger = new Ledger(HOLDER);
+        Ledger ledger = new Ledger(TESTING_HOLDER);
         repositoryFacade.given(debit, credit, ledger);
 
-        ledgerScribingService.scribeLedger(HOLDER, doubleTransaction);
+        ledgerScribingService.scribeLedger(TESTING_HOLDER, doubleTransaction);
 
-        then(ledgerProvider).should().provideLedger(HOLDER);
+        then(ledgerProvider).should().provideLedger(TESTING_HOLDER);
     }
 
 }

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -17,7 +17,7 @@ class LedgerTest {
     @Test
     @DisplayName("복식 거래 기록 - 기록 추가")
     void writeDoubleTransaction_onSuccess_adds() {
-        Ledger ledger = new Ledger(HOLDER);
+        Ledger ledger = new Ledger(TESTING_HOLDER);
         DoubleTransaction doubleTransaction = toDoubleTransaction(transactionExecutedEvent());
 
         ledger.writeDoubleTransaction(doubleTransaction);
@@ -28,7 +28,7 @@ class LedgerTest {
     @Test
     @DisplayName("복식 거래 조회 - 사본 반환")
     void readDoubleTransactions_onSuccess_returnsClonedList() {
-        Ledger ledger = new Ledger(HOLDER);
+        Ledger ledger = new Ledger(TESTING_HOLDER);
 
         List<DoubleTransaction> transactions1 = ledger.readDoubleTransactions();
         List<DoubleTransaction> transactions2 = ledger.readDoubleTransactions();

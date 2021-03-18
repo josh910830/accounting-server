@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.NoSuchElementException;
 
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultEvents.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -33,12 +33,12 @@ class LedgerFindingServiceTest extends IntegrationTest {
         Account debit = doubleTransaction.getDebit();
         Account credit = doubleTransaction.getCredit();
 
-        Ledger ledger = new Ledger(HOLDER);
+        Ledger ledger = new Ledger(TESTING_HOLDER);
         ledger.writeDoubleTransaction(doubleTransaction);
 
         repositoryFacade.given(debit, credit, ledger);
 
-        LedgerData ledgerData = ledgerFindingService.findLedger(HOLDER);
+        LedgerData ledgerData = ledgerFindingService.findLedger(TESTING_HOLDER);
 
         assertThat(ledgerData.getDoubleTransactions()).hasSize(1);
     }
@@ -46,7 +46,7 @@ class LedgerFindingServiceTest extends IntegrationTest {
     @Test
     @DisplayName("존재하지 않음 - 예외 발생")
     void find_onNonExistent_throwsException() {
-        Executable action = () -> ledgerFindingService.findLedger(HOLDER);
+        Executable action = () -> ledgerFindingService.findLedger(TESTING_HOLDER);
 
         assertThrows(NoSuchElementException.class, action);
     }

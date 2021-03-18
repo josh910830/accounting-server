@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -21,15 +21,15 @@ class FlowUtilsTest {
     @Test
     @DisplayName("발생 비용 합")
     void sumIndividualOccurredAmounts_onSuccess_returnsSum() {
-        Expense expense1 = expense(1);
-        Expense expense2 = expense(1);
-        Expense expense3 = expense(1);
+        Expense expense1 = expense();
+        Expense expense2 = expense();
+        Expense expense3 = expense();
         List<Flow> expenses = List.of(expense1, expense2, expense3);
 
         LocalDateTime begin = LocalDateTime.now();
-        expense1.occur(AMOUNT, DESCRIPTION);
-        expense2.occur(AMOUNT, DESCRIPTION);
-        expense3.occur(AMOUNT, DESCRIPTION);
+        expense1.occur(MONEY_ONE, DESCRIPTION);
+        expense2.occur(MONEY_ONE, DESCRIPTION);
+        expense3.occur(MONEY_ONE, DESCRIPTION);
         LocalDateTime end = LocalDateTime.now();
         TimeRange timeRange = TimeRange.of(begin, end);
 

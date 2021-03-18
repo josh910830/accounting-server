@@ -5,12 +5,15 @@ import com.github.suloginscene.accountant.context.account.domain.account.concret
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
-import com.github.suloginscene.accountant.testing.fixture.DefaultAccounts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,10 +29,10 @@ class AccountCastUtilsTest {
 
     @BeforeEach
     void setup() {
-        asset = DefaultAccounts.asset(1);
-        liability = DefaultAccounts.liability(1);
-        revenue = DefaultAccounts.revenue(1);
-        expense = DefaultAccounts.expense(1);
+        asset = asset();
+        liability = liability();
+        revenue = revenue();
+        expense = expense();
     }
 
 

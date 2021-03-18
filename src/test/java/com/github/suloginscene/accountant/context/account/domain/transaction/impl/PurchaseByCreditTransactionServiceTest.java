@@ -5,10 +5,10 @@ import com.github.suloginscene.accountant.context.account.domain.account.concret
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.liability;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -22,7 +22,7 @@ class PurchaseByCreditTransactionServiceTest {
         Expense expense = expense(1);
 
         PurchaseByCreditTransactionService purchaseByCredit = new PurchaseByCreditTransactionService();
-        purchaseByCredit.doExecute(liability, expense, AMOUNT, DESCRIPTION);
+        purchaseByCredit.doExecute(liability, expense, MONEY_ONE, DESCRIPTION);
 
         assertThat(liability.getBalance().get()).isEqualTo(2);
     }

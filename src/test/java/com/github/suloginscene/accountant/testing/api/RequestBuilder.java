@@ -20,7 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class RequestBuilder {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private final MockHttpServletRequestBuilder mockHttpServletRequestBuilder;
+
+    private final MockHttpServletRequestBuilder builder;
 
 
     public static RequestBuilder ofPreflight(String url, String origin, HttpMethod requestMethod, Object... requestHeaders) {
@@ -38,28 +39,34 @@ public class RequestBuilder {
         return new RequestBuilder(get(url));
     }
 
+
     public RequestBuilder json(Object object) throws JsonProcessingException {
         String json = OBJECT_MAPPER.writeValueAsString(object);
-        return new RequestBuilder(mockHttpServletRequestBuilder.contentType(APPLICATION_JSON).content(json));
+        return new RequestBuilder(
+                builder.contentType(APPLICATION_JSON).content(json));
     }
 
     public RequestBuilder jwt(String jwt) {
-        return new RequestBuilder(mockHttpServletRequestBuilder.header("X-AUTH-TOKEN", jwt));
+        return new RequestBuilder(
+                builder.header("X-AUTH-TOKEN", jwt));
     }
 
     public RequestBuilder origin(String origin) {
-        return new RequestBuilder(mockHttpServletRequestBuilder.header(ORIGIN, origin));
+        return new RequestBuilder(
+                builder.header(ORIGIN, origin));
     }
 
     public RequestBuilder header(String name, Object... value) {
         if (value.length == 0) {
             return this;
         }
-        return new RequestBuilder(mockHttpServletRequestBuilder.header(name, value));
+        return new RequestBuilder(
+                builder.header(name, value));
     }
 
+
     public MockHttpServletRequestBuilder build() {
-        return mockHttpServletRequestBuilder;
+        return builder;
     }
 
 }

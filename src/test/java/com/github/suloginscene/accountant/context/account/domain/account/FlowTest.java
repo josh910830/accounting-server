@@ -10,9 +10,9 @@ import org.junit.jupiter.api.function.Executable;
 import java.time.LocalDateTime;
 
 import static com.github.suloginscene.accountant.context.common.value.range.DateRange.today;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.revenue;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -23,13 +23,13 @@ class FlowTest {
     @Test
     @DisplayName("기간 내 발생 금액 - 합 기억")
     void memorizeOccurredDuringRange_onSuccess_memorizeSum() {
-        Flow flow = revenue(1);
+        Flow flow = revenue();
 
-        flow.occur(AMOUNT, DESCRIPTION);
+        flow.occur(MONEY_ONE, DESCRIPTION);
         LocalDateTime begin = LocalDateTime.now();
-        flow.occur(AMOUNT, DESCRIPTION);
+        flow.occur(MONEY_ONE, DESCRIPTION);
         LocalDateTime end = LocalDateTime.now();
-        flow.occur(AMOUNT, DESCRIPTION);
+        flow.occur(MONEY_ONE, DESCRIPTION);
 
         TimeRange timeRange = TimeRange.of(begin, end);
         flow.memorizeOccurredDuring(timeRange);
@@ -40,7 +40,7 @@ class FlowTest {
     @Test
     @DisplayName("기간 내 발생 금액 처리 전 요청 - 예외 발생")
     void occurred_beforeMemorize_throwsException() {
-        Flow flow = revenue(1);
+        Flow flow = revenue();
 
         Executable action = flow::occurred;
 

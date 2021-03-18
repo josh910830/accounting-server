@@ -11,9 +11,9 @@ import static com.github.suloginscene.accountant.context.account.domain.account.
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.EXPENSE;
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.LIABILITY;
 import static com.github.suloginscene.accountant.context.account.domain.account.AccountType.REVENUE;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.HOLDER;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.NAME;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.ACCOUNT_NAME;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -57,7 +57,7 @@ class AccountFactoryTest {
     }
 
     private AccountCreationParameter createParam(AccountType type) {
-        return new AccountCreationParameter(type, HOLDER, NAME, AMOUNT);
+        return new AccountCreationParameter(type, TESTING_HOLDER, ACCOUNT_NAME, MONEY_ONE);
     }
 
 }

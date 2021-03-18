@@ -7,9 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,7 +24,7 @@ class TransferTransactionServiceTest {
         Asset destinationAsset = asset(1);
 
         TransferTransactionService transfer = new TransferTransactionService();
-        transfer.doExecute(sourceAsset, destinationAsset, AMOUNT, DESCRIPTION);
+        transfer.doExecute(sourceAsset, destinationAsset, MONEY_ONE, DESCRIPTION);
 
         assertThat(sourceAsset.getBalance().get()).isEqualTo(0);
         assertThat(destinationAsset.getBalance().get()).isEqualTo(2);

@@ -8,10 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.liability;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,7 +26,7 @@ class RepayTransactionServiceTest {
         Liability liability = liability(1);
 
         RepayTransactionService repay = new RepayTransactionService();
-        repay.doExecute(asset, liability, AMOUNT, DESCRIPTION);
+        repay.doExecute(asset, liability, MONEY_ONE, DESCRIPTION);
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
         assertThat(liability.getBalance().get()).isEqualTo(0);

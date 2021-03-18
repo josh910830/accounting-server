@@ -8,10 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.asset;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultAccounts.expense;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.AMOUNT;
-import static com.github.suloginscene.accountant.testing.fixture.DefaultValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,7 +26,7 @@ class PurchaseByCashTransactionServiceTest {
         Expense expense = expense(1);
 
         PurchaseByCashTransactionService purchaseByCash = new PurchaseByCashTransactionService();
-        purchaseByCash.doExecute(asset, expense, AMOUNT, DESCRIPTION);
+        purchaseByCash.doExecute(asset, expense, MONEY_ONE, DESCRIPTION);
 
         assertThat(asset.getBalance().get()).isEqualTo(0);
     }
