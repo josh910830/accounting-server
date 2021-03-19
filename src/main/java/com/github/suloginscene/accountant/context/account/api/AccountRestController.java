@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -28,7 +29,8 @@ public class AccountRestController {
 
 
     @PostMapping
-    ResponseEntity<Void> postAccount(@Authenticated Long memberId, @RequestBody AccountCreationRequest request) {
+    ResponseEntity<Void> postAccount(@Authenticated Long memberId,
+                                     @Valid @RequestBody AccountCreationRequest request) {
         AccountCreationInput input = toInput(memberId, request);
 
         Long id = accountCreatingService.createAccount(input);

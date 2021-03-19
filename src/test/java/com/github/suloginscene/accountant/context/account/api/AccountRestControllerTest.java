@@ -1,11 +1,14 @@
 package com.github.suloginscene.accountant.context.account.api;
 
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPost;
+import static com.github.suloginscene.accountant.testing.api.ResultParser.jsonMap;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +36,27 @@ class AccountRestControllerTest extends ControllerTest {
         then.andDo(document("post-account"));
     }
 
-    // TODO validate request
+    @Test
+    @DisplayName("계정 등록(입력값 오류) - 400")
+    void postAccount_withInvalidParam_returns400() throws Exception {
+        String type = "notInEnum";
+        String name = "!invalid!";
+        int money = -1;
+
+        AccountCreationRequest request = new AccountCreationRequest(type, name, money);
+        ResultActions when = mockMvc.perform(
+                ofPost(URL).jwt(jwt).json(request).build());
+
+        when.andExpect(status().isBadRequest())
+                .andExpect(hasThreeSentencesInErrorDescription());
+    }
+
+    private ResultMatcher hasThreeSentencesInErrorDescription() {
+        return result -> {
+            String errorDescription = jsonMap(result).get("errorDescription").toString();
+            // TODO validate type
+            Assertions.assertEquals(2, errorDescription.split(",").length);
+        };
+    }
 
 }

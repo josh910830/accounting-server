@@ -17,13 +17,13 @@ public abstract class TransactionService {
         return createEvent(pair, amount, description);
     }
 
+    protected abstract void doExecute(Account source, Account destination, Money amount, String description);
+
     private TransactionExecutedEvent createEvent(AccountPair pair, Money amount, String description) {
         Holder holder = pair.getHolder();
         TransactionType type = type();
         return new TransactionExecutedEvent(holder, type, pair, amount, description);
     }
-
-    protected abstract void doExecute(Account source, Account destination, Money amount, String description);
 
     protected abstract TransactionType type();
 
