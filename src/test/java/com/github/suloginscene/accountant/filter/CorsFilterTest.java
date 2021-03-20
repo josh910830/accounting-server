@@ -1,11 +1,10 @@
 package com.github.suloginscene.accountant.filter;
 
-import com.github.suloginscene.accountant.config.JwtProperties;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
@@ -20,14 +19,15 @@ public class CorsFilterTest extends ControllerTest {
 
     static final String URL = "/";
 
-    @Autowired JwtProperties jwtProperties;
+    @Value("${jwt.urls}")
+    String urls;
 
     String validOrigin;
     String invalidOrigin;
 
     @BeforeEach
     void setup() {
-        validOrigin = jwtProperties.getUrls().split(",")[0];
+        validOrigin = urls.split(",")[0];
         invalidOrigin = "http://invalid.com";
     }
 

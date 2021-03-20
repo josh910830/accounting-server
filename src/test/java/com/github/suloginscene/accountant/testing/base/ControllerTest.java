@@ -1,7 +1,6 @@
 package com.github.suloginscene.accountant.testing.base;
 
 import com.github.suloginscene.accountant.testing.config.RestDocsConfig;
-import com.github.suloginscene.accountant.testing.config.TestJwtConfig;
 import com.github.suloginscene.jjwthelper.JwtFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
-@Import({TestJwtConfig.class, RestDocsConfig.class})
+@Import(RestDocsConfig.class)
 @Slf4j
 public abstract class ControllerTest extends IntegrationTest {
 

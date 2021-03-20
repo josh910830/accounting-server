@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.account.api;
 
-import com.github.suloginscene.accountant.config.Authenticated;
 import com.github.suloginscene.accountant.context.account.application.AccountCreatingService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreationInput;
 import com.github.suloginscene.accountant.context.account.application.AccountFindingService;
@@ -8,6 +7,7 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.common.util.UriFactory;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
+import com.github.suloginscene.jwtconfig.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
