@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import java.util.Map;
+
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPost;
-import static com.github.suloginscene.accountant.testing.api.ResultParser.jsonMap;
+import static com.github.suloginscene.accountant.testing.api.ResultParser.toResponseAsJsonMap;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,9 +55,10 @@ class AccountRestControllerTest extends ControllerTest {
 
     private ResultMatcher hasThreeSentencesInErrorDescription() {
         return result -> {
-            String errorDescription = jsonMap(result).get("errorDescription").toString();
-            // TODO validate type
-            Assertions.assertEquals(2, errorDescription.split(",").length);
+            Map<String, Object> errorResponse = toResponseAsJsonMap(result);
+            String errorDescription = errorResponse.get("errorDescription").toString();
+            String[] sentences = errorDescription.split(",");
+            Assertions.assertEquals(3, sentences.length);
         };
     }
 

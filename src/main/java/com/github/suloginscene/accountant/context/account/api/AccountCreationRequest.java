@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 @Data
 public class AccountCreationRequest {
 
+    @NotNull
     private final String type;
 
     @NotNull

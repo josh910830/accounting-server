@@ -10,6 +10,8 @@ import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,14 @@ public class AccountRestController {
 
     private final AccountCreatingService accountCreatingService;
     private final AccountFindingService accountFindingService;
+
+    private final AccountTypeValidator accountTypeValidator;
+
+
+    @InitBinder
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(accountTypeValidator);
+    }
 
 
     @PostMapping
