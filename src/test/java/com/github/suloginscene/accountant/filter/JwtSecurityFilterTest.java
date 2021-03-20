@@ -31,7 +31,7 @@ public class JwtSecurityFilterTest extends ControllerTest {
     @Test
     @DisplayName("정상 - 404")
     void jwtFilter_withValidJwt_returns404() throws Exception {
-        String validJwt = testJwtFactory.of(id);
+        String validJwt = testJwtFactory.valid(id);
 
         ResultActions when = mockMvc.perform(
                 ofGet(URL).jwt(validJwt).build());
