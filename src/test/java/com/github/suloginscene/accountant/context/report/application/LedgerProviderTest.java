@@ -20,7 +20,7 @@ class LedgerProviderTest extends IntegrationTest {
     @DisplayName("장부 존재 - 기존 장부 반환")
     void provide_onGivenLedger_returnsFoundLedger() {
         Ledger ledger = new Ledger(TESTING_HOLDER);
-        repositoryFacade.given(ledger);
+        given(ledger);
 
         Ledger found = ledgerProvider.provideLedger(TESTING_HOLDER);
 

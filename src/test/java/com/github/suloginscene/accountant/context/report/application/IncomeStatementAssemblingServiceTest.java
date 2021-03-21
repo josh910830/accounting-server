@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
-import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,7 +32,7 @@ class IncomeStatementAssemblingServiceTest extends IntegrationTest {
         revenue1.occur(MONEY_ONE, DESCRIPTION);
         revenue2.occur(MONEY_ONE, DESCRIPTION);
         expense.occur(MONEY_ONE, DESCRIPTION);
-        repositoryFacade.given(revenue1, revenue2, expense);
+        given(revenue1, revenue2, expense);
 
         DateRange duringToday = DateRange.today();
         IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(TESTING_HOLDER, duringToday);

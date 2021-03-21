@@ -1,0 +1,36 @@
+package com.github.suloginscene.accountant.testing.base;
+
+import com.github.suloginscene.accountant.context.account.domain.account.Account;
+import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.context.account.domain.account.SingleTransaction;
+import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
+import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
+import com.github.suloginscene.accountant.context.report.domain.ledger.LedgerRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+
+@Component
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+public class EntityLoader {
+
+    private final AccountRepository accountRepository;
+    private final LedgerRepository ledgerRepository;
+
+
+    public Account loadedAccount(Long id) {
+        Account account = accountRepository.findById(id).orElseThrow();
+        account.readSingleTransactions().forEach(SingleTransaction::getDescription);
+        return account;
+    }
+
+    public Ledger loadedLedger(Holder holder) {
+        Ledger ledger = ledgerRepository.findById(holder).orElseThrow();
+        ledger.readDoubleTransactions().forEach(DoubleTransaction::getDescription);
+        return ledger;
+    }
+
+}

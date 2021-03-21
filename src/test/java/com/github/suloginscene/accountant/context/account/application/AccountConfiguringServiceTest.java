@@ -1,7 +1,6 @@
 package com.github.suloginscene.accountant.context.account.application;
 
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.AssetRepository;
+import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,27 +15,20 @@ class AccountConfiguringServiceTest extends IntegrationTest {
 
     @Autowired AccountConfiguringService accountConfiguringService;
 
-    @Autowired AssetRepository assetRepository;
-
 
     // TODO 입력값 검증은 웹계층
     @Test
     @DisplayName("이름 변경 - 변경")
     void changeName_onSuccess_updatesName() {
-        Asset asset = asset();
-        repositoryFacade.given(asset);
+        Account account = asset();
+        given(account);
 
-        Long id = asset.getId();
+        Long id = account.getId();
         String newName = "새 이름";
         accountConfiguringService.changeName(id, newName);
 
-        asset = sync(asset);
-        assertThat(asset.getName()).isEqualTo(newName);
-    }
-
-    // TODO refactor
-    private Asset sync(Asset asset) {
-        return assetRepository.findById(asset.getId()).orElseThrow();
+        account = sync(account);
+        assertThat(account.getName()).isEqualTo(newName);
     }
 
     @Test

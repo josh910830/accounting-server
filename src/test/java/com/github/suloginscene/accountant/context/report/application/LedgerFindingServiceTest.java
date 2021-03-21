@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.report.application;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
@@ -30,13 +29,11 @@ class LedgerFindingServiceTest extends IntegrationTest {
     void find_onSuccess_returnsLedger() {
         TransactionExecutedEvent event = transactionExecutedEvent();
         DoubleTransaction doubleTransaction = toDoubleTransaction(event);
-        Account debit = doubleTransaction.getDebit();
-        Account credit = doubleTransaction.getCredit();
+        given(doubleTransaction.getDebit(), doubleTransaction.getCredit());
 
         Ledger ledger = new Ledger(TESTING_HOLDER);
         ledger.writeDoubleTransaction(doubleTransaction);
-
-        repositoryFacade.given(debit, credit, ledger);
+        given(ledger);
 
         LedgerData ledgerData = ledgerFindingService.findLedger(TESTING_HOLDER);
 

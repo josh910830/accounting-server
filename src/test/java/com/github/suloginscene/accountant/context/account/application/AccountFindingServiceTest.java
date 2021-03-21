@@ -27,7 +27,7 @@ class AccountFindingServiceTest extends IntegrationTest {
     @Test
     @DisplayName("리스트 - 단순 계정 데이터 리스트 반환")
     void findList_onSuccess_returnsDataList() {
-        repositoryFacade.given(asset(), liability(), revenue(), expense());
+        given(asset(), liability(), revenue(), expense());
 
         List<AccountSimpleData> accounts = accountFindingService.findAccounts(TESTING_HOLDER);
 
@@ -39,7 +39,7 @@ class AccountFindingServiceTest extends IntegrationTest {
     void findOne_onSuccess_returnsData() {
         Asset asset = asset();
         asset.increase(MONEY_ONE, DESCRIPTION);
-        repositoryFacade.given(asset);
+        given(asset);
 
         AccountData account = accountFindingService.findAccount(asset.getId());
 

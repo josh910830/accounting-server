@@ -26,7 +26,7 @@ class BalanceSheetAssemblingServiceTest extends IntegrationTest {
         Asset asset1 = asset(1);
         Asset asset2 = asset(1);
         Liability liability = liability(1);
-        repositoryFacade.given(asset1, asset2, liability);
+        given(asset1, asset2, liability);
 
         BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(TESTING_HOLDER);
 

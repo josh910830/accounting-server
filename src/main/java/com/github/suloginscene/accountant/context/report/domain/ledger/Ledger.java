@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -21,6 +22,7 @@ import static lombok.AccessLevel.PROTECTED;
 public class Ledger {
 
     @Id
+    @Getter
     private Holder holder;
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
