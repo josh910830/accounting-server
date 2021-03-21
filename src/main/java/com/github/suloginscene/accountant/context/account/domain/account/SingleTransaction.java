@@ -25,13 +25,16 @@ public class SingleTransaction {
     private Long id;
 
     @Enumerated(STRING)
+    @Getter
     private SingleTransactionType type;
 
     @Getter
     private Money amount;
 
+    @Getter
     private String description;
 
+    @Getter
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 

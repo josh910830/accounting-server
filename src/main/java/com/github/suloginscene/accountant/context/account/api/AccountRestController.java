@@ -45,7 +45,7 @@ public class AccountRestController {
 
         Long id = accountCreatingService.createAccount(input);
 
-        URI uri = UriFactory.of(this, id);
+        URI uri = UriFactory.create(this, id);
         return ResponseEntity.created(uri).build();
     }
 
@@ -56,5 +56,7 @@ public class AccountRestController {
         Money money = Money.of(request.getMoney());
         return new AccountCreationInput(holder, type, name, money);
     }
+
+    // TODO check authorization
 
 }

@@ -4,9 +4,9 @@ import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTra
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import lombok.Data;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DEFAULT;
 import static java.util.stream.Collectors.toList;
 
 
@@ -40,7 +40,7 @@ public class LedgerData {
             debit = doubleTransaction.getDebit().getName();
             credit = doubleTransaction.getCredit().getName();
             description = doubleTransaction.getDescription();
-            createdAt = doubleTransaction.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            createdAt = doubleTransaction.getCreatedAt().format(DEFAULT);
         }
 
     }

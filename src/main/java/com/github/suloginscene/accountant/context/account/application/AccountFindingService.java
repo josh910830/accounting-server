@@ -28,6 +28,10 @@ public class AccountFindingService {
                 .collect(toList());
     }
 
-    // TODO single account find
+    public AccountData findAccount(Long id) {
+        Account account = accountRepository.findById(id).orElseThrow();
+
+        return new AccountData(account);
+    }
 
 }

@@ -9,7 +9,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 public class UriFactory {
 
-    public static URI of(Object controller, Object... paths) {
+    public static URI create(Object controller, Object... paths) {
         Class<?> aClass = controller.getClass();
         WebMvcLinkBuilder link = linkTo(aClass);
 
