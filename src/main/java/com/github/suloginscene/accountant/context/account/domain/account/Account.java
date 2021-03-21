@@ -52,6 +52,11 @@ public abstract class Account {
     }
 
 
+    public void changeName(String newName) {
+        this.name = newName;
+    }
+
+
     protected void writeSingleTransaction(SingleTransaction singleTransaction) {
         singleTransactions.add(singleTransaction);
     }
