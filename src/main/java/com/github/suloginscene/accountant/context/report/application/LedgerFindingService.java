@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.context.report.domain.ledger.LedgerRepository;
@@ -21,9 +22,14 @@ public class LedgerFindingService {
     public LedgerData findLedger(Holder holder) {
         preLoadAccountsToPreventNPlus1(holder);
 
-        Ledger ledger = ledgerRepository.findById(holder).orElseThrow();
+        Ledger ledger = find(holder);
 
         return new LedgerData(ledger);
+    }
+
+    private Ledger find(Holder holder) {
+        return ledgerRepository.findById(holder)
+                .orElseThrow(() -> new NotFoundException(Ledger.class, holder));
     }
 
     private void preLoadAccountsToPreventNPlus1(Holder holder) {

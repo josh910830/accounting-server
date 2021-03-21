@@ -1,13 +1,13 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,15 +40,15 @@ class StockTest {
     }
 
     @Test
-    @DisplayName("감소 잔액 부족 - 예외 발생")
-    void decrease_onFail_increasesBalance() {
+    @DisplayName("감소 잔액 부족 - 요청 예외")
+    void decrease_onFail_throwsException() {
         int base = 1;
         Stock stock = asset(base);
 
         int amount = 2;
         Executable action = () -> stock.decrease(Money.of(amount), DESCRIPTION);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
 }

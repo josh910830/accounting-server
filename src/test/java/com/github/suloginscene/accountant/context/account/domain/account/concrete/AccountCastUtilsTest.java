@@ -3,6 +3,7 @@ package com.github.suloginscene.accountant.context.account.domain.account.concre
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,15 +44,15 @@ class AccountCastUtilsTest {
     }
 
     @Test
-    @DisplayName("자산 실패 - 예외 발생")
+    @DisplayName("자산 실패 - 요청 예외")
     void toAsset_fromInvalidObject_throwsException() {
         Executable fromLiability = () -> AccountCastUtils.toAsset(liability);
         Executable fromRevenue = () -> AccountCastUtils.toAsset(revenue);
         Executable fromExpense = () -> AccountCastUtils.toAsset(expense);
 
-        assertThrows(AccountCastException.class, fromLiability);
-        assertThrows(AccountCastException.class, fromRevenue);
-        assertThrows(AccountCastException.class, fromExpense);
+        assertThrows(RequestException.class, fromLiability);
+        assertThrows(RequestException.class, fromRevenue);
+        assertThrows(RequestException.class, fromExpense);
     }
 
     @Test
@@ -63,15 +64,15 @@ class AccountCastUtilsTest {
     }
 
     @Test
-    @DisplayName("부채 실패 - 예외 발생")
+    @DisplayName("부채 실패 - 요청 예외")
     void toLiability_fromInvalidObject_throwsException() {
         Executable fromAsset = () -> AccountCastUtils.toLiability(asset);
         Executable fromRevenue = () -> AccountCastUtils.toLiability(revenue);
         Executable fromExpense = () -> AccountCastUtils.toLiability(expense);
 
-        assertThrows(AccountCastException.class, fromAsset);
-        assertThrows(AccountCastException.class, fromRevenue);
-        assertThrows(AccountCastException.class, fromExpense);
+        assertThrows(RequestException.class, fromAsset);
+        assertThrows(RequestException.class, fromRevenue);
+        assertThrows(RequestException.class, fromExpense);
     }
 
     @Test
@@ -83,15 +84,15 @@ class AccountCastUtilsTest {
     }
 
     @Test
-    @DisplayName("수입 실패 - 예외 발생")
+    @DisplayName("수입 실패 - 요청 예외")
     void toRevenue_fromInvalidObject_throwsException() {
         Executable fromAsset = () -> AccountCastUtils.toRevenue(asset);
         Executable fromLiability = () -> AccountCastUtils.toRevenue(liability);
         Executable fromExpense = () -> AccountCastUtils.toRevenue(expense);
 
-        assertThrows(AccountCastException.class, fromAsset);
-        assertThrows(AccountCastException.class, fromLiability);
-        assertThrows(AccountCastException.class, fromExpense);
+        assertThrows(RequestException.class, fromAsset);
+        assertThrows(RequestException.class, fromLiability);
+        assertThrows(RequestException.class, fromExpense);
     }
 
     @Test
@@ -103,15 +104,15 @@ class AccountCastUtilsTest {
     }
 
     @Test
-    @DisplayName("지출 실패 - 예외 발생")
+    @DisplayName("지출 실패 - 요청 예외")
     void toExpense_fromInvalidObject_throwsException() {
         Executable fromAsset = () -> AccountCastUtils.toExpense(asset);
         Executable fromLiability = () -> AccountCastUtils.toExpense(liability);
         Executable fromRevenue = () -> AccountCastUtils.toExpense(revenue);
 
-        assertThrows(AccountCastException.class, fromAsset);
-        assertThrows(AccountCastException.class, fromLiability);
-        assertThrows(AccountCastException.class, fromRevenue);
+        assertThrows(RequestException.class, fromAsset);
+        assertThrows(RequestException.class, fromLiability);
+        assertThrows(RequestException.class, fromRevenue);
     }
 
 
@@ -126,13 +127,13 @@ class AccountCastUtilsTest {
     }
 
     @Test
-    @DisplayName("저량 실패 - 예외 발생")
+    @DisplayName("저량 실패 - 요청 예외")
     void toStock_fromInvalidObject_throwsException() {
         Executable fromRevenue = () -> AccountCastUtils.toStock(revenue);
         Executable fromExpense = () -> AccountCastUtils.toStock(expense);
 
-        assertThrows(AccountCastException.class, fromRevenue);
-        assertThrows(AccountCastException.class, fromExpense);
+        assertThrows(RequestException.class, fromRevenue);
+        assertThrows(RequestException.class, fromExpense);
     }
 
     @Test
@@ -146,13 +147,13 @@ class AccountCastUtilsTest {
     }
 
     @Test
-    @DisplayName("유량 실패 - 예외 발생")
+    @DisplayName("유량 실패 - 요청 예외")
     void toFlow_fromInvalidObject_throwsException() {
         Executable fromAsset = () -> AccountCastUtils.toFlow(asset);
         Executable fromLiability = () -> AccountCastUtils.toFlow(liability);
 
-        assertThrows(AccountCastException.class, fromAsset);
-        assertThrows(AccountCastException.class, fromLiability);
+        assertThrows(RequestException.class, fromAsset);
+        assertThrows(RequestException.class, fromLiability);
     }
 
 }

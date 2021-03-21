@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.context.account.domain.account.concret
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
+import com.github.suloginscene.accountant.context.common.exception.InternalException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 
@@ -25,7 +26,7 @@ public class AccountFactory {
             case EXPENSE:
                 return new Expense(holder, name, money);
             default:
-                throw new AccountTypeNotFoundException(type);
+                throw new InternalException("enum is not handled");
         }
     }
 

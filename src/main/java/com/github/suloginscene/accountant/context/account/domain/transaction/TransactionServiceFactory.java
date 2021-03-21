@@ -6,6 +6,7 @@ import com.github.suloginscene.accountant.context.account.domain.transaction.imp
 import com.github.suloginscene.accountant.context.account.domain.transaction.impl.RepayTransactionService;
 import com.github.suloginscene.accountant.context.account.domain.transaction.impl.SellTransactionService;
 import com.github.suloginscene.accountant.context.account.domain.transaction.impl.TransferTransactionService;
+import com.github.suloginscene.accountant.context.common.exception.InternalException;
 
 
 public class TransactionServiceFactory {
@@ -25,7 +26,7 @@ public class TransactionServiceFactory {
             case TRANSFER:
                 return new TransferTransactionService();
             default:
-                throw new TransactionTypeNotFoundException(type);
+                throw new InternalException("enum is not handled");
         }
     }
 

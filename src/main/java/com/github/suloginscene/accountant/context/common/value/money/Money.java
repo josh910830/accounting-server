@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.common.value.money;
 
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -19,7 +20,7 @@ public class Money {
 
     private Money(int amount) {
         if (amount < 0) {
-            throw new NegativeMoneyException();
+            throw new RequestException("money amount is negative");
         }
         this.amount = amount;
     }

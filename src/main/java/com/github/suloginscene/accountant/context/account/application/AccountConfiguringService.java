@@ -4,6 +4,8 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
+import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,12 +42,13 @@ public class AccountConfiguringService {
 
 
     private Account findAccount(Long id) {
-        return accountRepository.findById(id).orElseThrow();
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(Account.class, id));
     }
 
     private void checkDeletable(Account account) {
         if (!isDeletable(account)) {
-            throw new AccountNotDeletableException(account);
+            throw new RequestException("account is not deletable");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.transaction;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import lombok.Getter;
 
@@ -31,7 +32,7 @@ public class AccountPair {
         Holder holder2 = b.getHolder();
 
         if (!holder1.equals(holder2)) {
-            throw new AccountPairHolderNotMatchedException(a, b);
+            throw new RequestException("account holder is not matched");
         }
     }
 

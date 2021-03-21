@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
-import com.github.suloginscene.accountant.context.common.exception.NullTransientFieldException;
+import com.github.suloginscene.accountant.context.common.exception.InternalException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
 import org.junit.jupiter.api.DisplayName;
@@ -10,9 +10,9 @@ import org.junit.jupiter.api.function.Executable;
 import java.time.LocalDateTime;
 
 import static com.github.suloginscene.accountant.context.common.value.range.DateRange.today;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
-import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -38,13 +38,13 @@ class FlowTest {
     }
 
     @Test
-    @DisplayName("기간 내 발생 금액 처리 전 요청 - 예외 발생")
+    @DisplayName("기간 내 발생 금액 처리 전 요청 - 내부 예외")
     void occurred_beforeMemorize_throwsException() {
         Flow flow = revenue();
 
         Executable action = flow::occurred;
 
-        assertThrows(NullTransientFieldException.class, action);
+        assertThrows(InternalException.class, action);
     }
 
     @Test

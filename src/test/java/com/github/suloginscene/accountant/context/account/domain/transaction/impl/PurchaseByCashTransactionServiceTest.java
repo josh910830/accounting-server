@@ -2,16 +2,16 @@ package com.github.suloginscene.accountant.context.account.domain.transaction.im
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
-import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,7 +32,7 @@ class PurchaseByCashTransactionServiceTest {
     }
 
     @Test
-    @DisplayName("잔액 부족 - 예외 발생")
+    @DisplayName("잔액 부족 - 요청 예외")
     void purchaseByCash_onInsufficientBalance_throwsException() {
         Asset asset = asset(1);
         Expense expense = expense(1);
@@ -40,7 +40,7 @@ class PurchaseByCashTransactionServiceTest {
         PurchaseByCashTransactionService purchaseByCash = new PurchaseByCashTransactionService();
         Executable action = () -> purchaseByCash.doExecute(asset, expense, Money.of(2), DESCRIPTION);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
 }

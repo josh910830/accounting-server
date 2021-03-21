@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
+import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
@@ -8,8 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.NoSuchElementException;
 
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
 import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
@@ -41,11 +40,11 @@ class LedgerFindingServiceTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("존재하지 않음 - 예외 발생")
+    @DisplayName("존재하지 않음 - 찾지 못함 예외")
     void find_onNonExistent_throwsException() {
         Executable action = () -> ledgerFindingService.findLedger(TESTING_HOLDER);
 
-        assertThrows(NoSuchElementException.class, action);
+        assertThrows(NotFoundException.class, action);
     }
 
 }

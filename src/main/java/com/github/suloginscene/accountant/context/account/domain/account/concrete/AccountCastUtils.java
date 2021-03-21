@@ -3,6 +3,7 @@ package com.github.suloginscene.accountant.context.account.domain.account.concre
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 
 
 public class AccountCastUtils {
@@ -41,7 +42,7 @@ public class AccountCastUtils {
 
     private static void checkAssignable(Account object, Class<? extends Account> targetClass) {
         if (!targetClass.isAssignableFrom(object.getClass())) {
-            throw new AccountCastException(object, targetClass);
+            throw new RequestException("account cannot cast to target type");
         }
     }
 

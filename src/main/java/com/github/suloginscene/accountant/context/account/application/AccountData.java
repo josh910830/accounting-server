@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.context.account.domain.account.Account
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.SingleTransaction;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
+import com.github.suloginscene.accountant.context.common.exception.InternalException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import lombok.Data;
@@ -45,7 +46,7 @@ public class AccountData {
             Flow flow = (Flow) account;
             return flow.getBudget();
         }
-        throw new IllegalStateException("Account is nor stock or flow");
+        throw new InternalException("account is nor stock or flow");
     }
 
 

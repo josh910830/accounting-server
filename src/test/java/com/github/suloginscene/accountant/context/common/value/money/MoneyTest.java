@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.common.value.money;
 
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MoneyTest {
 
     @Test
-    @DisplayName("생성 정상 - 금액 보유")
+    @DisplayName("정상 생성 - 금액 보유")
     void of_onSuccess_returnsMoney() {
         int amount = 1;
         Money money = Money.of(amount);
@@ -21,12 +22,12 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("생성 음수 - 예외 발생")
+    @DisplayName("음수생성 - 요청 예외")
     void of_onNegative_throwsException() {
         int amount = -1;
         Executable action = () -> Money.of(amount);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
 
@@ -52,13 +53,13 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("빼기 음수 - 예외 발생")
+    @DisplayName("빼기 음수 - 요청 예외")
     void subtract_onNegative_throwsException() {
         Money a = Money.of(1);
         Money b = Money.of(2);
         Executable action = () -> Money.subtract(a, b);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
 }

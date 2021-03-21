@@ -3,7 +3,7 @@ package com.github.suloginscene.accountant.context.account.application;
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.AccountCastException;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
@@ -55,7 +55,7 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("예산 변경(저량 계정) - 예외 발생")
+    @DisplayName("예산 변경(저량 계정) - 요청 예외")
     void changeBudget_onStock_throwsException() {
         Stock stock = asset();
         given(stock);
@@ -64,7 +64,7 @@ class AccountConfiguringServiceTest extends IntegrationTest {
         Money newBudget = Money.of(1_000_000);
         Executable action = () -> accountConfiguringService.changeBudget(id, newBudget);
 
-        assertThrows(AccountCastException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
     @Test
@@ -81,7 +81,7 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("계정 삭제(저량 계정 잔고 남음) - 예외 발생")
+    @DisplayName("계정 삭제(저량 계정 잔고 남음) - 요청 예외")
     void deleteAccount_onBalanceRemain_throwsException() {
         Account account = asset(1);
         given(account);
@@ -89,7 +89,7 @@ class AccountConfiguringServiceTest extends IntegrationTest {
         Long id = account.getId();
         Executable action = () -> accountConfiguringService.delete(id);
 
-        assertThrows(AccountNotDeletableException.class, action).printStackTrace();
+        assertThrows(RequestException.class, action);
     }
 
 }

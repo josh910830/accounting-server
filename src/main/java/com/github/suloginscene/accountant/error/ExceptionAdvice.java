@@ -1,14 +1,16 @@
 package com.github.suloginscene.accountant.error;
 
+import com.github.suloginscene.accountant.context.common.exception.InternalException;
+import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.NoSuchElementException;
-
-import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static java.util.stream.Collectors.joining;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
@@ -18,34 +20,42 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErrorResponse> on(BindException e) {
-        ErrorResponse errorResponse = ErrorResponse.of(e);
-        return badRequestWithLogWarn(errorResponse);
+        log.warn(toLogString(e));
+        return ResponseEntity
+                .badRequest().body(ErrorResponse.of(e));
     }
 
-    // TODO account cast exception -> badRequest
-    // TODO negative money exception -> badRequest
-
-    private ResponseEntity<ErrorResponse> badRequestWithLogWarn(ErrorResponse errorResponse) {
-        log.warn(errorResponse.toString());
-        return ResponseEntity.badRequest().body(errorResponse);
-    }
-
-
-    private ResponseEntity<ErrorResponse> forbiddenWithLogWarn(ErrorResponse errorResponse) {
-        log.warn(errorResponse.toString());
-        return ResponseEntity.status(FORBIDDEN).body(errorResponse);
+    private String toLogString(BindException e) {
+        String message = e.getBindingResult().getFieldErrors().stream()
+                .map(f -> f.getField() + "=" + f.getRejectedValue())
+                .collect(joining(","));
+        return "BindException(" + message + ")";
     }
 
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ErrorResponse> on(NoSuchElementException e) {
-        ErrorResponse errorResponse = ErrorResponse.of(e);
-        return notFoundWithLogWarn(errorResponse);
+    @ExceptionHandler(RequestException.class)
+    public ResponseEntity<ErrorResponse> on(RequestException e) {
+        log.warn(toLogString(e));
+        return ResponseEntity
+                .badRequest().body(ErrorResponse.of(e));
     }
 
-    private ResponseEntity<ErrorResponse> notFoundWithLogWarn(ErrorResponse errorResponse) {
-        log.warn(errorResponse.toString());
-        return ResponseEntity.status(NOT_FOUND).build();
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Void> on(NotFoundException e) {
+        log.warn(toLogString(e));
+        return ResponseEntity
+                .status(NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(InternalException.class)
+    public ResponseEntity<Void> on(InternalException e) {
+        log.error(toLogString(e));
+        return ResponseEntity
+                .status(INTERNAL_SERVER_ERROR).build();
+    }
+
+    private String toLogString(Exception e) {
+        return e.getClass().getSimpleName() + "(" + e.getMessage() + ")";
     }
 
 }

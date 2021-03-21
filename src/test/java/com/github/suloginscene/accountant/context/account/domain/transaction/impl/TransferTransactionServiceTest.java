@@ -1,15 +1,15 @@
 package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
-import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -31,7 +31,7 @@ class TransferTransactionServiceTest {
     }
 
     @Test
-    @DisplayName("잔액 부족 - 예외 발생")
+    @DisplayName("잔액 부족 - 요청 예외")
     void transfer_onInsufficientBalance_throwsException() {
         Asset sourceAsset = asset(1);
         Asset destinationAsset = asset(1);
@@ -39,7 +39,7 @@ class TransferTransactionServiceTest {
         TransferTransactionService transfer = new TransferTransactionService();
         Executable action = () -> transfer.doExecute(sourceAsset, destinationAsset, Money.of(2), DESCRIPTION);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
 }

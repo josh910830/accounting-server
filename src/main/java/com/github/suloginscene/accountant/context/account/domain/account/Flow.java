@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
-import com.github.suloginscene.accountant.context.common.exception.NullTransientFieldException;
+import com.github.suloginscene.accountant.context.common.exception.InternalException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.context.common.value.range.TimeRange;
@@ -73,7 +73,7 @@ public abstract class Flow extends Account {
 
     public Money occurred() {
         if (occurred == null) {
-            throw new NullTransientFieldException(Money.class, "occurred");
+            throw new InternalException("transient field is unset");
         }
         return occurred;
     }

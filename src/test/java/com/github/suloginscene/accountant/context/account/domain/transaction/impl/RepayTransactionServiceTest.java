@@ -2,16 +2,16 @@ package com.github.suloginscene.accountant.context.account.domain.transaction.im
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
-import com.github.suloginscene.accountant.context.common.value.money.NegativeMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
-import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -33,7 +33,7 @@ class RepayTransactionServiceTest {
     }
 
     @Test
-    @DisplayName("잔액 부족 - 예외 발생")
+    @DisplayName("잔액 부족 - 요청 예외")
     void repay_onInsufficientBalance_throwsException() {
         Asset asset = asset(1);
         Liability liability = liability(10);
@@ -41,11 +41,11 @@ class RepayTransactionServiceTest {
         RepayTransactionService repay = new RepayTransactionService();
         Executable action = () -> repay.doExecute(asset, liability, Money.of(2), DESCRIPTION);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
     @Test
-    @DisplayName("초과 상환 - 예외 발생")
+    @DisplayName("초과 상환 - 요청 예외")
     void repay_onOverRepay_throwsException() {
         Asset asset = asset(10);
         Liability liability = liability(1);
@@ -53,7 +53,7 @@ class RepayTransactionServiceTest {
         RepayTransactionService repay = new RepayTransactionService();
         Executable action = () -> repay.doExecute(asset, liability, Money.of(2), DESCRIPTION);
 
-        assertThrows(NegativeMoneyException.class, action);
+        assertThrows(RequestException.class, action);
     }
 
 }

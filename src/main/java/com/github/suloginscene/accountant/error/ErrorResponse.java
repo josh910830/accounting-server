@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.error;
 
+import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.validation.BindException;
@@ -17,12 +18,6 @@ public class ErrorResponse {
     private final String errorDescription;
 
 
-    public static ErrorResponse of(Exception e) {
-        String className = e.getClass().getSimpleName();
-        String message = e.getMessage();
-        return new ErrorResponse(className, message);
-    }
-
     public static ErrorResponse of(BindException e) {
         String className = e.getClass().getSimpleName();
         String message = e.getBindingResult()
@@ -35,6 +30,13 @@ public class ErrorResponse {
     private static String formatFieldError(FieldError fe) {
         return String.format("%s=%s(%s)",
                 fe.getField(), fe.getRejectedValue(), fe.getDefaultMessage());
+    }
+
+
+    public static ErrorResponse of(RequestException e) {
+        String className = e.getClass().getSimpleName();
+        String message = e.getMessage();
+        return new ErrorResponse(className, message);
     }
 
 }
