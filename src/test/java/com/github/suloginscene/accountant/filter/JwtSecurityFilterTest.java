@@ -1,11 +1,13 @@
 package com.github.suloginscene.accountant.filter;
 
-import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import com.github.suloginscene.jjwthelper.TestJwtFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
@@ -14,10 +16,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @DisplayName("JWT 필터")
-public class JwtSecurityFilterTest extends ControllerTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+public class JwtSecurityFilterTest {
 
     static final String URL = "/";
 
+    @Autowired MockMvc mockMvc;
     @Autowired TestJwtFactory testJwtFactory;
 
     Long id;

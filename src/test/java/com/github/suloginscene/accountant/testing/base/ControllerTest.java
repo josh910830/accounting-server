@@ -25,7 +25,7 @@ public abstract class ControllerTest extends IntegrationTest {
 
     @BeforeEach
     final void setJwt() {
-        log.info("set jwt");
+        log.debug("set jwt");
         jwt = jwtFactory.create(1L);
     }
 

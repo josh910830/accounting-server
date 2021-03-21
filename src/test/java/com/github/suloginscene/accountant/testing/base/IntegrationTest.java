@@ -21,31 +21,54 @@ public abstract class IntegrationTest {
 
 
     protected void given(Account... accounts) {
-        for (Account account : accounts) {
-            accountRepository.save(account);
-        }
+        logAround("given", () -> {
+            for (Account account : accounts) {
+                accountRepository.save(account);
+            }
+        });
     }
 
     protected void given(Ledger... ledgers) {
-        for (Ledger ledger : ledgers) {
-            ledgerRepository.save(ledger);
-        }
+        logAround("given", () -> {
+            for (Ledger ledger : ledgers) {
+                ledgerRepository.save(ledger);
+            }
+        });
     }
 
 
     protected Account sync(Account account) {
-        return entityLoader.loadedAccount(account.getId());
+        ThreadLocal<Account> temp = new ThreadLocal<>();
+        logAround("sync", () -> {
+            Account found = entityLoader.loadedAccount(account.getId());
+            temp.set(found);
+        });
+        return temp.get();
     }
 
     protected Ledger sync(Ledger ledger) {
-        return entityLoader.loadedLedger(ledger.getHolder());
+        ThreadLocal<Ledger> temp = new ThreadLocal<>();
+        logAround("sync", () -> {
+            Ledger found = entityLoader.loadedLedger(ledger.getHolder());
+            temp.set(found);
+        });
+        return temp.get();
     }
 
 
     @AfterEach
     final void clearAllRepositories() {
-        ledgerRepository.deleteAll();
-        accountRepository.deleteAll();
+        logAround("clear", () -> {
+            ledgerRepository.deleteAll();
+            accountRepository.deleteAll();
+        });
+    }
+
+
+    private void logAround(String info, Runnable runnable) {
+        log.debug("{} will be started.", info);
+        runnable.run();
+        log.debug("{} is finished.", info);
     }
 
 }
