@@ -1,15 +1,17 @@
 package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.AccountCastException;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.AccountCastException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.NoSuchElementException;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
@@ -68,13 +70,26 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     @Test
     @DisplayName("계정 삭제 - 삭제")
     void deleteAccount_onSuccess_removesAccount() {
-        // TODO
+        Account account = asset(0);
+        given(account);
+
+        Long id = account.getId();
+        accountConfiguringService.delete(id);
+
+        Executable findingAction = () -> sync(account);
+        assertThrows(NoSuchElementException.class, findingAction);
     }
 
     @Test
     @DisplayName("계정 삭제(저량 계정 잔고 남음) - 예외 발생")
     void deleteAccount_onBalanceRemain_throwsException() {
-        // TODO
+        Account account = asset(1);
+        given(account);
+
+        Long id = account.getId();
+        Executable action = () -> accountConfiguringService.delete(id);
+
+        assertThrows(AccountNotDeletableException.class, action).printStackTrace();
     }
 
 }

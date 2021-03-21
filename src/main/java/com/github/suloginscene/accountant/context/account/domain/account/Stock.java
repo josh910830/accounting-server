@@ -28,6 +28,12 @@ public abstract class Stock extends Account {
         this.balance = balance;
     }
 
+
+    public boolean hasEmptyBalance() {
+        return balance.get() == 0;
+    }
+
+
     public void increase(Money amount, String description) {
         balance = Money.add(balance, amount);
 
