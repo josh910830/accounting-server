@@ -22,6 +22,9 @@ public class ExceptionAdvice {
         return badRequestWithLogWarn(errorResponse);
     }
 
+    // TODO account cast exception -> badRequest
+    // TODO negative money exception -> badRequest
+
     private ResponseEntity<ErrorResponse> badRequestWithLogWarn(ErrorResponse errorResponse) {
         log.warn(errorResponse.toString());
         return ResponseEntity.badRequest().body(errorResponse);

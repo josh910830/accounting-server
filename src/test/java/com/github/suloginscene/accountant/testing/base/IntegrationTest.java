@@ -37,10 +37,10 @@ public abstract class IntegrationTest {
     }
 
 
-    protected Account sync(Account account) {
-        ThreadLocal<Account> temp = new ThreadLocal<>();
+    protected <T extends Account> T sync(T account) {
+        ThreadLocal<T> temp = new ThreadLocal<>();
         logAround("sync", () -> {
-            Account found = entityLoader.loadedAccount(account.getId());
+            T found = (T) entityLoader.loadedAccount(account.getId());
             temp.set(found);
         });
         return temp.get();

@@ -1,13 +1,11 @@
-package com.github.suloginscene.accountant.context.account.domain.transaction.impl;
+package com.github.suloginscene.accountant.context.account.domain.account.concrete;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
-import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
+import com.github.suloginscene.accountant.context.account.domain.account.Flow;
+import com.github.suloginscene.accountant.context.account.domain.account.Stock;
 
 
-class AccountCastUtils {
+public class AccountCastUtils {
 
     public static Asset toAsset(Account account) {
         checkAssignable(account, Asset.class);
@@ -29,8 +27,20 @@ class AccountCastUtils {
         return (Expense) account;
     }
 
+
+    public static Stock toStock(Account account) {
+        checkAssignable(account, Stock.class);
+        return (Stock) account;
+    }
+
+    public static Flow toFlow(Account account) {
+        checkAssignable(account, Flow.class);
+        return (Flow) account;
+    }
+
+
     private static void checkAssignable(Account object, Class<? extends Account> targetClass) {
-        if (!object.getClass().isAssignableFrom(targetClass)) {
+        if (!targetClass.isAssignableFrom(object.getClass())) {
             throw new AccountCastException(object, targetClass);
         }
     }

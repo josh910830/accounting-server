@@ -7,7 +7,7 @@ import com.github.suloginscene.accountant.context.account.domain.transaction.Tra
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.TRANSFER;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.impl.AccountCastUtils.toAsset;
+import static com.github.suloginscene.accountant.context.account.domain.account.concrete.AccountCastUtils.toAsset;
 
 
 public class TransferTransactionService extends TransactionService {

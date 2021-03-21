@@ -8,8 +8,8 @@ import com.github.suloginscene.accountant.context.account.domain.transaction.Tra
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 
 import static com.github.suloginscene.accountant.context.account.domain.transaction.TransactionType.PURCHASE_BY_CREDIT;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.impl.AccountCastUtils.toExpense;
-import static com.github.suloginscene.accountant.context.account.domain.transaction.impl.AccountCastUtils.toLiability;
+import static com.github.suloginscene.accountant.context.account.domain.account.concrete.AccountCastUtils.toExpense;
+import static com.github.suloginscene.accountant.context.account.domain.account.concrete.AccountCastUtils.toLiability;
 
 
 public class PurchaseByCreditTransactionService extends TransactionService {

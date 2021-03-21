@@ -11,8 +11,8 @@ public abstract class AbstractValidator implements Validator {
 
 
     @Override
-    public boolean supports(Class<?> clazz) {
-        return clazz.isAssignableFrom(targetClass());
+    public boolean supports(@NonNull Class<?> clazz) {
+        return targetClass().isAssignableFrom(clazz);
     }
 
     @Override

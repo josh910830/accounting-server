@@ -21,6 +21,7 @@ import static lombok.AccessLevel.PROTECTED;
 public abstract class Flow extends Account {
 
     @AttributeOverride(name = "amount", column = @Column(name = "budget"))
+    @Getter
     private Money budget;
 
     @Transient
@@ -34,6 +35,11 @@ public abstract class Flow extends Account {
     protected Flow(Holder holder, String name, Money budget) {
         super(holder, name);
         this.budget = budget;
+    }
+
+
+    public void changeBudget(Money newBudget) {
+        budget = newBudget;
     }
 
 
