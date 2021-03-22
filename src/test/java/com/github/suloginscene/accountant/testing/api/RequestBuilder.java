@@ -14,6 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 
 @RequiredArgsConstructor(access = PRIVATE)
@@ -37,6 +38,10 @@ public class RequestBuilder {
 
     public static RequestBuilder ofGet(String url) {
         return new RequestBuilder(get(url));
+    }
+
+    public static RequestBuilder ofPut(String url) {
+        return new RequestBuilder(put(url));
     }
 
 

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPost;
+import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPut;
 import static com.github.suloginscene.accountant.testing.api.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
@@ -122,6 +123,41 @@ class AccountRestControllerTest extends ControllerTest {
         ResultActions then = when.andExpect(status().isOk());
 
         then.andDo(document("get-accounts"));
+    }
+
+
+    @Test
+    @DisplayName("계정 이름 변경(정상) - 204")
+    void putAccountName_onSuccess_returns204() throws Exception {
+        Asset asset = asset();
+        given(asset);
+
+        AccountNameChangeRequest request = new AccountNameChangeRequest("newName");
+        ResultActions when = mockMvc.perform(
+                ofPut(URL + "/" + asset.getId() + "/name").jwt(jwt).json(request).build());
+
+        ResultActions then = when.andExpect(status().isNoContent());
+
+        then.andDo(document("put-account-name"));
+    }
+
+    @Test
+    @DisplayName("계정 이름 변경(입력값) - 400")
+    void putAccountName_withInvalidName_returns400() throws Exception {
+        Asset asset = asset();
+        given(asset);
+
+        AccountNameChangeRequest request = new AccountNameChangeRequest("!invalid!");
+        ResultActions when = mockMvc.perform(
+                ofPut(URL + "/" + asset.getId() + "/name").jwt(jwt).json(request).build());
+
+        when.andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("계정 이름 변경(권한) - 403")
+    void putAccountName_onNotOwner_returns403() throws Exception {
+        // TODO
     }
 
 }

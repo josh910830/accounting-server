@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.account.api;
 
+import com.github.suloginscene.accountant.context.account.application.AccountConfiguringService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreatingService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreationInput;
 import com.github.suloginscene.accountant.context.account.application.AccountData;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,12 +36,13 @@ public class AccountRestController {
 
     private final AccountCreatingService accountCreatingService;
     private final AccountFindingService accountFindingService;
+    private final AccountConfiguringService accountConfiguringService;
 
     private final AccountTypeValidator accountTypeValidator;
 
 
-    @InitBinder
-    void initBinder(WebDataBinder webDataBinder) {
+    @InitBinder("accountCreationRequest")
+    void addAccountTypeValidatorOnCreation(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(accountTypeValidator);
     }
 
@@ -67,8 +70,11 @@ public class AccountRestController {
     @GetMapping("/{accountId}")
     ResponseEntity<AccountData> getAccount(@Authenticated Long memberId,
                                            @PathVariable Long accountId) {
+
+
         AccountData account = accountFindingService.findAccount(accountId);
 
+        // TODO checkAuth by checker in head
         checkAuthority(account, memberId);
         return ResponseEntity.ok(account);
     }
@@ -86,6 +92,18 @@ public class AccountRestController {
         List<AccountSimpleData> accounts = accountFindingService.findAccounts(holder);
 
         return ResponseEntity.ok(accounts);
+    }
+
+
+    @PutMapping("/{accountId}/name")
+    ResponseEntity<Void> putAccount(@Authenticated Long memberId,
+                                    @PathVariable Long accountId,
+                                    @Valid @RequestBody AccountNameChangeRequest request) {
+        // TODO checkAuth by checker
+
+        accountConfiguringService.changeName(accountId, request.getNewName());
+
+        return ResponseEntity.noContent().build();
     }
 
 }

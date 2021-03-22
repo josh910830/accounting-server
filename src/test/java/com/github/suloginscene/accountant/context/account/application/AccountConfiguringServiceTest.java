@@ -24,7 +24,7 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     @Autowired AccountConfiguringService accountConfiguringService;
 
 
-    // TODO 입력값 검증은 웹계층
+    // TODO 입력값 검증은 웹계층(budget 남음)
     @Test
     @DisplayName("이름 변경 - 변경")
     void changeName_onSuccess_updatesName() {
