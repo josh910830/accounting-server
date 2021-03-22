@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.context.account.application.AccountCre
 import com.github.suloginscene.accountant.context.account.application.AccountCreationInput;
 import com.github.suloginscene.accountant.context.account.application.AccountData;
 import com.github.suloginscene.accountant.context.account.application.AccountFindingService;
+import com.github.suloginscene.accountant.context.account.application.AccountSimpleData;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
 import com.github.suloginscene.accountant.context.common.exception.ForbiddenException;
 import com.github.suloginscene.accountant.context.common.util.UriFactory;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -66,6 +68,7 @@ public class AccountRestController {
     ResponseEntity<AccountData> getAccount(@Authenticated Long memberId,
                                            @PathVariable Long accountId) {
         AccountData account = accountFindingService.findAccount(accountId);
+
         checkAuthority(account, memberId);
         return ResponseEntity.ok(account);
     }
@@ -74,6 +77,15 @@ public class AccountRestController {
         if (!account.isOwnedBy(memberId)) {
             throw new ForbiddenException(memberId, account);
         }
+    }
+
+    @GetMapping
+    ResponseEntity<List<AccountSimpleData>> getAccounts(@Authenticated Long memberId) {
+        Holder holder = new Holder(memberId);
+
+        List<AccountSimpleData> accounts = accountFindingService.findAccounts(holder);
+
+        return ResponseEntity.ok(accounts);
     }
 
 }

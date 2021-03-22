@@ -14,6 +14,9 @@ import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGe
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPost;
 import static com.github.suloginscene.accountant.testing.api.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -106,6 +109,19 @@ class AccountRestControllerTest extends ControllerTest {
                 ofGet(URL + "/" + nonExistentId).jwt(jwt).build());
 
         when.andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("계정 리스트 조회(정상) - 200")
+    void getAccounts_onSuccess_returns200() throws Exception {
+        given(asset(), liability(), revenue(), expense());
+
+        ResultActions when = mockMvc.perform(
+                ofGet(URL).jwt(jwt).build());
+
+        ResultActions then = when.andExpect(status().isOk());
+
+        then.andDo(document("get-accounts"));
     }
 
 }
