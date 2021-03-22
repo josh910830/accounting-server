@@ -37,17 +37,27 @@ public class RequestBuilder {
         return new RequestBuilder(post(url));
     }
 
-    // TODO slash
-    public static RequestBuilder ofGet(String url) {
-        return new RequestBuilder(get(url));
+    public static RequestBuilder ofGet(String url, Object... slashes) {
+        String combinedUrl = combineUrl(url, slashes);
+        return new RequestBuilder(get(combinedUrl));
     }
 
-    public static RequestBuilder ofPut(String url) {
-        return new RequestBuilder(put(url));
+    public static RequestBuilder ofPut(String url, Object... slashes) {
+        String combinedUrl = combineUrl(url, slashes);
+        return new RequestBuilder(put(combinedUrl));
     }
 
-    public static RequestBuilder ofDelete(String url) {
-        return new RequestBuilder(delete(url));
+    public static RequestBuilder ofDelete(String url, Object... slashes) {
+        String combinedUrl = combineUrl(url, slashes);
+        return new RequestBuilder(delete(combinedUrl));
+    }
+
+    private static String combineUrl(String url, Object[] slashes) {
+        StringBuilder combinedUrl = new StringBuilder(url);
+        for (Object path : slashes) {
+            combinedUrl.append("/").append(path);
+        }
+        return combinedUrl.toString();
     }
 
 

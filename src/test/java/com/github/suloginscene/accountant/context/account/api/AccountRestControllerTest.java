@@ -24,7 +24,6 @@ import static com.github.suloginscene.accountant.testing.data.TestingValues.DESC
 import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -85,7 +84,7 @@ class AccountRestControllerTest extends ControllerTest {
         given(asset);
 
         ResultActions when = mockMvc.perform(
-                ofGet(URL + "/" + asset.getId()).jwt(jwt).build());
+                ofGet(URL, asset.getId()).jwt(jwt).build());
 
         ResultActions then = when.andExpect(status().isOk());
 
@@ -100,7 +99,7 @@ class AccountRestControllerTest extends ControllerTest {
 
         String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
         ResultActions when = mockMvc.perform(
-                ofGet(URL + "/" + asset.getId()).jwt(notOwnerJwt).build());
+                ofGet(URL, asset.getId()).jwt(notOwnerJwt).build());
 
         when.andExpect(status().isForbidden());
     }
@@ -110,7 +109,7 @@ class AccountRestControllerTest extends ControllerTest {
     void getAccount_onNonExistent_returns404() throws Exception {
         int nonExistentId = Integer.MAX_VALUE;
         ResultActions when = mockMvc.perform(
-                ofGet(URL + "/" + nonExistentId).jwt(jwt).build());
+                ofGet(URL, nonExistentId).jwt(jwt).build());
 
         when.andExpect(status().isNotFound());
     }
@@ -137,7 +136,7 @@ class AccountRestControllerTest extends ControllerTest {
 
         AccountNameChangeRequest request = new AccountNameChangeRequest("newName");
         ResultActions when = mockMvc.perform(
-                ofPut(URL + "/" + asset.getId() + "/name").jwt(jwt).json(request).build());
+                ofPut(URL, asset.getId(), "name").jwt(jwt).json(request).build());
 
         ResultActions then = when.andExpect(status().isNoContent());
 
@@ -153,7 +152,7 @@ class AccountRestControllerTest extends ControllerTest {
         String newName = "!invalid!";
         AccountNameChangeRequest request = new AccountNameChangeRequest(newName);
         ResultActions when = mockMvc.perform(
-                ofPut(URL + "/" + asset.getId() + "/name").jwt(jwt).json(request).build());
+                ofPut(URL, asset.getId(), "name").jwt(jwt).json(request).build());
 
         when.andExpect(status().isBadRequest());
     }
@@ -167,7 +166,7 @@ class AccountRestControllerTest extends ControllerTest {
         String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
         AccountNameChangeRequest request = new AccountNameChangeRequest("newName");
         ResultActions when = mockMvc.perform(
-                ofPut(URL + "/" + asset.getId() + "/name").jwt(notOwnerJwt).json(request).build());
+                ofPut(URL, asset.getId(), "name").jwt(notOwnerJwt).json(request).build());
 
         when.andExpect(status().isForbidden());
     }
@@ -180,7 +179,7 @@ class AccountRestControllerTest extends ControllerTest {
 
         AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(1_000_000);
         ResultActions when = mockMvc.perform(
-                ofPut(URL + "/" + expense.getId() + "/budget").jwt(jwt).json(request).build());
+                ofPut(URL, expense.getId(), "budget").jwt(jwt).json(request).build());
 
         ResultActions then = when.andExpect(status().isNoContent());
 
@@ -196,7 +195,7 @@ class AccountRestControllerTest extends ControllerTest {
         Integer negative = -1;
         AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(negative);
         ResultActions when = mockMvc.perform(
-                ofPut(URL + "/" + expense.getId() + "/budget").jwt(jwt).json(request).build());
+                ofPut(URL, expense.getId(), "budget").jwt(jwt).json(request).build());
 
         when.andExpect(status().isBadRequest());
     }
@@ -210,7 +209,7 @@ class AccountRestControllerTest extends ControllerTest {
         String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
         AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(1_000_000);
         ResultActions when = mockMvc.perform(
-                ofPut(URL + "/" + expense.getId() + "/budget").jwt(notOwnerJwt).json(request).build());
+                ofPut(URL, expense.getId(), "budget").jwt(notOwnerJwt).json(request).build());
 
         when.andExpect(status().isForbidden());
     }
@@ -223,12 +222,11 @@ class AccountRestControllerTest extends ControllerTest {
         given(asset);
 
         ResultActions when = mockMvc.perform(
-                ofDelete(URL + "/" + asset.getId()).jwt(jwt).build());
+                ofDelete(URL, asset.getId()).jwt(jwt).build());
 
         ResultActions then = when.andExpect(status().isNoContent());
 
-        then.andDo(document("delete-account"))
-                .andDo(print());
+        then.andDo(document("delete-account"));
     }
 
     @Test
@@ -239,7 +237,7 @@ class AccountRestControllerTest extends ControllerTest {
 
         String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
         ResultActions when = mockMvc.perform(
-                ofDelete(URL + "/" + asset.getId()).jwt(notOwnerJwt).build());
+                ofDelete(URL, asset.getId()).jwt(notOwnerJwt).build());
 
         when.andExpect(status().isForbidden());
     }
