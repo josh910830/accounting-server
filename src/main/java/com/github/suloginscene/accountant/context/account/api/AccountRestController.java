@@ -53,7 +53,6 @@ public class AccountRestController {
     ResponseEntity<Void> postAccount(@RequestBody @Valid AccountCreationRequest request,
                                      @Authenticated Long memberId) {
         AccountCreationInput input = toInput(request, memberId);
-
         Long id = accountCreatingService.createAccount(input);
 
         URI uri = UriFactory.create(this, id);
@@ -82,7 +81,6 @@ public class AccountRestController {
     @GetMapping
     ResponseEntity<List<AccountSimpleData>> getAccounts(@Authenticated Long memberId) {
         Holder holder = new Holder(memberId);
-
         List<AccountSimpleData> accounts = accountFindingService.findAccounts(holder);
 
         return ResponseEntity.ok(accounts);
@@ -90,12 +88,25 @@ public class AccountRestController {
 
 
     @PutMapping("/{accountId}/name")
-    ResponseEntity<Void> putAccount(@PathVariable Long accountId,
-                                    @RequestBody @Valid AccountNameChangeRequest request,
-                                    @Authenticated Long memberId) {
+    ResponseEntity<Void> putAccountName(@PathVariable Long accountId,
+                                        @RequestBody @Valid AccountNameChangeRequest request,
+                                        @Authenticated Long memberId) {
         accountAuthorityChecker.checkAuthority(accountId, memberId);
 
-        accountConfiguringService.changeName(accountId, request.getNewName());
+        String newName = request.getNewName();
+        accountConfiguringService.changeName(accountId, newName);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{accountId}/budget")
+    ResponseEntity<Void> putAccountBudget(@PathVariable Long accountId,
+                                          @RequestBody @Valid AccountBudgetChangeRequest request,
+                                          @Authenticated Long memberId) {
+        accountAuthorityChecker.checkAuthority(accountId, memberId);
+
+        Money newBudget = Money.of(request.getNewBudget());
+        accountConfiguringService.changeBudget(accountId, newBudget);
 
         return ResponseEntity.noContent().build();
     }

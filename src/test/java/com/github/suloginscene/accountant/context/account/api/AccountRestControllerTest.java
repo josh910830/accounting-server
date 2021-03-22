@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.account.api;
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -165,6 +166,49 @@ class AccountRestControllerTest extends ControllerTest {
         AccountNameChangeRequest request = new AccountNameChangeRequest("newName");
         ResultActions when = mockMvc.perform(
                 ofPut(URL + "/" + asset.getId() + "/name").jwt(notOwnerJwt).json(request).build());
+
+        when.andExpect(status().isForbidden());
+    }
+
+    @Test
+    @DisplayName("계정 예산 변경(정상) - 204")
+    void putAccountBudget_onSuccess_returns204() throws Exception {
+        Expense expense = expense();
+        given(expense);
+
+        AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(1_000_000);
+        ResultActions when = mockMvc.perform(
+                ofPut(URL + "/" + expense.getId() + "/budget").jwt(jwt).json(request).build());
+
+        ResultActions then = when.andExpect(status().isNoContent());
+
+        then.andDo(document("put-account-budget"));
+    }
+
+    @Test
+    @DisplayName("계정 예산 변경(입력값) - 400")
+    void putAccountBudget_withNegativeMoney_returns400() throws Exception {
+        Expense expense = expense();
+        given(expense);
+
+        Integer negative = -1;
+        AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(negative);
+        ResultActions when = mockMvc.perform(
+                ofPut(URL + "/" + expense.getId() + "/budget").jwt(jwt).json(request).build());
+
+        when.andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("계정 예산 변경(권한) - 403")
+    void putAccountBudget_onNotOwner_returns403() throws Exception {
+        Expense expense = expense();
+        given(expense);
+
+        String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
+        AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(1_000_000);
+        ResultActions when = mockMvc.perform(
+                ofPut(URL + "/" + expense.getId() + "/budget").jwt(notOwnerJwt).json(request).build());
 
         when.andExpect(status().isForbidden());
     }
