@@ -1,13 +1,42 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
+import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
-import org.springframework.data.jpa.repository.JpaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
-public interface AccountRepository extends JpaRepository<Account, Long> {
+@Component
+@RequiredArgsConstructor
+public class AccountRepository {
 
-    List<Account> findByHolder(Holder holder);
+    private final AccountJpaRepository accountJpaRepository;
+
+
+    public Long save(Account newAccount) {
+        Account saved = accountJpaRepository.save(newAccount);
+        return saved.getId();
+    }
+
+
+    public Account findById(Long id) {
+        return accountJpaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(Account.class, id));
+    }
+
+    public List<Account> findByHolder(Holder holder) {
+        return accountJpaRepository.findByHolder(holder);
+    }
+
+
+    public void deleteById(Long id) {
+        accountJpaRepository.deleteById(id);
+    }
+
+    public void deleteAll() {
+        accountJpaRepository.deleteAll();
+    }
 
 }

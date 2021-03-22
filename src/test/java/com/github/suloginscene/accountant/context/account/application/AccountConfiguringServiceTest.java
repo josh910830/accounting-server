@@ -3,6 +3,7 @@ package com.github.suloginscene.accountant.context.account.application;
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.Stock;
+import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import com.github.suloginscene.accountant.context.common.exception.RequestException;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
@@ -10,8 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.NoSuchElementException;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
@@ -77,7 +76,7 @@ class AccountConfiguringServiceTest extends IntegrationTest {
         accountConfiguringService.delete(id);
 
         Executable findingAction = () -> sync(account);
-        assertThrows(NoSuchElementException.class, findingAction);
+        assertThrows(NotFoundException.class, findingAction);
     }
 
     @Test

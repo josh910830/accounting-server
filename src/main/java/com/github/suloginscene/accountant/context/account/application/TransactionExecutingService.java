@@ -8,7 +8,6 @@ import com.github.suloginscene.accountant.context.account.domain.transaction.Tra
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionService;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionServiceFactory;
 import com.github.suloginscene.accountant.context.common.event.AccountantEventPublisher;
-import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,15 +36,10 @@ public class TransactionExecutingService {
     }
 
     private TransactionExecutionParameter toParam(TransactionExecutionInput input) {
-        Account source = findAccount(input.getSourceId());
-        Account destination = findAccount(input.getDestinationId());
+        Account source = accountRepository.findById(input.getSourceId());
+        Account destination = accountRepository.findById(input.getDestinationId());
         AccountPair pair = AccountPair.of(source, destination);
         return new TransactionExecutionParameter(pair, input.getAmount(), input.getDescription());
-    }
-
-    private Account findAccount(Long id) {
-        return accountRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(Account.class, id));
     }
 
 }

@@ -2,7 +2,6 @@ package com.github.suloginscene.accountant.context.account.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
-import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,16 +22,13 @@ public class AccountFindingService {
 
     public List<AccountSimpleData> findAccounts(Holder holder) {
         List<Account> accounts = accountRepository.findByHolder(holder);
-
         return accounts.stream()
                 .map(AccountSimpleData::new)
                 .collect(toList());
     }
 
     public AccountData findAccount(Long id) {
-        Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(Account.class, id));
-
+        Account account = accountRepository.findById(id);
         return new AccountData(account);
     }
 

@@ -20,10 +20,8 @@ public class AccountCreatingService {
     public Long createAccount(AccountCreationInput input) {
         AccountCreationParameter param = toParam(input);
 
-        Account created = AccountFactory.create(param);
-        Account saved = accountRepository.save(created);
-
-        return saved.getId();
+        Account newAccount = AccountFactory.create(param);
+        return accountRepository.save(newAccount);
     }
 
     private AccountCreationParameter toParam(AccountCreationInput input) {

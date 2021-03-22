@@ -22,7 +22,7 @@ public class EntityLoader {
 
 
     public Account loadedAccount(Long id) {
-        Account account = accountRepository.findById(id).orElseThrow();
+        Account account = accountRepository.findById(id);
         account.readSingleTransactions().forEach(SingleTransaction::getDescription);
         return account;
     }
