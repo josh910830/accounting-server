@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.error;
 
+import com.github.suloginscene.accountant.context.common.exception.ForbiddenException;
 import com.github.suloginscene.accountant.context.common.exception.InternalException;
 import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
 import com.github.suloginscene.accountant.context.common.exception.RequestException;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import static java.util.stream.Collectors.joining;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -45,6 +47,13 @@ public class ExceptionAdvice {
         log.warn(toLogString(e));
         return ResponseEntity
                 .status(NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<Void> on(ForbiddenException e) {
+        log.warn(toLogString(e));
+        return ResponseEntity
+                .status(FORBIDDEN).build();
     }
 
     @ExceptionHandler(InternalException.class)

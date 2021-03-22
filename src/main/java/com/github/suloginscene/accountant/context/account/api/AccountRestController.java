@@ -2,8 +2,10 @@ package com.github.suloginscene.accountant.context.account.api;
 
 import com.github.suloginscene.accountant.context.account.application.AccountCreatingService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreationInput;
+import com.github.suloginscene.accountant.context.account.application.AccountData;
 import com.github.suloginscene.accountant.context.account.application.AccountFindingService;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
+import com.github.suloginscene.accountant.context.common.exception.ForbiddenException;
 import com.github.suloginscene.accountant.context.common.util.UriFactory;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
@@ -11,7 +13,9 @@ import com.github.suloginscene.jwtconfig.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +61,19 @@ public class AccountRestController {
         return new AccountCreationInput(holder, type, name, money);
     }
 
-    // TODO check authorization
+
+    @GetMapping("/{accountId}")
+    ResponseEntity<AccountData> getAccount(@Authenticated Long memberId,
+                                           @PathVariable Long accountId) {
+        AccountData account = accountFindingService.findAccount(accountId);
+        checkAuthority(account, memberId);
+        return ResponseEntity.ok(account);
+    }
+
+    private void checkAuthority(AccountData account, Long memberId) throws ForbiddenException {
+        if (!account.isOwnedBy(memberId)) {
+            throw new ForbiddenException(memberId, account);
+        }
+    }
 
 }
