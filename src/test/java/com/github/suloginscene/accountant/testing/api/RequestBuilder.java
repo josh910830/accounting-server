@@ -11,6 +11,7 @@ import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_REQUEST_HEADER
 import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD;
 import static org.springframework.http.HttpHeaders.ORIGIN;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -36,12 +37,17 @@ public class RequestBuilder {
         return new RequestBuilder(post(url));
     }
 
+    // TODO slash
     public static RequestBuilder ofGet(String url) {
         return new RequestBuilder(get(url));
     }
 
     public static RequestBuilder ofPut(String url) {
         return new RequestBuilder(put(url));
+    }
+
+    public static RequestBuilder ofDelete(String url) {
+        return new RequestBuilder(delete(url));
     }
 
 

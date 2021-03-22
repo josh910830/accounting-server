@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.Map;
 
+import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofDelete;
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPost;
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPut;
@@ -23,6 +24,7 @@ import static com.github.suloginscene.accountant.testing.data.TestingValues.DESC
 import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -209,6 +211,35 @@ class AccountRestControllerTest extends ControllerTest {
         AccountBudgetChangeRequest request = new AccountBudgetChangeRequest(1_000_000);
         ResultActions when = mockMvc.perform(
                 ofPut(URL + "/" + expense.getId() + "/budget").jwt(notOwnerJwt).json(request).build());
+
+        when.andExpect(status().isForbidden());
+    }
+
+
+    @Test
+    @DisplayName("계정 삭제(정상) - 204")
+    void deleteAccount_onSuccess_returns204() throws Exception {
+        Asset asset = asset(0);
+        given(asset);
+
+        ResultActions when = mockMvc.perform(
+                ofDelete(URL + "/" + asset.getId()).jwt(jwt).build());
+
+        ResultActions then = when.andExpect(status().isNoContent());
+
+        then.andDo(document("delete-account"))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("계정 삭제(권한) - 403")
+    void deleteAccount_onNotOwner_returns403() throws Exception {
+        Asset asset = asset(0);
+        given(asset);
+
+        String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
+        ResultActions when = mockMvc.perform(
+                ofDelete(URL + "/" + asset.getId()).jwt(notOwnerJwt).build());
 
         when.andExpect(status().isForbidden());
     }

@@ -15,14 +15,7 @@ import com.github.suloginscene.jwtconfig.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -107,6 +100,17 @@ public class AccountRestController {
 
         Money newBudget = Money.of(request.getNewBudget());
         accountConfiguringService.changeBudget(accountId, newBudget);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @DeleteMapping("/{accountId}")
+    ResponseEntity<Void> deleteAccount(@PathVariable Long accountId,
+                                       @Authenticated Long memberId) {
+        accountAuthorityChecker.checkAuthority(accountId, memberId);
+
+        accountConfiguringService.delete(accountId);
 
         return ResponseEntity.noContent().build();
     }
