@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.account.domain.account;
 
 import com.github.suloginscene.accountant.context.common.exception.NotFoundException;
+import com.github.suloginscene.accountant.context.common.util.ProfileChecker;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.List;
 public class AccountRepository {
 
     private final AccountJpaRepository accountJpaRepository;
+    private final ProfileChecker profileChecker;
 
 
     public Long save(Account newAccount) {
@@ -36,8 +38,8 @@ public class AccountRepository {
     }
 
 
-    // TODO on test
     public void deleteAll() {
+        profileChecker.checkTest();
         accountJpaRepository.deleteAll();
     }
 

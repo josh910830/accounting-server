@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.report.domain.ledger;
 
+import com.github.suloginscene.accountant.context.common.util.ProfileChecker;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class LedgerRepository {
 
     private final LedgerJpaRepository ledgerJpaRepository;
+    private final ProfileChecker profileChecker;
 
 
     public Ledger findByIdOrElseNewSaved(Holder holder) {
@@ -26,12 +28,13 @@ public class LedgerRepository {
     }
 
 
-    // TODO on test
     public void save(Ledger ledger) {
+        profileChecker.checkTest();
         ledgerJpaRepository.save(ledger);
     }
 
     public void deleteAll() {
+        profileChecker.checkTest();
         ledgerJpaRepository.deleteAll();
     }
 
