@@ -147,7 +147,8 @@ class AccountRestControllerTest extends ControllerTest {
         Asset asset = asset();
         given(asset);
 
-        AccountNameChangeRequest request = new AccountNameChangeRequest("!invalid!");
+        String newName = "!invalid!";
+        AccountNameChangeRequest request = new AccountNameChangeRequest(newName);
         ResultActions when = mockMvc.perform(
                 ofPut(URL + "/" + asset.getId() + "/name").jwt(jwt).json(request).build());
 
@@ -157,7 +158,15 @@ class AccountRestControllerTest extends ControllerTest {
     @Test
     @DisplayName("계정 이름 변경(권한) - 403")
     void putAccountName_onNotOwner_returns403() throws Exception {
-        // TODO
+        Asset asset = asset();
+        given(asset);
+
+        String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
+        AccountNameChangeRequest request = new AccountNameChangeRequest("newName");
+        ResultActions when = mockMvc.perform(
+                ofPut(URL + "/" + asset.getId() + "/name").jwt(notOwnerJwt).json(request).build());
+
+        when.andExpect(status().isForbidden());
     }
 
 }

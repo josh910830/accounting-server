@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.context.account.api;
 
+import com.github.suloginscene.accountant.context.account.application.AccountAuthorityChecker;
 import com.github.suloginscene.accountant.context.account.application.AccountConfiguringService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreatingService;
 import com.github.suloginscene.accountant.context.account.application.AccountCreationInput;
@@ -7,7 +8,6 @@ import com.github.suloginscene.accountant.context.account.application.AccountDat
 import com.github.suloginscene.accountant.context.account.application.AccountFindingService;
 import com.github.suloginscene.accountant.context.account.application.AccountSimpleData;
 import com.github.suloginscene.accountant.context.account.domain.account.AccountType;
-import com.github.suloginscene.accountant.context.common.exception.ForbiddenException;
 import com.github.suloginscene.accountant.context.common.util.UriFactory;
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.common.value.money.Money;
@@ -34,6 +34,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountRestController {
 
+    private final AccountAuthorityChecker accountAuthorityChecker;
+
     private final AccountCreatingService accountCreatingService;
     private final AccountFindingService accountFindingService;
     private final AccountConfiguringService accountConfiguringService;
@@ -48,9 +50,9 @@ public class AccountRestController {
 
 
     @PostMapping
-    ResponseEntity<Void> postAccount(@Authenticated Long memberId,
-                                     @Valid @RequestBody AccountCreationRequest request) {
-        AccountCreationInput input = toInput(memberId, request);
+    ResponseEntity<Void> postAccount(@RequestBody @Valid AccountCreationRequest request,
+                                     @Authenticated Long memberId) {
+        AccountCreationInput input = toInput(request, memberId);
 
         Long id = accountCreatingService.createAccount(input);
 
@@ -58,7 +60,7 @@ public class AccountRestController {
         return ResponseEntity.created(uri).build();
     }
 
-    private AccountCreationInput toInput(Long memberId, AccountCreationRequest request) {
+    private AccountCreationInput toInput(AccountCreationRequest request, Long memberId) {
         Holder holder = new Holder(memberId);
         AccountType type = AccountType.valueOf(request.getType());
         String name = request.getName();
@@ -68,21 +70,13 @@ public class AccountRestController {
 
 
     @GetMapping("/{accountId}")
-    ResponseEntity<AccountData> getAccount(@Authenticated Long memberId,
-                                           @PathVariable Long accountId) {
-
+    ResponseEntity<AccountData> getAccount(@PathVariable Long accountId,
+                                           @Authenticated Long memberId) {
+        accountAuthorityChecker.checkAuthority(accountId, memberId);
 
         AccountData account = accountFindingService.findAccount(accountId);
 
-        // TODO checkAuth by checker in head
-        checkAuthority(account, memberId);
         return ResponseEntity.ok(account);
-    }
-
-    private void checkAuthority(AccountData account, Long memberId) throws ForbiddenException {
-        if (!account.isOwnedBy(memberId)) {
-            throw new ForbiddenException(memberId, account);
-        }
     }
 
     @GetMapping
@@ -96,10 +90,10 @@ public class AccountRestController {
 
 
     @PutMapping("/{accountId}/name")
-    ResponseEntity<Void> putAccount(@Authenticated Long memberId,
-                                    @PathVariable Long accountId,
-                                    @Valid @RequestBody AccountNameChangeRequest request) {
-        // TODO checkAuth by checker
+    ResponseEntity<Void> putAccount(@PathVariable Long accountId,
+                                    @RequestBody @Valid AccountNameChangeRequest request,
+                                    @Authenticated Long memberId) {
+        accountAuthorityChecker.checkAuthority(accountId, memberId);
 
         accountConfiguringService.changeName(accountId, request.getNewName());
 

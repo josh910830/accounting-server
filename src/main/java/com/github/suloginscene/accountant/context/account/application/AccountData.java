@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.context.account.application;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.suloginscene.accountant.context.account.domain.account.Account;
 import com.github.suloginscene.accountant.context.account.domain.account.Flow;
 import com.github.suloginscene.accountant.context.account.domain.account.SingleTransaction;
@@ -18,9 +17,6 @@ import static java.util.stream.Collectors.toList;
 @Data
 public class AccountData {
 
-    @JsonIgnore
-    private final Long holderId;
-
     private final Long id;
     private final String name;
     private final String type;
@@ -29,7 +25,6 @@ public class AccountData {
 
 
     AccountData(Account account) {
-        holderId = account.getHolder().get();
         id = account.getId();
         name = account.getName();
         type = account.getClass().getSimpleName();
@@ -49,11 +44,6 @@ public class AccountData {
             return flow.getBudget();
         }
         throw new InternalException("account is nor stock or flow");
-    }
-
-
-    public boolean isOwnedBy(Long memberId) {
-        return holderId.equals(memberId);
     }
 
 
