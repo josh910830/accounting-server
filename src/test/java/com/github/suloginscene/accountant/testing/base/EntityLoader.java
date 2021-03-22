@@ -28,7 +28,7 @@ public class EntityLoader {
     }
 
     public Ledger loadedLedger(Holder holder) {
-        Ledger ledger = ledgerRepository.findById(holder).orElseThrow();
+        Ledger ledger = ledgerRepository.findByIdOrElseNewSaved(holder);
         ledger.readDoubleTransactions().forEach(DoubleTransaction::getDescription);
         return ledger;
     }
