@@ -60,6 +60,14 @@ public class ExceptionAdvice {
                 .status(INTERNAL_SERVER_ERROR).build();
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Void> on(Exception e) {
+        log.error(toLogString(e));
+        return ResponseEntity
+                .status(INTERNAL_SERVER_ERROR).build();
+    }
+
+
     private String toLogString(Exception e) {
         String className = e.getClass().getSimpleName();
         String message = e.getMessage();

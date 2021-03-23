@@ -8,13 +8,17 @@ import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofGet;
+import static com.github.suloginscene.accountant.lib.test.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.accountant.lib.time.DateTimeFormatters.DATE;
 import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
@@ -95,6 +99,27 @@ class ReportRestControllerTest extends ControllerTest {
         then.andDo(document("get-income-statement"));
     }
 
-    // TODO validate
+    @Test
+    @DisplayName("손익계산서(날짜 형식) - 400")
+    void getIncomeStatement_withInvalidParam_returns400() throws Exception {
+        String begin = "yyyy-MM-dd";
+        String end = "19910830";
+
+        IncomeStatementRequest request = new IncomeStatementRequest(begin, end);
+        ResultActions when = mockMvc.perform(
+                ofGet(URL, "income-statement").jwt(jwt).json(request).build());
+
+        when.andExpect(status().isBadRequest())
+                .andExpect(hasTwoSentencesInErrorDescription());
+    }
+
+    private ResultMatcher hasTwoSentencesInErrorDescription() {
+        return result -> {
+            Map<String, Object> errorResponse = toResponseAsJsonMap(result);
+            String errorDescription = errorResponse.get("errorDescription").toString();
+            String[] sentences = errorDescription.split(",");
+            Assertions.assertEquals(2, sentences.length);
+        };
+    }
 
 }
