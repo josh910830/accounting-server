@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.List;
 
-import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DEFAULT;
+import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DATE_TIME;
 import static java.util.stream.Collectors.toList;
 
 
@@ -40,7 +40,7 @@ public class LedgerData {
             debit = doubleTransaction.getDebit().getName();
             credit = doubleTransaction.getCredit().getName();
             description = doubleTransaction.getDescription();
-            createdAt = doubleTransaction.getCreatedAt().format(DEFAULT);
+            createdAt = doubleTransaction.getCreatedAt().format(DATE_TIME);
         }
 
     }

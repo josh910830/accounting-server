@@ -3,7 +3,6 @@ package com.github.suloginscene.accountant.context.report.application;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
 import com.github.suloginscene.accountant.context.common.value.range.DateRange;
-import com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatement;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,9 +34,9 @@ class IncomeStatementAssemblingServiceTest extends IntegrationTest {
         given(revenue1, revenue2, expense);
 
         DateRange duringToday = DateRange.today();
-        IncomeStatement incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(TESTING_HOLDER, duringToday);
+        IncomeStatementData incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(TESTING_HOLDER, duringToday);
 
-        assertThat(incomeStatement.getProfit()).isEqualTo(2 - 1);
+        assertThat(incomeStatement.getTotal().get("PROFIT")).isEqualTo(2 - 1);
     }
 
 }

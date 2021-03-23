@@ -1,7 +1,9 @@
 package com.github.suloginscene.accountant.context.report.api;
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Expense;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
+import com.github.suloginscene.accountant.context.account.domain.account.concrete.Revenue;
 import com.github.suloginscene.accountant.context.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
@@ -10,11 +12,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.time.LocalDate;
+
+import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DATE;
 import static com.github.suloginscene.accountant.context.report.listener.EventTransformUtils.toDoubleTransaction;
 import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.TESTING_HOLDER;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -64,5 +73,28 @@ class ReportRestControllerTest extends ControllerTest {
 
         then.andDo(document("get-balance-sheet"));
     }
+
+    @Test
+    @DisplayName("손익계산서 - 200")
+    void getIncomeStatement_onSuccess_returns200() throws Exception {
+        Revenue r = revenue(30);
+        Expense e1 = expense(30);
+        Expense e2 = expense(30);
+        r.occur(MONEY_ONE, DESCRIPTION);
+        e1.occur(MONEY_ONE, DESCRIPTION);
+        e2.occur(MONEY_ONE, DESCRIPTION);
+        given(r, e1, e2);
+
+        String todayString = LocalDate.now().format(DATE);
+        IncomeStatementRequest request = new IncomeStatementRequest(todayString, todayString);
+        ResultActions when = mockMvc.perform(
+                ofGet(URL, "income-statement").jwt(jwt).json(request).build());
+
+        ResultActions then = when.andExpect(status().isOk());
+
+        then.andDo(document("get-income-statement"));
+    }
+
+    // TODO validate
 
 }

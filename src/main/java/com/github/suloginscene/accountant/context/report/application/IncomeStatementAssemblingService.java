@@ -24,10 +24,13 @@ public class IncomeStatementAssemblingService {
     private final ExpenseRepository expenseRepository;
 
 
-    public IncomeStatement assembleIncomeStatement(Holder holder, DateRange dateRange) {
+    public IncomeStatementData assembleIncomeStatement(Holder holder, DateRange dateRange) {
         List<Revenue> revenues = revenueRepository.findByHolder(holder);
         List<Expense> expenses = expenseRepository.findByHolder(holder);
-        return IncomeStatementFactory.create(revenues, expenses, dateRange);
+
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(dateRange, revenues, expenses);
+
+        return new IncomeStatementData(incomeStatement);
     }
 
 }

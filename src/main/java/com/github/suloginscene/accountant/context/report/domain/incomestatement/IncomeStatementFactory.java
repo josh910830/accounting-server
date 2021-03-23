@@ -14,13 +14,13 @@ import static com.github.suloginscene.accountant.context.report.domain.incomesta
 
 public class IncomeStatementFactory {
 
-    public static IncomeStatement create(List<Revenue> revenues, List<Expense> expenses, DateRange dateRange) {
+    public static IncomeStatement create(DateRange dateRange, List<Revenue> revenues, List<Expense> expenses) {
         TimeRange timeRange = dateRange.toTimeRange();
         revenues.forEach(f -> f.memorizeOccurredDuring(timeRange));
         expenses.forEach(f -> f.memorizeOccurredDuring(timeRange));
 
         Map<IncomeStatementKey, Integer> total = totalTable(revenues, expenses);
-        return new IncomeStatement(total, revenues, expenses);
+        return new IncomeStatement(dateRange, total, revenues, expenses);
     }
 
     private static Map<IncomeStatementKey, Integer> totalTable(List<Revenue> revenues, List<Expense> expenses) {

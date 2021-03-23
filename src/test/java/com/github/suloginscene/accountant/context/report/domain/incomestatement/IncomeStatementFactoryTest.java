@@ -9,10 +9,13 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatementKey.EXPENSE_SUM;
+import static com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatementKey.PROFIT;
+import static com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatementKey.REVENUE_SUM;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
-import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingValues.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingValues.MONEY_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -37,11 +40,11 @@ class IncomeStatementFactoryTest {
         e3.occur(MONEY_ONE, DESCRIPTION);
 
         DateRange today = DateRange.today();
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, today);
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(today, revenues, expenses);
 
-        assertThat(incomeStatement.getProfit()).isEqualTo(2 - 3);
-        assertThat(incomeStatement.getRevenueSum()).isEqualTo(2);
-        assertThat(incomeStatement.getExpenseSum()).isEqualTo(3);
+        assertThat(incomeStatement.getTotal().get(PROFIT)).isEqualTo(2 - 3);
+        assertThat(incomeStatement.getTotal().get(REVENUE_SUM)).isEqualTo(2);
+        assertThat(incomeStatement.getTotal().get(EXPENSE_SUM)).isEqualTo(3);
     }
 
     @Test
@@ -56,11 +59,11 @@ class IncomeStatementFactoryTest {
         e1.occur(MONEY_ONE, DESCRIPTION);
 
         DateRange yesterday = DateRange.of(LocalDate.now().minusDays(1));
-        IncomeStatement incomeStatement = IncomeStatementFactory.create(revenues, expenses, yesterday);
+        IncomeStatement incomeStatement = IncomeStatementFactory.create(yesterday, revenues, expenses);
 
-        assertThat(incomeStatement.getProfit()).isEqualTo(0);
-        assertThat(incomeStatement.getRevenueSum()).isEqualTo(0);
-        assertThat(incomeStatement.getExpenseSum()).isEqualTo(0);
+        assertThat(incomeStatement.getTotal().get(PROFIT)).isEqualTo(0);
+        assertThat(incomeStatement.getTotal().get(REVENUE_SUM)).isEqualTo(0);
+        assertThat(incomeStatement.getTotal().get(EXPENSE_SUM)).isEqualTo(0);
     }
 
 }

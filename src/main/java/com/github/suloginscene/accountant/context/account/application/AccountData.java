@@ -10,7 +10,7 @@ import lombok.Data;
 
 import java.util.List;
 
-import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DEFAULT;
+import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DATE_TIME;
 import static java.util.stream.Collectors.toList;
 
 
@@ -60,7 +60,7 @@ public class AccountData {
             type = singleTransaction.getType().name();
             amount = singleTransaction.getAmount().get();
             description = singleTransaction.getDescription();
-            createdAt = singleTransaction.getCreatedAt().format(DEFAULT);
+            createdAt = singleTransaction.getCreatedAt().format(DATE_TIME);
         }
 
     }

@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.context.common.value.range;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -10,7 +11,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode @ToString
 public class DateRange {
 
+    @Getter
     private final LocalDate begin;
+
+    @Getter
     private final LocalDate end;
 
 

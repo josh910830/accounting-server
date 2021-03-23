@@ -1,17 +1,23 @@
 package com.github.suloginscene.accountant.context.report.api;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
+import com.github.suloginscene.accountant.context.common.value.range.DateRange;
 import com.github.suloginscene.accountant.context.report.application.BalanceSheetAssemblingService;
 import com.github.suloginscene.accountant.context.report.application.BalanceSheetData;
 import com.github.suloginscene.accountant.context.report.application.IncomeStatementAssemblingService;
+import com.github.suloginscene.accountant.context.report.application.IncomeStatementData;
 import com.github.suloginscene.accountant.context.report.application.LedgerData;
 import com.github.suloginscene.accountant.context.report.application.LedgerFindingService;
 import com.github.suloginscene.jwtconfig.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.time.LocalDate;
 
 
 @RestController
@@ -38,6 +44,23 @@ public class ReportRestController {
         BalanceSheetData balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(holder);
 
         return ResponseEntity.ok(balanceSheet);
+    }
+
+    @GetMapping("/income-statement")
+    ResponseEntity<IncomeStatementData> getIncomeStatement(@RequestBody @Valid IncomeStatementRequest request,
+                                                           @Authenticated Long memberId) {
+        Holder holder = new Holder(memberId);
+        DateRange dateRange = toDateRange(request);
+        IncomeStatementData incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(holder, dateRange);
+
+        return ResponseEntity.ok(incomeStatement);
+    }
+
+    private DateRange toDateRange(IncomeStatementRequest request) {
+        LocalDate begin = LocalDate.parse(request.getBegin());
+        LocalDate inclusiveEnd = LocalDate.parse(request.getInclusiveEnd());
+        LocalDate exclusiveEnd = inclusiveEnd.plusDays(1);
+        return DateRange.of(begin, exclusiveEnd);
     }
 
 }
