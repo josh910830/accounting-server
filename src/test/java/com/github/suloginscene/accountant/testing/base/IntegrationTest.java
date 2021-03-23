@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.testing.base;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Account;
-import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
-import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
-import com.github.suloginscene.accountant.context.report.domain.ledger.LedgerRepository;
+import com.github.suloginscene.accountant.account.domain.account.Account;
+import com.github.suloginscene.accountant.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
+import com.github.suloginscene.accountant.report.domain.ledger.LedgerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;

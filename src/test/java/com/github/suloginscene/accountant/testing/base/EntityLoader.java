@@ -1,12 +1,12 @@
 package com.github.suloginscene.accountant.testing.base;
 
-import com.github.suloginscene.accountant.context.account.domain.account.Account;
-import com.github.suloginscene.accountant.context.account.domain.account.AccountRepository;
-import com.github.suloginscene.accountant.context.account.domain.account.SingleTransaction;
-import com.github.suloginscene.accountant.context.common.value.holder.Holder;
-import com.github.suloginscene.accountant.context.report.domain.ledger.DoubleTransaction;
-import com.github.suloginscene.accountant.context.report.domain.ledger.Ledger;
-import com.github.suloginscene.accountant.context.report.domain.ledger.LedgerRepository;
+import com.github.suloginscene.accountant.account.domain.account.Account;
+import com.github.suloginscene.accountant.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.account.domain.account.SingleTransaction;
+import com.github.suloginscene.accountant.common.Holder;
+import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
+import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
+import com.github.suloginscene.accountant.report.domain.ledger.LedgerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

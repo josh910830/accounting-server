@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofGet;
-import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPost;
-import static com.github.suloginscene.accountant.testing.api.RequestBuilder.ofPreflight;
+import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofGet;
+import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofPost;
+import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofPreflight;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

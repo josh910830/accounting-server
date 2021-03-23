@@ -1,0 +1,63 @@
+package com.github.suloginscene.accountant.report.domain.ledger;
+
+import com.github.suloginscene.accountant.account.domain.account.Account;
+import com.github.suloginscene.accountant.common.Money;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
+
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
+import static lombok.AccessLevel.PROTECTED;
+
+
+@Entity
+@NoArgsConstructor(access = PROTECTED)
+public class DoubleTransaction {
+
+    @Id @GeneratedValue
+    @Column(name = "double_transaction_id")
+    private Long id;
+
+    @Enumerated(STRING)
+    @Getter
+    private DoubleTransactionType type;
+
+    @ManyToOne(fetch = LAZY)
+    @Getter
+    private Account debit;
+
+    @ManyToOne(fetch = LAZY)
+    @Getter
+    private Account credit;
+
+    @Getter
+    private Money amount;
+
+    @Getter
+    private String description;
+
+    @Getter
+    private final LocalDateTime createdAt = LocalDateTime.now();
+
+
+    public DoubleTransaction(DoubleTransactionType type,
+                             Account debit,
+                             Account credit,
+                             Money amount,
+                             String description) {
+        this.type = type;
+        this.debit = debit;
+        this.credit = credit;
+        this.amount = amount;
+        this.description = description;
+    }
+
+}
