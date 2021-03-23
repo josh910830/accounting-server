@@ -2,7 +2,6 @@ package com.github.suloginscene.accountant.context.report.application;
 
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Asset;
 import com.github.suloginscene.accountant.context.account.domain.account.concrete.Liability;
-import com.github.suloginscene.accountant.context.report.domain.balanceSheet.BalanceSheet;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,9 +27,9 @@ class BalanceSheetAssemblingServiceTest extends IntegrationTest {
         Liability liability = liability(1);
         given(asset1, asset2, liability);
 
-        BalanceSheet balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(TESTING_HOLDER);
+        BalanceSheetData balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(TESTING_HOLDER);
 
-        assertThat(balanceSheet.getNet()).isEqualTo(2 - 1);
+        assertThat(balanceSheet.getTotal().get("NET")).isEqualTo(2 - 1);
     }
 
 }

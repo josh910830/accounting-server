@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.context.report.api;
 
 import com.github.suloginscene.accountant.context.common.value.holder.Holder;
 import com.github.suloginscene.accountant.context.report.application.BalanceSheetAssemblingService;
+import com.github.suloginscene.accountant.context.report.application.BalanceSheetData;
 import com.github.suloginscene.accountant.context.report.application.IncomeStatementAssemblingService;
 import com.github.suloginscene.accountant.context.report.application.LedgerData;
 import com.github.suloginscene.accountant.context.report.application.LedgerFindingService;
@@ -29,6 +30,14 @@ public class ReportRestController {
         LedgerData ledger = ledgerFindingService.findLedger(holder);
 
         return ResponseEntity.ok(ledger);
+    }
+
+    @GetMapping("/balance-sheet")
+    ResponseEntity<BalanceSheetData> getBalanceSheet(@Authenticated Long memberId) {
+        Holder holder = new Holder(memberId);
+        BalanceSheetData balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(holder);
+
+        return ResponseEntity.ok(balanceSheet);
     }
 
 }

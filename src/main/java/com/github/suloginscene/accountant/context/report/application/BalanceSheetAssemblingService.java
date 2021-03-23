@@ -23,10 +23,13 @@ public class BalanceSheetAssemblingService {
     private final LiabilityRepository liabilityRepository;
 
 
-    public BalanceSheet assembleBalanceSheet(Holder holder) {
+    public BalanceSheetData assembleBalanceSheet(Holder holder) {
         List<Asset> assets = assetRepository.findByHolder(holder);
         List<Liability> liabilities = liabilityRepository.findByHolder(holder);
-        return BalanceSheetFactory.create(assets, liabilities);
+
+        BalanceSheet balanceSheet = BalanceSheetFactory.create(assets, liabilities);
+
+        return new BalanceSheetData(balanceSheet);
     }
 
 }

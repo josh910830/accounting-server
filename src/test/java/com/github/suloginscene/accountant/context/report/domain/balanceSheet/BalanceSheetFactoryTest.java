@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.github.suloginscene.accountant.context.report.domain.balanceSheet.BalanceSheetKey.ASSET_SUM;
+import static com.github.suloginscene.accountant.context.report.domain.balanceSheet.BalanceSheetKey.LIABILITY_SUM;
+import static com.github.suloginscene.accountant.context.report.domain.balanceSheet.BalanceSheetKey.NET;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,9 +33,9 @@ class BalanceSheetFactoryTest {
 
         BalanceSheet balanceSheet = BalanceSheetFactory.create(assets, liabilities);
 
-        assertThat(balanceSheet.getNet()).isEqualTo((1 + 2 + 3) - (4 + 5 + 6));
-        assertThat(balanceSheet.getAssetSum()).isEqualTo(1 + 2 + 3);
-        assertThat(balanceSheet.getLiabilitySum()).isEqualTo(4 + 5 + 6);
+        assertThat(balanceSheet.getTotal().get(NET)).isEqualTo((1 + 2 + 3) - (4 + 5 + 6));
+        assertThat(balanceSheet.getTotal().get(ASSET_SUM)).isEqualTo(1 + 2 + 3);
+        assertThat(balanceSheet.getTotal().get(LIABILITY_SUM)).isEqualTo(4 + 5 + 6);
     }
 
 }
