@@ -1,11 +1,11 @@
 package com.github.suloginscene.accountant.account.application;
 
-import com.github.suloginscene.accountant.account.domain.account.Account;
-import com.github.suloginscene.accountant.account.domain.account.Flow;
-import com.github.suloginscene.accountant.account.domain.account.Stock;
+import com.github.suloginscene.accountant.account.domain.Account;
+import com.github.suloginscene.accountant.account.domain.Flow;
+import com.github.suloginscene.accountant.account.domain.Stock;
+import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.lib.exception.NotFoundException;
 import com.github.suloginscene.accountant.lib.exception.RequestException;
-import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.report.application;
 
-import com.github.suloginscene.accountant.account.domain.account.Stock;
+import com.github.suloginscene.accountant.account.domain.Stock;
 import com.github.suloginscene.accountant.report.domain.balanceSheet.BalanceSheet;
 import lombok.Data;
 

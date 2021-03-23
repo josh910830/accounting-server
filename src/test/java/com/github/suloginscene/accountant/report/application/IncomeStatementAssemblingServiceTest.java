@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.report.application;
 
-import com.github.suloginscene.accountant.account.domain.account.concrete.Expense;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Revenue;
+import com.github.suloginscene.accountant.account.domain.concrete.Expense;
+import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.lib.time.DateRange;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;

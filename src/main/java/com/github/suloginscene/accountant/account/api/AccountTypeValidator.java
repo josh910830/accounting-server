@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.account.api;
 
-import com.github.suloginscene.accountant.account.domain.account.AccountType;
+import com.github.suloginscene.accountant.account.domain.AccountType;
 import com.github.suloginscene.accountant.lib.validation.AbstractValidator;
 import org.springframework.stereotype.Component;
 

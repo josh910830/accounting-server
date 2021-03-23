@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.report.application;
 
-import com.github.suloginscene.accountant.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.account.domain.AccountRepository;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.report.domain.ledger.LedgerRepository;

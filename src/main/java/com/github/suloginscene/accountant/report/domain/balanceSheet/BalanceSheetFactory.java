@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.report.domain.balanceSheet;
 
-import com.github.suloginscene.accountant.account.domain.account.Stock;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Liability;
+import com.github.suloginscene.accountant.account.domain.Stock;
+import com.github.suloginscene.accountant.account.domain.concrete.Asset;
+import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.common.Money;
 
 import java.util.HashMap;

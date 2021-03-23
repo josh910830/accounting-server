@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.account.application;
 
-import com.github.suloginscene.accountant.account.domain.account.Account;
-import com.github.suloginscene.accountant.account.domain.account.AccountCreationParameter;
-import com.github.suloginscene.accountant.account.domain.account.AccountFactory;
-import com.github.suloginscene.accountant.account.domain.account.AccountRepository;
+import com.github.suloginscene.accountant.account.domain.Account;
+import com.github.suloginscene.accountant.account.domain.AccountCreationParameter;
+import com.github.suloginscene.accountant.account.domain.AccountFactory;
+import com.github.suloginscene.accountant.account.domain.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

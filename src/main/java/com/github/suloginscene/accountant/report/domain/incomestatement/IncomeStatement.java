@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.report.domain.incomestatement;
 
-import com.github.suloginscene.accountant.account.domain.account.concrete.Expense;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Revenue;
+import com.github.suloginscene.accountant.account.domain.concrete.Expense;
+import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.lib.time.DateRange;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

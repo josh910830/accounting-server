@@ -1,9 +1,9 @@
 package com.github.suloginscene.accountant.report.application;
 
-import com.github.suloginscene.accountant.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.account.domain.account.concrete.AssetRepository;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Liability;
-import com.github.suloginscene.accountant.account.domain.account.concrete.LiabilityRepository;
+import com.github.suloginscene.accountant.account.domain.concrete.Asset;
+import com.github.suloginscene.accountant.account.domain.concrete.AssetRepository;
+import com.github.suloginscene.accountant.account.domain.concrete.Liability;
+import com.github.suloginscene.accountant.account.domain.concrete.LiabilityRepository;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.report.domain.balanceSheet.BalanceSheet;
 import com.github.suloginscene.accountant.report.domain.balanceSheet.BalanceSheetFactory;

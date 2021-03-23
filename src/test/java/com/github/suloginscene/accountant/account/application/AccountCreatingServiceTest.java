@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.suloginscene.accountant.account.domain.account.AccountType.ASSET;
+import static com.github.suloginscene.accountant.account.domain.AccountType.ASSET;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.ACCOUNT_NAME;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;

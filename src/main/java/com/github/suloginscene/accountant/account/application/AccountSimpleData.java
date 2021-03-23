@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.account.application;
 
-import com.github.suloginscene.accountant.account.domain.account.Account;
+import com.github.suloginscene.accountant.account.domain.Account;
 import lombok.Data;
 
 

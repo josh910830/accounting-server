@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.testing.base;
 
-import com.github.suloginscene.accountant.account.domain.account.Account;
-import com.github.suloginscene.accountant.account.domain.account.AccountRepository;
-import com.github.suloginscene.accountant.account.domain.account.SingleTransaction;
+import com.github.suloginscene.accountant.account.domain.Account;
+import com.github.suloginscene.accountant.account.domain.AccountRepository;
+import com.github.suloginscene.accountant.account.domain.SingleTransaction;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;

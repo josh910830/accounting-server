@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.report.application;
 
-import com.github.suloginscene.accountant.account.domain.account.Flow;
+import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.lib.time.DateRange;
 import com.github.suloginscene.accountant.report.domain.incomestatement.IncomeStatement;
 import lombok.Data;

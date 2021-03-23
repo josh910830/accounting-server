@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.report.domain.ledger;
 
-import com.github.suloginscene.accountant.account.domain.account.Account;
+import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

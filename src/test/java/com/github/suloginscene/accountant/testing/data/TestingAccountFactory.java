@@ -1,18 +1,18 @@
 package com.github.suloginscene.accountant.testing.data;
 
-import com.github.suloginscene.accountant.account.domain.account.AccountCreationParameter;
-import com.github.suloginscene.accountant.account.domain.account.AccountFactory;
-import com.github.suloginscene.accountant.account.domain.account.AccountType;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Expense;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Liability;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Revenue;
+import com.github.suloginscene.accountant.account.domain.AccountCreationParameter;
+import com.github.suloginscene.accountant.account.domain.AccountFactory;
+import com.github.suloginscene.accountant.account.domain.AccountType;
+import com.github.suloginscene.accountant.account.domain.concrete.Asset;
+import com.github.suloginscene.accountant.account.domain.concrete.Expense;
+import com.github.suloginscene.accountant.account.domain.concrete.Liability;
+import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.common.Money;
 
-import static com.github.suloginscene.accountant.account.domain.account.AccountType.ASSET;
-import static com.github.suloginscene.accountant.account.domain.account.AccountType.EXPENSE;
-import static com.github.suloginscene.accountant.account.domain.account.AccountType.LIABILITY;
-import static com.github.suloginscene.accountant.account.domain.account.AccountType.REVENUE;
+import static com.github.suloginscene.accountant.account.domain.AccountType.ASSET;
+import static com.github.suloginscene.accountant.account.domain.AccountType.EXPENSE;
+import static com.github.suloginscene.accountant.account.domain.AccountType.LIABILITY;
+import static com.github.suloginscene.accountant.account.domain.AccountType.REVENUE;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
 
 

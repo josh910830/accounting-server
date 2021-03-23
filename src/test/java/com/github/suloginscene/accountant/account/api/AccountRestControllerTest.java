@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.account.api;
 
-import com.github.suloginscene.accountant.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Expense;
+import com.github.suloginscene.accountant.account.domain.concrete.Asset;
+import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

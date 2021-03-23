@@ -1,12 +1,12 @@
 package com.github.suloginscene.accountant.report.listener;
 
-import com.github.suloginscene.accountant.account.domain.account.Account;
-import com.github.suloginscene.accountant.account.domain.transaction.AccountPair;
-import com.github.suloginscene.accountant.account.domain.transaction.TransactionExecutedEvent;
-import com.github.suloginscene.accountant.account.domain.transaction.TransactionType;
+import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransactionType;
+import com.github.suloginscene.accountant.transaction.domain.AccountPair;
+import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
+import com.github.suloginscene.accountant.transaction.domain.TransactionType;
 
 
 public class EventTransformUtils {

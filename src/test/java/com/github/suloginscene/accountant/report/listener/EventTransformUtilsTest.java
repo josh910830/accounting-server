@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.report.listener;
 
-import com.github.suloginscene.accountant.account.domain.transaction.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
+import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -7,7 +7,7 @@ import com.github.suloginscene.accountant.account.application.AccountCreationInp
 import com.github.suloginscene.accountant.account.application.AccountData;
 import com.github.suloginscene.accountant.account.application.AccountFindingService;
 import com.github.suloginscene.accountant.account.application.AccountSimpleData;
-import com.github.suloginscene.accountant.account.domain.account.AccountType;
+import com.github.suloginscene.accountant.account.domain.AccountType;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.jwtconfig.Authenticated;

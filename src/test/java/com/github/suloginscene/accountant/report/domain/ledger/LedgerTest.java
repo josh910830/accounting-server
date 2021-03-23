@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
-import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
+import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

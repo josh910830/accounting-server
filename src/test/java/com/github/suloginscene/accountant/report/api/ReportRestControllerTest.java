@@ -1,30 +1,30 @@
 package com.github.suloginscene.accountant.report.api;
 
-import com.github.suloginscene.accountant.account.domain.account.concrete.Asset;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Expense;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Liability;
-import com.github.suloginscene.accountant.account.domain.account.concrete.Revenue;
-import com.github.suloginscene.accountant.account.domain.transaction.TransactionExecutedEvent;
+import com.github.suloginscene.accountant.account.domain.concrete.Asset;
+import com.github.suloginscene.accountant.account.domain.concrete.Expense;
+import com.github.suloginscene.accountant.account.domain.concrete.Liability;
+import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
+import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 
+import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.accountant.lib.time.DateTimeFormatters.DATE;
 import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
-import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
-import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.DESCRIPTION;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
+import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
