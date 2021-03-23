@@ -5,20 +5,18 @@ import com.github.suloginscene.accountant.context.common.value.range.DateRange;
 import com.github.suloginscene.accountant.context.report.domain.incomestatement.IncomeStatement;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DATE;
 import static java.util.stream.Collectors.toList;
 
 
 @Data
 public class IncomeStatementData {
 
-    private final String dateRange;
+    private final String start;
+    private final String inclusiveEnd;
     private final Integer days;
 
     private final Map<String, Integer> total;
@@ -27,10 +25,10 @@ public class IncomeStatementData {
 
 
     IncomeStatementData(IncomeStatement incomeStatement) {
-        dateRange = toDateRangeString(incomeStatement.getDateRange());
-        System.out.println("dateRange = " + dateRange);
-        days = toDays(incomeStatement);
-        System.out.println("days = " + days);
+        DateRange dateRange = incomeStatement.getDateRange();
+        start = dateRange.beginString();
+        inclusiveEnd = dateRange.inclusiveEndString();
+        days = dateRange.days();
 
         total = new HashMap<>();
         incomeStatement.getTotal()
@@ -44,22 +42,6 @@ public class IncomeStatementData {
                 .collect(toList());
     }
 
-    // TODO into Range
-    private String toDateRangeString(DateRange dateRange) {
-        LocalDate begin = dateRange.getBegin();
-        LocalDate exclusiveEnd = dateRange.getEnd();
-        LocalDate inclusiveEnd = exclusiveEnd.minusDays(1);
-        return begin.format(DATE) + " ~ " + inclusiveEnd.format(DATE);
-    }
-
-    // TODO into Range
-    private Integer toDays(IncomeStatement incomeStatement) {
-        DateRange dateRange = incomeStatement.getDateRange();
-        LocalDate begin = dateRange.getBegin();
-        LocalDate exclusiveEnd = dateRange.getEnd();
-        return (int) ChronoUnit.DAYS.between(begin, exclusiveEnd);
-    }
-
 
     @Data
     public static class FlowInformation {
@@ -67,14 +49,14 @@ public class IncomeStatementData {
         private final Long id;
         private final String name;
         private final Integer occurred;
-        private final Integer budgetUsagePercent;
+        private final Integer monthlyBudget;
 
 
         FlowInformation(Flow flow) {
             id = flow.getId();
             name = flow.getName();
             occurred = flow.occurred().get();
-            budgetUsagePercent = flow.getBudgetUsagePercent();
+            monthlyBudget = flow.getBudget().get();
         }
 
     }

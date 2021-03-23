@@ -27,10 +27,6 @@ public abstract class Flow extends Account {
     @Transient
     private Money occurred;
 
-    @Transient
-    @Getter
-    private int budgetUsagePercent;
-
 
     protected Flow(Holder holder, String name, Money budget) {
         super(holder, name);
@@ -43,39 +39,24 @@ public abstract class Flow extends Account {
     }
 
 
-    public void occur(Money amount, String description) {
-        writeSingleTransaction(
-                new SingleTransaction(OCCUR, amount, description));
-    }
-
-
-    public void memorizeOccurredDuring(TimeRange timeRange) {
-        memorizeAmount(timeRange);
-        memorizeBudgetUsagePercent(timeRange);
-    }
-
-    private void memorizeAmount(TimeRange timeRange) {
-        Integer sum = readSingleTransactions(timeRange).stream()
-                .map(SingleTransaction::getAmount)
-                .map(Money::get)
-                .reduce(0, Integer::sum);
-        occurred = Money.of(sum);
-    }
-
-    private void memorizeBudgetUsagePercent(TimeRange timeRange) {
-        if (budget.get() < 30) return;
-
-        int numerator = 100 * occurred().get() * 30;
-        int denominator = timeRange.inclusiveDays() * budget.get();
-        budgetUsagePercent = numerator / denominator;
-    }
-
-
     public Money occurred() {
         if (occurred == null) {
             throw new InternalException("transient field is unset");
         }
         return occurred;
+    }
+
+    public void occur(Money amount, String description) {
+        writeSingleTransaction(
+                new SingleTransaction(OCCUR, amount, description));
+    }
+
+    public void memorizeOccurredDuring(TimeRange timeRange) {
+        Integer sum = readSingleTransactions(timeRange).stream()
+                .map(SingleTransaction::getAmount)
+                .map(Money::get)
+                .reduce(0, Integer::sum);
+        occurred = Money.of(sum);
     }
 
 }

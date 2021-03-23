@@ -47,12 +47,7 @@ public class SingleTransaction {
     }
 
     public boolean isCreatedDuring(TimeRange timeRange) {
-        LocalDateTime begin = timeRange.getBegin();
-        LocalDateTime end = timeRange.getEnd();
-
-        boolean closed = createdAt.isEqual(begin) || createdAt.isAfter(begin);
-        boolean open = createdAt.isBefore(end);
-        return closed && open;
+        return timeRange.contains(createdAt);
     }
 
 }

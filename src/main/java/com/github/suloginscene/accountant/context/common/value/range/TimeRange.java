@@ -1,21 +1,18 @@
 package com.github.suloginscene.accountant.context.common.value.range;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+
+import static com.github.suloginscene.accountant.context.common.util.DateTimeFormatters.DATE_TIME;
 
 
 @EqualsAndHashCode @ToString
 public class TimeRange {
 
-    @Getter
     private final LocalDateTime begin;
 
-    @Getter
     private final LocalDateTime end;
 
 
@@ -29,11 +26,19 @@ public class TimeRange {
     }
 
 
-    public int inclusiveDays() {
-        LocalDate beginDate = begin.toLocalDate();
-        LocalDate inclusiveEndDate = end.toLocalDate().plusDays(1);
+    public String beginString() {
+        return begin.format(DATE_TIME);
+    }
 
-        return (int) ChronoUnit.DAYS.between(beginDate, inclusiveEndDate);
+    public String endString() {
+        return end.format(DATE_TIME);
+    }
+
+
+    public boolean contains(LocalDateTime localDateTime) {
+        boolean closed = localDateTime.isEqual(begin) || localDateTime.isAfter(begin);
+        boolean open = localDateTime.isBefore(end);
+        return closed && open;
     }
 
 }
