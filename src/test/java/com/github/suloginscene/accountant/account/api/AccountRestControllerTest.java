@@ -73,6 +73,19 @@ class AccountRestControllerTest extends ControllerTest {
         };
     }
 
+    @Test
+    @DisplayName("계정 목록(정상) - 200")
+    void getAccounts_onSuccess_returns200() throws Exception {
+        given(asset(), liability(), revenue(), expense());
+
+        ResultActions when = mockMvc.perform(
+                ofGet(URL).jwt(jwt).build());
+
+        ResultActions then = when.andExpect(status().isOk());
+
+        then.andDo(document("get-accounts"));
+    }
+
 
     @Test
     @DisplayName("계정 조회(정상) - 200")
@@ -112,19 +125,6 @@ class AccountRestControllerTest extends ControllerTest {
                 ofGet(URL, nonExistentId).jwt(jwt).build());
 
         when.andExpect(status().isNotFound());
-    }
-
-    @Test
-    @DisplayName("계정 리스트 조회(정상) - 200")
-    void getAccounts_onSuccess_returns200() throws Exception {
-        given(asset(), liability(), revenue(), expense());
-
-        ResultActions when = mockMvc.perform(
-                ofGet(URL).jwt(jwt).build());
-
-        ResultActions then = when.andExpect(status().isOk());
-
-        then.andDo(document("get-accounts"));
     }
 
 
