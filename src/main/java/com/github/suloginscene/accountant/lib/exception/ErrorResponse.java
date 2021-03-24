@@ -18,7 +18,7 @@ public class ErrorResponse {
 
 
     public static ErrorResponse of(BindException e) {
-        String className = e.getClass().getSimpleName();
+        String className = "BindException";
         String message = e.getBindingResult()
                 .getFieldErrors().stream()
                 .map(ErrorResponse::formatFieldError)

@@ -1,0 +1,126 @@
+= 복식부기 가계부 REST API Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+[[overview]]
+== 개요
+
+복식부기 가계부를 위한 API
+
+[[overview-http-verbs]]
+=== HTTP 동사
+
+|===
+| `GET` | 조회
+| `POST` | 생성 또는 실행
+| `PUT` | 수정
+| `DELETE` | 삭제
+|===
+
+[[overview-http-status-codes]]
+=== HTTP 상태 코드
+
+|===
+| `200 OK` | GET 성공
+| `201 Created` | POST 성공
+| `204 Not Found` | PUT & DELETE 성공
+| `400 Bad Request` | 입력 값 또는 리소스 상태 이상
+| `401 Unauthorized` | JWT 관련 이상
+| `403 Forbidden` | Origin 또는 리소스 권한 이상
+| `404 Not Found` | 미지원 URL 또는 해당 리소스 없음
+| `500 Internal Server Error` | 서버 오류
+|===
+
+[[overview-hypermedia]]
+=== 하이퍼미디어
+
+`HAL_JSON` 형식 응답 본문에 관련된 `_links` 를 포함한다.
+
+[[overview-errors]]
+=== 오류
+
+서버에서 처리된 오류는 아래 형태의 JSON 응답을 갖는다.
+
+|===
+| `error` | BindException RequestException ForbiddenException NotFoundException InternalServerException
+| `errorDescription` | 복수 문장이 필요한 경우 ","로 구분
+|===
+
+[[representation]]
+== 표현
+
+// TODO
+//[[representation-root]]
+//=== 루트
+//
+//루트는 인증된 사용자로 식별되는 하나의 가계부를 의미한다.
+//
+//[[representation-root-index]]
+//==== 인덱스
+//
+//루트의 `GET` 은 인덱스를 의미한다.
+//
+//operation::index[snippets='http-request,http-response,links']
+
+[[representation-account]]
+=== 계정
+
+[[representation-account-post]]
+==== 계정 등록
+
+operation::post-account[snippets='http-request,http-response']
+
+[[representation-account-get]]
+==== 계정 조회
+
+operation::get-account[snippets='http-request,http-response']
+
+[[representation-account-get-collection]]
+==== 계정 목록
+
+operation::get-accounts[snippets='http-request,http-response']
+
+[[representation-account-put-name]]
+==== 계정 이름 변경
+
+operation::put-account-name[snippets='http-request,http-response']
+
+[[representation-account-put-budget]]
+==== 계정 예산 변경
+
+operation::put-account-budget[snippets='http-request,http-response']
+
+[[representation-account-delete]]
+==== 계정 삭제
+
+operation::delete-account[snippets='http-request,http-response']
+
+[[representation-transaction]]
+=== 거래
+
+[[representation-transaction-execute]]
+==== 거래 실행
+
+operation::execute-transaction[snippets='http-request,http-response']
+
+[[representation-report]]
+=== 보고서
+
+[[representation-report-ledger]]
+==== 장부 조회
+
+operation::get-ledger[snippets='http-request,http-response']
+
+[[representation-report-balance-sheet]]
+==== 재무상태표 조회
+
+operation::get-balance-sheet[snippets='http-request,http-response']
+
+[[representation-report-income-statement]]
+==== 손익계산서 조회
+
+operation::get-income-statement[snippets='http-request,http-response']
