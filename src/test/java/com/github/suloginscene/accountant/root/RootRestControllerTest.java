@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant;
+package com.github.suloginscene.accountant.root;
 
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import org.junit.jupiter.api.Test;

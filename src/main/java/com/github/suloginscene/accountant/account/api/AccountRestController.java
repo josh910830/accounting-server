@@ -20,7 +20,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
@@ -64,13 +63,12 @@ public class AccountRestController {
 
 
     @GetMapping
-    ResponseEntity<List<AccountSimpleRepresentation>> getAccounts(@Authenticated Long memberId) {
+    ResponseEntity<AccountsRepresentation> getAccounts(@Authenticated Long memberId) {
         Holder holder = new Holder(memberId);
         List<AccountSimpleData> accounts = accountFindingService.findAccounts(holder);
 
-        return ResponseEntity.ok(accounts.stream()
-                .map(AccountSimpleRepresentation::new)
-                .collect(toList()));
+        AccountsRepresentation accountsRepresentation = new AccountsRepresentation(accounts);
+        return ResponseEntity.ok(accountsRepresentation);
     }
 
     @GetMapping("/{accountId}")

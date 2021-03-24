@@ -71,14 +71,14 @@
 === 지도
 
 |===
-| 인덱스 | 계정 등록 +
+| 인덱스 -> | 계정 등록 +
 계정 목록 +
 거래 실행 +
 장부 조회 +
 손익계산서 조회 +
 재무상태표 조회
-| 계정 목록 | 계정 조회
-| 계정 조회 |계정 이름 변경 +
+| 계정 목록 -> | 계정 조회
+| 계정 조회 -> |계정 이름 변경 +
 계정 예산 변경 +
 계정 삭제
 |===
@@ -104,15 +104,15 @@ operation::index[snippets='http-request,http-response']
 
 operation::post-account[snippets='http-request,http-response']
 
-[[representation-account-get]]
-==== 계정 조회
-
-operation::get-account[snippets='http-request,http-response']
-
 [[representation-account-get-collection]]
 ==== 계정 목록
 
 operation::get-accounts[snippets='http-request,http-response']
+
+[[representation-account-get]]
+==== 계정 조회
+
+operation::get-account[snippets='http-request,http-response']
 
 [[representation-account-put-name]]
 ==== 계정 이름 변경
