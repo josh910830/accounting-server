@@ -72,13 +72,14 @@ public class AccountRestController {
     }
 
     @GetMapping("/{accountId}")
-    ResponseEntity<AccountData> getAccount(@PathVariable Long accountId,
-                                           @Authenticated Long memberId) {
+    ResponseEntity<AccountRepresentation> getAccount(@PathVariable Long accountId,
+                                                     @Authenticated Long memberId) {
         accountAuthorityChecker.checkAuthority(accountId, memberId);
 
         AccountData account = accountFindingService.findAccount(accountId);
 
-        return ResponseEntity.ok(account);
+        AccountRepresentation accountRepresentation = new AccountRepresentation(account);
+        return ResponseEntity.ok(accountRepresentation);
     }
 
 
