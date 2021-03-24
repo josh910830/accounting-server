@@ -46,25 +46,55 @@
 서버에서 처리된 오류는 아래 형태의 JSON 응답을 갖는다.
 
 |===
-| `error` | BindException RequestException ForbiddenException NotFoundException InternalServerException
-| `errorDescription` | 복수 문장이 필요한 경우 ","로 구분
+| `error` | 이름 (BindException, RequestException, ForbiddenException, NotFoundException, InternalServerException)
+| `errorDescription` | 설명 (복수 문장이 필요한 경우 ","로 구분)
+|===
+
+[[service]]
+== 서비스
+
+[[service-url]]
+=== URL
+
+이 서비스는 인증된 사용자를 대상으로 하며, 타인의 자원에 대한 접근은 허용되지 않는다. +
+따라서 URL 자체가 아니라, 인증정보와 결합된 URL이 자원을 가리킨다. +
+예를 들어 "/api/accounts"에 관한 GET 요청은 서비스의 모든 계정이 아니라, 현재 사용자의 모든 계정을 가져온다.
+
+[[service-modification]]
+=== 변경
+
+회계의 정확성과 정직함을 위해 대부분의 변경은 제한된다. +
+실행된 거래는 되돌릴 수 없으며, 보고서는 읽기 전용으로 제공된다. +
+계정의 이름과 예산에 한해 변경이 허용된다.
+
+[[service-map]]
+=== 지도
+
+|===
+| 인덱스 | 계정 등록 +
+계정 목록 +
+거래 실행 +
+장부 조회 +
+손익계산서 조회 +
+재무상태표 조회
+| 계정 목록 | 계정 조회
+| 계정 조회 |계정 이름 변경 +
+계정 예산 변경 +
+계정 삭제
 |===
 
 [[representation]]
 == 표현
 
-// TODO
-//[[representation-root]]
-//=== 루트
-//
-//루트는 인증된 사용자로 식별되는 하나의 가계부를 의미한다.
-//
-//[[representation-root-index]]
-//==== 인덱스
-//
-//루트의 `GET` 은 인덱스를 의미한다.
-//
-//operation::index[snippets='http-request,http-response,links']
+[[representation-root]]
+=== 루트
+
+[[representation-root-index]]
+==== 인덱스
+
+서비스의 진입점으로, 이용할 수 있는 링크들을 나열한다.
+
+operation::index[snippets='http-request,http-response']
 
 [[representation-account]]
 === 계정

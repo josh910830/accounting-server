@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web
                 .ignoring()
+                .mvcMatchers(GET, "/api")
                 .mvcMatchers(GET, "/docs/index.html");
     }
 
