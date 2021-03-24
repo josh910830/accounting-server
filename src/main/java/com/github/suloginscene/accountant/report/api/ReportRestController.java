@@ -57,8 +57,8 @@ public class ReportRestController {
     }
 
     private DateRange toDateRange(IncomeStatementRequest request) {
-        LocalDate begin = LocalDate.parse(request.getBegin());
-        LocalDate inclusiveEnd = LocalDate.parse(request.getInclusiveEnd());
+        LocalDate begin = LocalDate.parse(request.getBeginDate());
+        LocalDate inclusiveEnd = LocalDate.parse(request.getInclusiveEndDate());
         LocalDate exclusiveEnd = inclusiveEnd.plusDays(1);
         return DateRange.of(begin, exclusiveEnd);
     }

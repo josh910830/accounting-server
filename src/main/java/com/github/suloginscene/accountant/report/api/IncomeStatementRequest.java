@@ -14,10 +14,10 @@ public class IncomeStatementRequest {
 
     @NotNull
     @Pattern(regexp = DATE_REGEXP, message = DATE_MESSAGE)
-    private final String begin;
+    private final String beginDate;
 
     @NotNull
     @Pattern(regexp = DATE_REGEXP, message = DATE_MESSAGE)
-    private final String inclusiveEnd;
+    private final String inclusiveEndDate;
 
 }

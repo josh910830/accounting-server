@@ -43,10 +43,11 @@
 [[overview-errors]]
 === 오류
 
-서버에서 처리된 오류는 아래 형태의 JSON 응답을 갖는다.
+400 오류는 아래 형태의 JSON 응답을 갖는다. +
+(기타 오류는 보안을 위해 응답을 제공하지 않고, 로그만을 기록한다.)
 
 |===
-| `error` | 이름 (BindException, RequestException, ForbiddenException, NotFoundException, InternalServerException)
+| `error` | 종류 (예외 클래스 이름, RequestException 구현체)
 | `errorDescription` | 설명 (복수 문장이 필요한 경우 ","로 구분)
 |===
 
