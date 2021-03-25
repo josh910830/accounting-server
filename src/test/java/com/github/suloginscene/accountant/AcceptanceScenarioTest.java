@@ -91,7 +91,8 @@ public class AcceptanceScenarioTest {
         Map<String, Object> links = (Map<String, Object>) resultMap.get("_links");
         links.forEach((rel, value) -> {
             String href = ((Map<String, String>) value).get("href");
-            String path = href.substring("http://localhost".length());
+            int startOfPath = href.indexOf("/api");
+            String path = href.substring(startOfPath);
             relPathMap.put(rel, path);
         });
     }
