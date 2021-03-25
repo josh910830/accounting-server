@@ -2,7 +2,7 @@ package com.github.suloginscene.accountant.account.application;
 
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.AccountRepository;
-import com.github.suloginscene.accountant.lib.exception.ForbiddenException;
+import com.github.suloginscene.lib.exception.ForbiddenException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

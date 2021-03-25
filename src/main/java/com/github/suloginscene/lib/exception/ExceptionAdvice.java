@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.exception;
+package com.github.suloginscene.lib.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

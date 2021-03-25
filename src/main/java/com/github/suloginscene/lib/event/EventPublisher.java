@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.event;
+package com.github.suloginscene.lib.event;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;

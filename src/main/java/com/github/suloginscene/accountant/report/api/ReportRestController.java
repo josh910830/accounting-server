@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.report.api;
 
 import com.github.suloginscene.accountant.common.Holder;
-import com.github.suloginscene.accountant.lib.time.DateRange;
+import com.github.suloginscene.lib.time.DateRange;
 import com.github.suloginscene.accountant.report.application.BalanceSheetAssemblingService;
 import com.github.suloginscene.accountant.report.application.BalanceSheetData;
 import com.github.suloginscene.accountant.report.application.IncomeStatementAssemblingService;

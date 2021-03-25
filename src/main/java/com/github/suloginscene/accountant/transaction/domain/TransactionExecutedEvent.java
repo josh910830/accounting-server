@@ -2,7 +2,7 @@ package com.github.suloginscene.accountant.transaction.domain;
 
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.accountant.lib.event.Event;
+import com.github.suloginscene.lib.event.Event;
 import lombok.Data;
 
 

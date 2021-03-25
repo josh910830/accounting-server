@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.profile;
+package com.github.suloginscene.lib.profile;
 
 
 public class Profiles {

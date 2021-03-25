@@ -5,7 +5,7 @@ import com.github.suloginscene.accountant.account.domain.concrete.ExpenseReposit
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.account.domain.concrete.RevenueRepository;
 import com.github.suloginscene.accountant.common.Holder;
-import com.github.suloginscene.accountant.lib.time.DateRange;
+import com.github.suloginscene.lib.time.DateRange;
 import com.github.suloginscene.accountant.report.domain.incomestatement.IncomeStatement;
 import com.github.suloginscene.accountant.report.domain.incomestatement.IncomeStatementFactory;
 import lombok.RequiredArgsConstructor;

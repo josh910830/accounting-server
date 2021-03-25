@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.testing.base;
 
-import com.github.suloginscene.accountant.lib.test.RestDocsConfig;
+import com.github.suloginscene.lib.test.RestDocsConfig;
 import com.github.suloginscene.jjwthelper.JwtFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;

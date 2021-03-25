@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.test;
+package com.github.suloginscene.lib.test;
 
 import lombok.NoArgsConstructor;
 import org.springframework.boot.json.JacksonJsonParser;

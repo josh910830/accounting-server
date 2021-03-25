@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.validation;
+package com.github.suloginscene.lib.validation;
 
 import lombok.NonNull;
 import org.springframework.validation.Errors;

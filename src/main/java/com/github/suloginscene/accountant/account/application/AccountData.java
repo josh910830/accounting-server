@@ -5,12 +5,12 @@ import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.account.domain.SingleTransaction;
 import com.github.suloginscene.accountant.account.domain.Stock;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.accountant.lib.exception.InternalException;
+import com.github.suloginscene.lib.exception.InternalException;
 import lombok.Data;
 
 import java.util.List;
 
-import static com.github.suloginscene.accountant.lib.time.DateTimeFormatters.DATE_TIME;
+import static com.github.suloginscene.lib.time.DateTimeFormatters.DATE_TIME;
 import static java.util.stream.Collectors.toList;
 
 

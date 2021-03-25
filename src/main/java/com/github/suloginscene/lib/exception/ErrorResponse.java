@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.exception;
+package com.github.suloginscene.lib.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

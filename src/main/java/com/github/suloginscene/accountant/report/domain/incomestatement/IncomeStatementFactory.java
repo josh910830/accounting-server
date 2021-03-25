@@ -4,8 +4,8 @@ import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.accountant.lib.time.DateRange;
-import com.github.suloginscene.accountant.lib.time.TimeRange;
+import com.github.suloginscene.lib.time.DateRange;
+import com.github.suloginscene.lib.time.TimeRange;
 
 import java.util.HashMap;
 import java.util.List;

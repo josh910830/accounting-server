@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.report.listener;
 
-import com.github.suloginscene.accountant.lib.event.EventPublisher;
+import com.github.suloginscene.lib.event.EventPublisher;
 import com.github.suloginscene.accountant.report.application.LedgerScribingService;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import org.junit.jupiter.api.DisplayName;

@@ -5,7 +5,7 @@ import com.github.suloginscene.accountant.account.domain.AccountRepository;
 import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.account.domain.Stock;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.accountant.lib.exception.RequestException;
+import com.github.suloginscene.lib.exception.RequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

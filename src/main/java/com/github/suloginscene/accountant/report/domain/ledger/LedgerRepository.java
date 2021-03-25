@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.report.domain.ledger;
 
 import com.github.suloginscene.accountant.common.Holder;
-import com.github.suloginscene.accountant.lib.profile.ProfileChecker;
+import com.github.suloginscene.lib.profile.ProfileChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

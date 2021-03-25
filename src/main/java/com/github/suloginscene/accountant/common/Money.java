@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.common;
 
-import com.github.suloginscene.accountant.lib.exception.RequestException;
+import com.github.suloginscene.lib.exception.RequestException;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

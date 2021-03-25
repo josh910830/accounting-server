@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.account.domain;
 
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.accountant.lib.exception.RequestException;
+import com.github.suloginscene.lib.exception.RequestException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

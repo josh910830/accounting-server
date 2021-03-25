@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.lib.test;
+package com.github.suloginscene.lib.test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,6 @@
-package com.github.suloginscene.accountant.lib.profile;
+package com.github.suloginscene.lib.profile;
 
-import com.github.suloginscene.accountant.lib.exception.InternalException;
+import com.github.suloginscene.lib.exception.InternalException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.github.suloginscene.accountant.lib.profile.Profiles.TEST;
+import static com.github.suloginscene.lib.profile.Profiles.TEST;
 
 
 @Component

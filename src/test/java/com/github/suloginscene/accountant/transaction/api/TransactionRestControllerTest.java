@@ -11,8 +11,8 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.Map;
 
-import static com.github.suloginscene.accountant.lib.test.RequestBuilder.ofPost;
-import static com.github.suloginscene.accountant.lib.test.ResultParser.toResponseAsJsonMap;
+import static com.github.suloginscene.lib.test.RequestBuilder.ofPost;
+import static com.github.suloginscene.lib.test.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.DESCRIPTION;

@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.transaction.domain;
 
-import com.github.suloginscene.accountant.lib.exception.InternalException;
+import com.github.suloginscene.lib.exception.InternalException;
 import com.github.suloginscene.accountant.transaction.domain.impl.BorrowTransactionService;
 import com.github.suloginscene.accountant.transaction.domain.impl.PurchaseByCashTransactionService;
 import com.github.suloginscene.accountant.transaction.domain.impl.PurchaseByCreditTransactionService;
