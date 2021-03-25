@@ -60,7 +60,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.suloginscene</groupId>
-            <artifactId>jwt-config</artifactId>
+            <artifactId>common</artifactId>
             <version>0.0.1</version>
         </dependency>
 
