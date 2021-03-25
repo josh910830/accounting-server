@@ -11,11 +11,11 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.Map;
 
-import static com.github.suloginscene.test.RequestBuilder.ofPost;
-import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.DESCRIPTION;
+import static com.github.suloginscene.test.RequestBuilder.ofPost;
+import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

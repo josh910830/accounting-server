@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.report.listener;
 
-import com.github.suloginscene.lib.event.EventPublisher;
 import com.github.suloginscene.accountant.report.application.LedgerScribingService;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
+import com.github.suloginscene.lib.event.EventPublisher;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.report.application;
 
 import com.github.suloginscene.accountant.account.domain.Flow;
-import com.github.suloginscene.lib.time.DateRange;
 import com.github.suloginscene.accountant.report.domain.incomestatement.IncomeStatement;
+import com.github.suloginscene.lib.time.DateRange;
 import lombok.Data;
 
 import java.util.HashMap;

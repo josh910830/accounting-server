@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.testing.base;
 
-import com.github.suloginscene.test.RestDocsConfig;
 import com.github.suloginscene.jjwthelper.JwtFactory;
+import com.github.suloginscene.test.RestDocsConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
