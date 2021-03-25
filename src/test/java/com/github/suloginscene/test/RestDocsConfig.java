@@ -1,4 +1,4 @@
-package com.github.suloginscene.lib.test;
+package com.github.suloginscene.test;
 
 import org.springframework.boot.test.autoconfigure.restdocs.RestDocsMockMvcConfigurationCustomizer;
 import org.springframework.boot.test.context.TestConfiguration;

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.suloginscene.lib.test.RequestBuilder.ofGet;
-import static com.github.suloginscene.lib.test.RequestBuilder.ofPost;
-import static com.github.suloginscene.lib.test.RequestBuilder.ofPreflight;
+import static com.github.suloginscene.test.RequestBuilder.ofGet;
+import static com.github.suloginscene.test.RequestBuilder.ofPost;
+import static com.github.suloginscene.test.RequestBuilder.ofPreflight;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

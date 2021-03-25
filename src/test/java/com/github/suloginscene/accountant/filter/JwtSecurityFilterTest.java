@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.filter;
 
-import com.github.suloginscene.jjwthelper.TestJwtFactory;
+import com.github.suloginscene.test.TestJwtFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.suloginscene.lib.test.RequestBuilder.ofGet;
+import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

@@ -17,8 +17,8 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import java.time.LocalDate;
 import java.util.Map;
 
-import static com.github.suloginscene.lib.test.RequestBuilder.ofGet;
-import static com.github.suloginscene.lib.test.ResultParser.toResponseAsJsonMap;
+import static com.github.suloginscene.test.RequestBuilder.ofGet;
+import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.lib.time.DateTimeFormatters.DATE;
 import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
