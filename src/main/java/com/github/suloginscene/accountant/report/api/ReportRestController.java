@@ -7,8 +7,8 @@ import com.github.suloginscene.accountant.report.application.IncomeStatementAsse
 import com.github.suloginscene.accountant.report.application.IncomeStatementData;
 import com.github.suloginscene.accountant.report.application.LedgerData;
 import com.github.suloginscene.accountant.report.application.LedgerFindingService;
-import com.github.suloginscene.jwtconfig.Authenticated;
 import com.github.suloginscene.lib.time.DateRange;
+import com.github.suloginscene.security.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.config;
 
-import com.github.suloginscene.jwtconfig.JwtSecurityFilter;
+import com.github.suloginscene.security.JwtSecurityFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

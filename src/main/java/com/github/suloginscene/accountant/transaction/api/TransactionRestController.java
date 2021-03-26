@@ -5,7 +5,7 @@ import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.transaction.application.TransactionExecutingService;
 import com.github.suloginscene.accountant.transaction.application.TransactionExecutionInput;
 import com.github.suloginscene.accountant.transaction.domain.TransactionType;
-import com.github.suloginscene.jwtconfig.Authenticated;
+import com.github.suloginscene.security.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;

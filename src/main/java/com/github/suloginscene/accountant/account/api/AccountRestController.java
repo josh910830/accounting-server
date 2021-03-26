@@ -10,7 +10,7 @@ import com.github.suloginscene.accountant.account.application.AccountSimpleData;
 import com.github.suloginscene.accountant.account.domain.AccountType;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.jwtconfig.Authenticated;
+import com.github.suloginscene.security.Authenticated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;

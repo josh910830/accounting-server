@@ -5,7 +5,7 @@ import com.github.suloginscene.accountant.account.api.AccountCreationRequest;
 import com.github.suloginscene.accountant.account.api.AccountNameChangeRequest;
 import com.github.suloginscene.accountant.report.api.IncomeStatementRequest;
 import com.github.suloginscene.accountant.transaction.api.TransactionExecutionRequest;
-import com.github.suloginscene.jjwthelper.JwtFactory;
+import com.github.suloginscene.jwt.JwtFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
