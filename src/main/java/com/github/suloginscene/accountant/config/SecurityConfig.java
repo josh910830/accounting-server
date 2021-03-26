@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.config;
 
+import com.github.suloginscene.jwt.JwtReader;
 import com.github.suloginscene.security.JwtSecurityFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,9 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtSecurityFilter jwtSecurityFilter;
+    private final JwtReader jwtReader;
     private final CorsConfigurationSource corsConfigurationSource;
+
 
     @Override
     public void configure(WebSecurity web) {
@@ -40,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().anyRequest().authenticated();
 
         http
-                .addFilterBefore(jwtSecurityFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtSecurityFilter(jwtReader), UsernamePasswordAuthenticationFilter.class);
 
         http
                 .cors().configurationSource(corsConfigurationSource);

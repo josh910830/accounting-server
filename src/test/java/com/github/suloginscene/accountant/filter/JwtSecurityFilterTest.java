@@ -44,50 +44,50 @@ public class JwtSecurityFilterTest {
         when.andExpect(status().isNotFound());
     }
 
-    // TODO 403 to 401
     @Test
-    @DisplayName("만료 - 403")
-    void jwtFilter_withExpiredJwt_returns403() throws Exception {
+    @DisplayName("만료 - 401")
+    void jwtFilter_withExpiredJwt_returns401() throws Exception {
         String expiredJwt = testJwtFactory.expired(id);
 
         ResultActions when = mockMvc.perform(
                 ofGet(URL).jwt(expiredJwt).build());
 
-        when.andExpect(status().isForbidden())
-                .andExpect(content().string("ExpiredJwtException"));
+        when.andExpect(status().isUnauthorized())
+                .andExpect(content().string("Expired Jwt"));
     }
 
     @Test
-    @DisplayName("서명 - 403")
-    void jwtFilter_withInvalidSignature_returns403() throws Exception {
+    @DisplayName("서명 - 401")
+    void jwtFilter_withInvalidSignature_returns401() throws Exception {
         String invalidJwt = testJwtFactory.invalid(id);
 
         ResultActions when = mockMvc.perform(
                 ofGet(URL).jwt(invalidJwt).build());
 
-        when.andExpect(status().isForbidden())
-                .andExpect(content().string("SignatureException"));
+        when.andExpect(status().isUnauthorized())
+                .andExpect(content().string("Invalid Signature"));
     }
 
     @Test
-    @DisplayName("형식 - 403")
-    void jwtFilter_withMalformedJwt_returns403() throws Exception {
+    @DisplayName("형식 - 401")
+    void jwtFilter_withMalformedJwt_returns401() throws Exception {
         String malformed = testJwtFactory.malformed();
 
         ResultActions when = mockMvc.perform(
                 ofGet(URL).jwt(malformed).build());
 
-        when.andExpect(status().isForbidden())
-                .andExpect(content().string("MalformedJwtException"));
+        when.andExpect(status().isUnauthorized())
+                .andExpect(content().string("Malformed Jwt"));
     }
 
     @Test
-    @DisplayName("없음 - 403")
-    void jwtFilter_withoutJwt_returns403() throws Exception {
+    @DisplayName("없음 - 401")
+    void jwtFilter_withoutJwt_returns401() throws Exception {
         ResultActions when = mockMvc.perform(
                 ofGet(URL).build());
 
-        when.andExpect(status().isForbidden());
+        when.andExpect(status().isUnauthorized())
+                .andExpect(content().string("Jwt Not Exists"));
     }
 
 }
