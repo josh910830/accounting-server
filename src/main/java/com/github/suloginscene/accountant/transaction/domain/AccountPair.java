@@ -2,7 +2,7 @@ package com.github.suloginscene.accountant.transaction.domain;
 
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Holder;
-import com.github.suloginscene.lib.exception.RequestException;
+import com.github.suloginscene.exception.RequestException;
 import lombok.Getter;
 
 

@@ -26,9 +26,9 @@ import static com.github.suloginscene.accountant.testing.data.TestingConstants.D
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
 import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
-import static com.github.suloginscene.lib.time.DateTimeFormatters.DATE;
 import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
+import static com.github.suloginscene.time.DateTimeFormatters.DATE;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

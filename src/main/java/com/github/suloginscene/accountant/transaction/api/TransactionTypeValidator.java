@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.transaction.api;
 
 import com.github.suloginscene.accountant.transaction.domain.TransactionType;
-import com.github.suloginscene.lib.validation.AbstractValidator;
+import com.github.suloginscene.validation.AbstractValidator;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

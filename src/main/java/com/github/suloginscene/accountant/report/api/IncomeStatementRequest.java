@@ -5,8 +5,8 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import static com.github.suloginscene.lib.time.DateTimeFormatters.DATE_MESSAGE;
-import static com.github.suloginscene.lib.time.DateTimeFormatters.DATE_REGEXP;
+import static com.github.suloginscene.time.DateTimeFormatters.DATE_MESSAGE;
+import static com.github.suloginscene.time.DateTimeFormatters.DATE_REGEXP;
 
 
 @Data

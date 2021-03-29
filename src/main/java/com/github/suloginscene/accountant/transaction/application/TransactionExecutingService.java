@@ -7,7 +7,7 @@ import com.github.suloginscene.accountant.transaction.domain.TransactionExecuted
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutionParameter;
 import com.github.suloginscene.accountant.transaction.domain.TransactionService;
 import com.github.suloginscene.accountant.transaction.domain.TransactionServiceFactory;
-import com.github.suloginscene.lib.event.EventPublisher;
+import com.github.suloginscene.event.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

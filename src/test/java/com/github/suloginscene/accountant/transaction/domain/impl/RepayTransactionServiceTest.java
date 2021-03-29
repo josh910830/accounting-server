@@ -3,7 +3,7 @@ package com.github.suloginscene.accountant.transaction.domain.impl;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.lib.exception.RequestException;
+import com.github.suloginscene.exception.RequestException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

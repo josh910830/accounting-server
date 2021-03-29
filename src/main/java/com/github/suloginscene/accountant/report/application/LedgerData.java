@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.List;
 
-import static com.github.suloginscene.lib.time.DateTimeFormatters.DATE_TIME;
+import static com.github.suloginscene.time.DateTimeFormatters.DATE_TIME;
 import static java.util.stream.Collectors.toList;
 
 

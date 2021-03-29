@@ -6,7 +6,7 @@ import com.github.suloginscene.accountant.transaction.domain.impl.PurchaseByCred
 import com.github.suloginscene.accountant.transaction.domain.impl.RepayTransactionService;
 import com.github.suloginscene.accountant.transaction.domain.impl.SellTransactionService;
 import com.github.suloginscene.accountant.transaction.domain.impl.TransferTransactionService;
-import com.github.suloginscene.lib.exception.InternalException;
+import com.github.suloginscene.exception.InternalException;
 
 
 public class TransactionServiceFactory {

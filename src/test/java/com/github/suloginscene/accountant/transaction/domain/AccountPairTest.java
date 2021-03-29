@@ -7,7 +7,7 @@ import com.github.suloginscene.accountant.account.domain.AccountType;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.common.Holder;
-import com.github.suloginscene.lib.exception.RequestException;
+import com.github.suloginscene.exception.RequestException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

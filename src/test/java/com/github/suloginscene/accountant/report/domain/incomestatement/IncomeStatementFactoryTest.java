@@ -2,7 +2,7 @@ package com.github.suloginscene.accountant.report.domain.incomestatement;
 
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
-import com.github.suloginscene.lib.time.DateRange;
+import com.github.suloginscene.time.DateRange;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

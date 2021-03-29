@@ -1,8 +1,8 @@
 package com.github.suloginscene.accountant.account.domain;
 
 import com.github.suloginscene.accountant.common.Holder;
-import com.github.suloginscene.lib.exception.NotFoundException;
-import com.github.suloginscene.lib.profile.ProfileChecker;
+import com.github.suloginscene.exception.NotFoundException;
+import com.github.suloginscene.profile.ProfileChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

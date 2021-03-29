@@ -3,7 +3,7 @@ package com.github.suloginscene.accountant.account.domain.concrete;
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.account.domain.Stock;
-import com.github.suloginscene.lib.exception.RequestException;
+import com.github.suloginscene.exception.RequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

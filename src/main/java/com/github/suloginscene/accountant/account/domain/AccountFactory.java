@@ -6,7 +6,7 @@ import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.lib.exception.InternalException;
+import com.github.suloginscene.exception.InternalException;
 
 
 public class AccountFactory {

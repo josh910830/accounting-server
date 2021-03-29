@@ -1,7 +1,7 @@
 package com.github.suloginscene.accountant.account.domain;
 
-import com.github.suloginscene.lib.exception.InternalException;
-import com.github.suloginscene.lib.time.TimeRange;
+import com.github.suloginscene.exception.InternalException;
+import com.github.suloginscene.time.TimeRange;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
