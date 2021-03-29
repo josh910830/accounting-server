@@ -1,12 +1,12 @@
 package com.github.suloginscene.accountant.testing.data;
 
-import com.github.suloginscene.accountant.account.domain.AccountCreationParameter;
 import com.github.suloginscene.accountant.account.domain.AccountFactory;
 import com.github.suloginscene.accountant.account.domain.AccountType;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
+import com.github.suloginscene.accountant.account.domain.param.AccountCreationParameter;
 import com.github.suloginscene.accountant.common.Money;
 
 import static com.github.suloginscene.accountant.account.domain.AccountType.ASSET;

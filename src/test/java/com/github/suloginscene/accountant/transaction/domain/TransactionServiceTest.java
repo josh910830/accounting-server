@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.transaction.domain;
 
+import com.github.suloginscene.accountant.transaction.domain.param.TransactionExecutionParameter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

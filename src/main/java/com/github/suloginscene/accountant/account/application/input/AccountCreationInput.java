@@ -1,16 +1,17 @@
-package com.github.suloginscene.accountant.account.domain;
+package com.github.suloginscene.accountant.account.application.input;
 
+import com.github.suloginscene.accountant.account.domain.AccountType;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
 import lombok.Data;
 
 
 @Data
-public class AccountCreationParameter {
-
-    private final AccountType type;
+public class AccountCreationInput {
 
     private final Holder holder;
+
+    private final AccountType type;
     private final String name;
     private final Money money;
 

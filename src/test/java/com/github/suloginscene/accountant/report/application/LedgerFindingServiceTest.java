@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.report.application;
 
+import com.github.suloginscene.accountant.report.application.data.LedgerData;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;

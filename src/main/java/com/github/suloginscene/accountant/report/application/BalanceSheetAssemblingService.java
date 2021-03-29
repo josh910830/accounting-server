@@ -5,6 +5,7 @@ import com.github.suloginscene.accountant.account.domain.concrete.AssetRepositor
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.account.domain.concrete.LiabilityRepository;
 import com.github.suloginscene.accountant.common.Holder;
+import com.github.suloginscene.accountant.report.application.data.BalanceSheetData;
 import com.github.suloginscene.accountant.report.domain.balanceSheet.BalanceSheet;
 import com.github.suloginscene.accountant.report.domain.balanceSheet.BalanceSheetFactory;
 import lombok.RequiredArgsConstructor;

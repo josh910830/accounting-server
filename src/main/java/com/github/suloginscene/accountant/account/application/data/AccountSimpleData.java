@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.account.application;
+package com.github.suloginscene.accountant.account.application.data;
 
 import com.github.suloginscene.accountant.account.domain.Account;
 import lombok.Data;

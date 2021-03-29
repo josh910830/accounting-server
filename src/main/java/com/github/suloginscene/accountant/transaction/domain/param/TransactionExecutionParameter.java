@@ -1,6 +1,7 @@
-package com.github.suloginscene.accountant.transaction.domain;
+package com.github.suloginscene.accountant.transaction.domain.param;
 
 import com.github.suloginscene.accountant.common.Money;
+import com.github.suloginscene.accountant.transaction.domain.AccountPair;
 import lombok.Data;
 
 

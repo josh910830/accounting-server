@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.account.api;
+package com.github.suloginscene.accountant.account.api.request;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

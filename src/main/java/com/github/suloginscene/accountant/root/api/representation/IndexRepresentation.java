@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.root;
+package com.github.suloginscene.accountant.root.api.representation;
 
 import com.github.suloginscene.accountant.account.api.AccountRestController;
 import com.github.suloginscene.accountant.report.api.ReportRestController;

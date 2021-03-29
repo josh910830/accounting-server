@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.transaction.api;
+package com.github.suloginscene.accountant.transaction.api.request;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

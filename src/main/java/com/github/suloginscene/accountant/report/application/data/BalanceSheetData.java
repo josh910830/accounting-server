@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.report.application;
+package com.github.suloginscene.accountant.report.application.data;
 
 import com.github.suloginscene.accountant.account.domain.Stock;
 import com.github.suloginscene.accountant.report.domain.balanceSheet.BalanceSheet;
@@ -19,7 +19,7 @@ public class BalanceSheetData {
     private final List<StockInformation> liabilities;
 
 
-    BalanceSheetData(BalanceSheet balanceSheet) {
+    public BalanceSheetData(BalanceSheet balanceSheet) {
         total = new HashMap<>();
         balanceSheet.getTotal()
                 .forEach((k, v) -> total.put(k.name(), v));

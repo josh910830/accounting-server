@@ -1,5 +1,7 @@
 package com.github.suloginscene.accountant.account.application;
 
+import com.github.suloginscene.accountant.account.application.data.AccountData;
+import com.github.suloginscene.accountant.account.application.data.AccountSimpleData;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;

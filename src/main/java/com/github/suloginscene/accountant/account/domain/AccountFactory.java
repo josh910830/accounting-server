@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
+import com.github.suloginscene.accountant.account.domain.param.AccountCreationParameter;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.exception.InternalException;

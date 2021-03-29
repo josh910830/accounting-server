@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.account.application;
+package com.github.suloginscene.accountant.account.application.data;
 
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.Flow;
@@ -24,7 +24,7 @@ public class AccountData {
     private final List<SingleTransactionData> singleTransactions;
 
 
-    AccountData(Account account) {
+    public AccountData(Account account) {
         id = account.getId();
         name = account.getName();
         type = account.getClass().getSimpleName();

@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.report.application;
+package com.github.suloginscene.accountant.report.application.data;
 
 import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.report.domain.incomestatement.IncomeStatement;
@@ -24,7 +24,7 @@ public class IncomeStatementData {
     private final List<FlowInformation> expenses;
 
 
-    IncomeStatementData(IncomeStatement incomeStatement) {
+    public IncomeStatementData(IncomeStatement incomeStatement) {
         DateRange dateRange = incomeStatement.getDateRange();
         start = dateRange.beginString();
         inclusiveEnd = dateRange.inclusiveEndString();

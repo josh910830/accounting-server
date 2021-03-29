@@ -1,10 +1,10 @@
 package com.github.suloginscene.accountant;
 
-import com.github.suloginscene.accountant.account.api.AccountBudgetChangeRequest;
-import com.github.suloginscene.accountant.account.api.AccountCreationRequest;
-import com.github.suloginscene.accountant.account.api.AccountNameChangeRequest;
-import com.github.suloginscene.accountant.report.api.IncomeStatementRequest;
-import com.github.suloginscene.accountant.transaction.api.TransactionExecutionRequest;
+import com.github.suloginscene.accountant.account.api.request.AccountBudgetChangeRequest;
+import com.github.suloginscene.accountant.account.api.request.AccountCreationRequest;
+import com.github.suloginscene.accountant.account.api.request.AccountNameChangeRequest;
+import com.github.suloginscene.accountant.report.api.request.IncomeStatementRequest;
+import com.github.suloginscene.accountant.transaction.api.request.TransactionExecutionRequest;
 import com.github.suloginscene.jwt.JwtFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

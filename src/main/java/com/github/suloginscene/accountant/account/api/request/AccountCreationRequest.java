@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.account.api;
+package com.github.suloginscene.accountant.account.api.request;
 
 import lombok.Data;
 
@@ -6,8 +6,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import static com.github.suloginscene.accountant.account.api.AccountRegexps.NAME_MESSAGE;
-import static com.github.suloginscene.accountant.account.api.AccountRegexps.NAME_REGEXP;
+import static com.github.suloginscene.accountant.account.api.request.AccountRegexps.NAME_MESSAGE;
+import static com.github.suloginscene.accountant.account.api.request.AccountRegexps.NAME_REGEXP;
 
 
 @Data

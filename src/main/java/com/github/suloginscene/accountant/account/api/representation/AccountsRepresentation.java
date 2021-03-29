@@ -1,6 +1,7 @@
-package com.github.suloginscene.accountant.account.api;
+package com.github.suloginscene.accountant.account.api.representation;
 
-import com.github.suloginscene.accountant.account.application.AccountSimpleData;
+import com.github.suloginscene.accountant.account.api.AccountRestController;
+import com.github.suloginscene.accountant.account.application.data.AccountSimpleData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
@@ -17,7 +18,7 @@ public class AccountsRepresentation extends RepresentationModel<AccountsRepresen
     private final List<AccountSimpleRepresentation> accounts;
 
 
-    AccountsRepresentation(List<AccountSimpleData> accounts) {
+    public AccountsRepresentation(List<AccountSimpleData> accounts) {
         this.accounts = accounts.stream()
                 .map(AccountSimpleRepresentation::new)
                 .collect(Collectors.toList());

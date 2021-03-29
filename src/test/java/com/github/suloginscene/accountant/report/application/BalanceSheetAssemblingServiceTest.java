@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.report.application;
 
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
+import com.github.suloginscene.accountant.report.application.data.BalanceSheetData;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

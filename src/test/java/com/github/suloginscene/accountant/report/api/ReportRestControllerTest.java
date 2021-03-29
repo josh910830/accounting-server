@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
+import com.github.suloginscene.accountant.report.api.request.IncomeStatementRequest;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;

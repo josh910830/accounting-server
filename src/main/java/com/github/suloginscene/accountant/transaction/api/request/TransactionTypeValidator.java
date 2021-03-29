@@ -1,6 +1,6 @@
-package com.github.suloginscene.accountant.account.api;
+package com.github.suloginscene.accountant.transaction.api.request;
 
-import com.github.suloginscene.accountant.account.domain.AccountType;
+import com.github.suloginscene.accountant.transaction.domain.TransactionType;
 import com.github.suloginscene.validation.AbstractValidator;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,13 @@ import static java.util.stream.Collectors.toSet;
 
 
 @Component
-public class AccountTypeValidator extends AbstractValidator {
+public class TransactionTypeValidator extends AbstractValidator {
 
-    private static final Set<String> ACCOUNT_TYPES;
+    private static final Set<String> TRANSACTION_TYPES;
 
     static {
-        AccountType[] accountTypes = AccountType.values();
-        ACCOUNT_TYPES = Arrays.stream(accountTypes)
+        TransactionType[] transactionTypes = TransactionType.values();
+        TRANSACTION_TYPES = Arrays.stream(transactionTypes)
                 .map(Enum::name)
                 .collect(toSet());
     }
@@ -25,7 +25,7 @@ public class AccountTypeValidator extends AbstractValidator {
 
     @Override
     protected Class<?> targetClass() {
-        return AccountCreationRequest.class;
+        return TransactionExecutionRequest.class;
     }
 
     @Override
@@ -35,16 +35,16 @@ public class AccountTypeValidator extends AbstractValidator {
 
     @Override
     protected String rejectedReason() {
-        return "부적절한 계정 유형";
+        return "부적절한 거래 유형";
     }
 
     @Override
     protected boolean isValid(Object target) {
-        AccountCreationRequest request = (AccountCreationRequest) target;
+        TransactionExecutionRequest request = (TransactionExecutionRequest) target;
 
         String type = request.getType();
 
-        return ACCOUNT_TYPES.contains(type);
+        return TRANSACTION_TYPES.contains(type);
     }
 
 }

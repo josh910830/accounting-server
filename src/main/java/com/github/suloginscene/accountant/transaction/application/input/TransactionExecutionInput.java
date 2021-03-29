@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.transaction.application;
+package com.github.suloginscene.accountant.transaction.application.input;
 
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.transaction.domain.TransactionType;

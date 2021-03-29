@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.transaction.application;
 
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
+import com.github.suloginscene.accountant.transaction.application.input.TransactionExecutionInput;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import com.github.suloginscene.event.EventPublisher;
 import org.junit.jupiter.api.DisplayName;

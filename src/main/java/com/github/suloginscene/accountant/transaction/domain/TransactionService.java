@@ -3,6 +3,7 @@ package com.github.suloginscene.accountant.transaction.domain;
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
+import com.github.suloginscene.accountant.transaction.domain.param.TransactionExecutionParameter;
 
 
 public abstract class TransactionService {

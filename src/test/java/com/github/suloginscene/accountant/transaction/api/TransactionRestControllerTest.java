@@ -3,6 +3,7 @@ package com.github.suloginscene.accountant.transaction.api;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
+import com.github.suloginscene.accountant.transaction.api.request.TransactionExecutionRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

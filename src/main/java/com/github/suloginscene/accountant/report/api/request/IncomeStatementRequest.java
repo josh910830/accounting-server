@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.report.api;
+package com.github.suloginscene.accountant.report.api.request;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.github.suloginscene.accountant.report.application;
+package com.github.suloginscene.accountant.report.application.data;
 
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;

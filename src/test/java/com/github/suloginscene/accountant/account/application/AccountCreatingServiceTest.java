@@ -1,5 +1,6 @@
 package com.github.suloginscene.accountant.account.application;
 
+import com.github.suloginscene.accountant.account.application.input.AccountCreationInput;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,12 +1,13 @@
 package com.github.suloginscene.accountant.report.api;
 
 import com.github.suloginscene.accountant.common.Holder;
+import com.github.suloginscene.accountant.report.api.request.IncomeStatementRequest;
 import com.github.suloginscene.accountant.report.application.BalanceSheetAssemblingService;
-import com.github.suloginscene.accountant.report.application.BalanceSheetData;
 import com.github.suloginscene.accountant.report.application.IncomeStatementAssemblingService;
-import com.github.suloginscene.accountant.report.application.IncomeStatementData;
-import com.github.suloginscene.accountant.report.application.LedgerData;
 import com.github.suloginscene.accountant.report.application.LedgerFindingService;
+import com.github.suloginscene.accountant.report.application.data.BalanceSheetData;
+import com.github.suloginscene.accountant.report.application.data.IncomeStatementData;
+import com.github.suloginscene.accountant.report.application.data.LedgerData;
 import com.github.suloginscene.security.Authenticated;
 import com.github.suloginscene.time.DateRange;
 import lombok.RequiredArgsConstructor;
