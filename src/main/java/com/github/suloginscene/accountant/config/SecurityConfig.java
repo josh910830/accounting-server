@@ -7,9 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import static com.github.suloginscene.security.Authorities.MEMBER;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -20,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtReader jwtReader;
     private final CorsConfigurationSource corsConfigurationSource;
+    private final AccessDeniedHandler accessDeniedHandler;
 
 
     @Override
@@ -39,13 +42,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(STATELESS);
 
         http
-                .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests().anyRequest().hasAuthority(MEMBER);
 
         http
                 .addFilterBefore(new JwtSecurityFilter(jwtReader), UsernamePasswordAuthenticationFilter.class);
 
         http
                 .cors().configurationSource(corsConfigurationSource);
+
+        http
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
 }
