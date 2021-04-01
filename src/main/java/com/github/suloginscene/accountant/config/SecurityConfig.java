@@ -29,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web
                 .ignoring()
-                .mvcMatchers(GET, "/api")
                 .mvcMatchers(GET, "/docs/index.html");
     }
 
@@ -42,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(STATELESS);
 
         http
-                .authorizeRequests().anyRequest().hasAuthority(MEMBER);
+                .authorizeRequests()
+                .mvcMatchers(GET, "/api").permitAll()
+                .anyRequest().hasAuthority(MEMBER);
 
         http
                 .addFilterBefore(new JwtSecurityFilter(jwtReader), UsernamePasswordAuthenticationFilter.class);
