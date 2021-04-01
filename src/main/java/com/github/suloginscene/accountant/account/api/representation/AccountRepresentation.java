@@ -28,9 +28,9 @@ public class AccountRepresentation extends RepresentationModel<AccountsRepresent
         moneyAmount = account.getMoneyAmount();
         singleTransactions = account.getSingleTransactions();
 
-        add(linkTo(AccountRestController.class).slash(id).slash("name").withRel("change-name"));
-        add(linkTo(AccountRestController.class).slash(id).slash("budget").withRel("change-budget"));
-        add(linkTo(AccountRestController.class).slash(id).withRel("delete-account"));
+        add(linkTo(AccountRestController.class).slash(id).slash("name").withRel("changeName"));
+        add(linkTo(AccountRestController.class).slash(id).slash("budget").withRel("changeBudget"));
+        add(linkTo(AccountRestController.class).slash(id).withRel("deleteAccount"));
     }
 
 }

@@ -15,14 +15,14 @@ public class IndexRepresentation extends RepresentationModel<IndexRepresentation
 
     private IndexRepresentation() {
 
-        add(linkTo(AccountRestController.class).withRel("post-account"));
-        add(linkTo(AccountRestController.class).withRel("get-accounts"));
+        add(linkTo(AccountRestController.class).withRel("postAccount"));
+        add(linkTo(AccountRestController.class).withRel("getAccounts"));
 
-        add(linkTo(TransactionRestController.class).withRel("execute-transaction"));
+        add(linkTo(TransactionRestController.class).withRel("executeTransaction"));
 
-        add(linkTo(ReportRestController.class).slash("ledger").withRel("get-ledger"));
-        add(linkTo(ReportRestController.class).slash("balance-sheet").withRel("get-balance-sheet"));
-        add(linkTo(ReportRestController.class).slash("income-statement").withRel("get-income-statement"));
+        add(linkTo(ReportRestController.class).slash("ledger").withRel("getLedger"));
+        add(linkTo(ReportRestController.class).slash("balance-sheet").withRel("getBalanceSheet"));
+        add(linkTo(ReportRestController.class).slash("income-statement").withRel("getIncomeStatement"));
 
     }
 

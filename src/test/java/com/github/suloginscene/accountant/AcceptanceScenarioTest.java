@@ -78,12 +78,12 @@ public class AcceptanceScenarioTest {
         MvcResult result = getIndex.andExpect(status().isOk()).andReturn();
 
         setRelPathMap(result);
-        assertThat(relPathMap.get("post-account")).isEqualTo("/api/accounts");
-        assertThat(relPathMap.get("get-accounts")).isEqualTo("/api/accounts");
-        assertThat(relPathMap.get("execute-transaction")).isEqualTo("/api/transactions");
-        assertThat(relPathMap.get("get-ledger")).isEqualTo("/api/reports/ledger");
-        assertThat(relPathMap.get("get-balance-sheet")).isEqualTo("/api/reports/balance-sheet");
-        assertThat(relPathMap.get("get-income-statement")).isEqualTo("/api/reports/income-statement");
+        assertThat(relPathMap.get("postAccount")).isEqualTo("/api/accounts");
+        assertThat(relPathMap.get("getAccounts")).isEqualTo("/api/accounts");
+        assertThat(relPathMap.get("executeTransaction")).isEqualTo("/api/transactions");
+        assertThat(relPathMap.get("getLedger")).isEqualTo("/api/reports/ledger");
+        assertThat(relPathMap.get("getBalanceSheet")).isEqualTo("/api/reports/balance-sheet");
+        assertThat(relPathMap.get("getIncomeStatement")).isEqualTo("/api/reports/income-statement");
     }
 
     private void setRelPathMap(MvcResult mvcResult) throws UnsupportedEncodingException {
@@ -102,7 +102,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("계정 등록: 총 7개(2/2/1/2) - 201")
     void postAccounts() throws Exception {
-        String url = relPathMap.get("post-account");
+        String url = relPathMap.get("postAccount");
 
         List<AccountCreationRequest> accountCreationRequests = List.of(
                 new AccountCreationRequest("ASSET", "저축 계좌", 10_000_000),
@@ -123,7 +123,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("계정 목록 - 200: 계정정보 7개")
     void getAccounts() throws Exception {
-        String url = relPathMap.get("get-accounts");
+        String url = relPathMap.get("getAccounts");
 
         ResultActions getAccounts = mockMvc.perform(ofGet(url).jwt(jwt).build());
 
@@ -151,7 +151,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("거래 실행: 총 6건(종류별) - 200")
     void executeTransactions() throws Exception {
-        String url = relPathMap.get("execute-transaction");
+        String url = relPathMap.get("executeTransaction");
 
         List<TransactionExecutionRequest> transactionExecutionRequests = List.of(
                 new TransactionExecutionRequest("SELL",
@@ -187,7 +187,7 @@ public class AcceptanceScenarioTest {
     }
 
     private void assertAccountHasTransactions(String name, int size) throws Exception {
-        String baseUrl = relPathMap.get("get-accounts");
+        String baseUrl = relPathMap.get("getAccounts");
         String url = baseUrl + "/" + nameIdMap.get(name);
 
         ResultActions getAccount = mockMvc.perform(ofGet(url).jwt(jwt).build());
@@ -204,7 +204,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("계정 수정: 식비(이름&예산) - 204")
     void configureAccounts() throws Exception {
-        String baseUrl = relPathMap.get("post-account");
+        String baseUrl = relPathMap.get("postAccount");
 
         String nameUrl = baseUrl + "/" + nameIdMap.get("식비") + "/name";
         ResultActions putName = mockMvc.perform(
@@ -230,7 +230,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("장부 조회 - 200: 복식 거래기록 개수 일치")
     void getLedger() throws Exception {
-        String url = relPathMap.get("get-ledger");
+        String url = relPathMap.get("getLedger");
 
         ResultActions getLedger = mockMvc.perform(ofGet(url).jwt(jwt).build());
 
@@ -245,7 +245,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("재무상태표 조회 - 200: 잔액 일치")
     void getBalanceSheet() throws Exception {
-        String url = relPathMap.get("get-balance-sheet");
+        String url = relPathMap.get("getBalanceSheet");
 
         ResultActions getBalanceSheet = mockMvc.perform(ofGet(url).jwt(jwt).build());
 
@@ -279,7 +279,7 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("손익계산서 조회 - 200: 발생량 일치")
     void getIncomeStatement() throws Exception {
-        String url = relPathMap.get("get-income-statement");
+        String url = relPathMap.get("getIncomeStatement");
 
         String today = LocalDate.now().format(DATE);
         ResultActions getIncomeStatement = mockMvc.perform(
