@@ -22,7 +22,8 @@ class AccountTest {
     void writeSingleTransaction_onSuccess_changeState() {
         Account account = asset();
 
-        account.writeSingleTransaction(createSingleTransaction());
+        SingleTransaction transaction = new SingleTransaction(account, INCREASE, MONEY_ONE, DESCRIPTION);
+        account.writeSingleTransaction(transaction);
 
         assertThat(account.readSingleTransactions()).hasSize(1);
     }
@@ -43,21 +44,20 @@ class AccountTest {
     void readSingleTransactionsDuringParams_onSuccess_returnsFilteredList() {
         Account account = asset();
 
-        account.writeSingleTransaction(createSingleTransaction());
+        SingleTransaction t1 = new SingleTransaction(account, INCREASE, MONEY_ONE, DESCRIPTION);
         LocalDateTime begin = LocalDateTime.now();
-        account.writeSingleTransaction(createSingleTransaction());
+        SingleTransaction t2 = new SingleTransaction(account, INCREASE, MONEY_ONE, DESCRIPTION);
         LocalDateTime end = LocalDateTime.now();
-        account.writeSingleTransaction(createSingleTransaction());
+        SingleTransaction t3 = new SingleTransaction(account, INCREASE, MONEY_ONE, DESCRIPTION);
+
+        account.writeSingleTransaction(t1);
+        account.writeSingleTransaction(t2);
+        account.writeSingleTransaction(t3);
 
         TimeRange timeRange = TimeRange.of(begin, end);
         List<SingleTransaction> transactions = account.readSingleTransactions(timeRange);
 
         assertThat(transactions).hasSize(1);
-    }
-
-
-    private SingleTransaction createSingleTransaction() {
-        return new SingleTransaction(INCREASE, MONEY_ONE, DESCRIPTION);
     }
 
 }

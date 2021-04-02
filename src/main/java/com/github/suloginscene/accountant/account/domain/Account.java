@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +39,7 @@ public abstract class Account {
     @Getter
     private String name;
 
-    @OneToMany(cascade = ALL, orphanRemoval = true)
-    @JoinColumn(name = "account_id")
+    @OneToMany(mappedBy = "account", cascade = ALL, orphanRemoval = true)
     @BatchSize(size = 100)
     private final List<SingleTransaction> singleTransactions = new ArrayList<>();
 

@@ -38,14 +38,14 @@ public abstract class Stock extends Account {
         balance = Money.add(balance, amount);
 
         writeSingleTransaction(
-                new SingleTransaction(INCREASE, amount, description));
+                new SingleTransaction(this, INCREASE, amount, description));
     }
 
     public void decrease(Money amount, String description) {
         balance = Money.subtract(balance, amount);
 
         writeSingleTransaction(
-                new SingleTransaction(DECREASE, amount, description));
+                new SingleTransaction(this, DECREASE, amount, description));
     }
 
 }

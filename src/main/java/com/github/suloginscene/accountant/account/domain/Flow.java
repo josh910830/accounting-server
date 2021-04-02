@@ -48,7 +48,7 @@ public abstract class Flow extends Account {
 
     public void occur(Money amount, String description) {
         writeSingleTransaction(
-                new SingleTransaction(OCCUR, amount, description));
+                new SingleTransaction(this, OCCUR, amount, description));
     }
 
     public void memorizeOccurredDuring(TimeRange timeRange) {
