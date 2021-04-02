@@ -17,7 +17,7 @@ public class LedgerDeletingService {
 
     public void deleteLedger(Holder holder) {
         if (ledgerRepository.existsById(holder)) {
-            ledgerRepository.deleteById(holder);
+            ledgerRepository.deleteWithChildren(holder);
         }
     }
 

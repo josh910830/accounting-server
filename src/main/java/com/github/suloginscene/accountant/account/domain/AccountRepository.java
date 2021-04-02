@@ -33,14 +33,16 @@ public class AccountRepository {
     }
 
 
-    public void deleteById(Long id) {
-        accountJpaRepository.deleteById(id);
+    public void deleteWithChildren(Account account) {
+        accountJpaRepository.bulkDeleteChildren(account);
+        accountJpaRepository.delete(account);
     }
 
-    public void deleteByHolder(Holder holder) {
+    public void deleteByHolderWithChildren(Holder holder) {
+        List<Account> accounts = findByHolder(holder);
+        accountJpaRepository.bulkDeleteChildren(accounts);
         accountJpaRepository.deleteByHolder(holder);
     }
-
 
     public void deleteAll() {
         profileChecker.checkTest();

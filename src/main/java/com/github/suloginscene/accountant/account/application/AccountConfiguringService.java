@@ -38,7 +38,7 @@ public class AccountConfiguringService {
     public void delete(Long id) {
         Account account = accountRepository.findById(id);
         checkDeletable(account);
-        accountRepository.deleteById(id);
+        accountRepository.deleteWithChildren(account);
     }
 
     private void checkDeletable(Account account) {
@@ -55,8 +55,8 @@ public class AccountConfiguringService {
     }
 
 
-    public void deleteByHolder(Holder holder) {
-        accountRepository.deleteByHolder(holder);
+    public void deleteByHolderForce(Holder holder) {
+        accountRepository.deleteByHolderWithChildren(holder);
     }
 
 }

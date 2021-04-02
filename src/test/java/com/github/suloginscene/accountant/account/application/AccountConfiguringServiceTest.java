@@ -100,16 +100,16 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("전체 삭제(계정 존재) - 성공")
+    @DisplayName("소유자 전 계정 강제 삭제(계정 존재) - 성공")
     void deleteAccounts_onExistent_deletes() {
         Asset asset = asset(0);
         asset.increase(MONEY_ONE, DESCRIPTION);
-        asset.decrease(MONEY_ONE, DESCRIPTION);
+        asset.increase(MONEY_ONE, DESCRIPTION);
         Revenue revenue = revenue();
         revenue.occur(MONEY_ONE, DESCRIPTION);
         given(asset, revenue);
 
-        accountConfiguringService.deleteByHolder(TESTING_HOLDER);
+        accountConfiguringService.deleteByHolderForce(TESTING_HOLDER);
 
         Executable findAsset = () -> sync(asset);
         Executable findRevenue = () -> sync(revenue);
@@ -119,9 +119,9 @@ class AccountConfiguringServiceTest extends IntegrationTest {
 
 
     @Test
-    @DisplayName("삭제(계정 없음) - 성공")
+    @DisplayName("소유자 전 계정 강제 삭제(계정 없음) - 성공")
     void deleteAccounts_onNonExistent_deletes() {
-        Executable action = () -> accountConfiguringService.deleteByHolder(TESTING_HOLDER);
+        Executable action = () -> accountConfiguringService.deleteByHolderForce(TESTING_HOLDER);
 
         assertDoesNotThrow(action);
     }

@@ -32,8 +32,10 @@ public class LedgerRepository {
         return ledgerJpaRepository.existsById(holder);
     }
 
-    public void deleteById(Holder holder) {
-        ledgerJpaRepository.deleteById(holder);
+    public void deleteWithChildren(Holder holder) {
+        Ledger ledger = findById(holder);
+        ledgerJpaRepository.bulkDeleteChildren(ledger);
+        ledgerJpaRepository.delete(ledger);
     }
 
 

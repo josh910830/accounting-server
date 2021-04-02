@@ -43,7 +43,7 @@ class RootClearingServiceTest extends IntegrationTest {
 
 
     @Test
-    @DisplayName("정리")
+    @DisplayName("정리 - 해당 컨텍스트 서비스 호출")
     void clearAll_onSuccess_callServices() {
         Asset asset = asset();
         Revenue revenue = revenue();
@@ -74,7 +74,7 @@ class RootClearingServiceTest extends IntegrationTest {
         assertThrows(NotFoundException.class, findingLedger);
 
         then(ledgerDeletingService).should().deleteLedger(TESTING_HOLDER);
-        then(accountConfiguringService).should().deleteByHolder(TESTING_HOLDER);
+        then(accountConfiguringService).should().deleteByHolderForce(TESTING_HOLDER);
     }
 
 }

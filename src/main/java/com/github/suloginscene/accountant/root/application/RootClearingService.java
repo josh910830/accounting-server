@@ -19,7 +19,7 @@ public class RootClearingService {
 
     public void clearAll(Holder holder) {
         ledgerDeletingService.deleteLedger(holder);
-        accountConfiguringService.deleteByHolder(holder);
+        accountConfiguringService.deleteByHolderForce(holder);
     }
 
 }
