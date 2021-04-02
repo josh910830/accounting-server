@@ -1,11 +1,14 @@
 package com.github.suloginscene.accountant.root.application;
 
 import com.github.suloginscene.accountant.account.application.AccountConfiguringService;
+import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
+import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.report.application.LedgerDeletingService;
-import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
+import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransactionType;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
+import com.github.suloginscene.accountant.report.listener.TransactionInformation;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import com.github.suloginscene.accountant.transaction.domain.AccountPair;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
@@ -19,7 +22,7 @@ import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
+import static com.github.suloginscene.accountant.report.listener.EventMappingUtils.mappedInformation;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.DESCRIPTION;
@@ -50,9 +53,15 @@ class RootClearingServiceTest extends IntegrationTest {
         TransactionExecutedEvent event = sell.execute(param);
         given(asset, revenue);
 
-        DoubleTransaction doubleTransaction = toDoubleTransaction(event);
+        TransactionInformation information = mappedInformation(event);
+        DoubleTransactionType type = information.getType();
+        Account debit = information.getDebit();
+        Account credit = information.getCredit();
+        Money amount = information.getAmount();
+        String description = information.getDescription();
+
         Ledger ledger = new Ledger(TESTING_HOLDER);
-        ledger.writeDoubleTransaction(doubleTransaction);
+        ledger.scribe(type, debit, credit, amount, description);
         given(ledger);
 
         rootClearingService.clearAll(TESTING_HOLDER);

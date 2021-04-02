@@ -1,12 +1,15 @@
 package com.github.suloginscene.accountant.report.api;
 
+import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Expense;
 import com.github.suloginscene.accountant.account.domain.concrete.Liability;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
+import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.report.api.request.IncomeStatementRequest;
-import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
+import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransactionType;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
+import com.github.suloginscene.accountant.report.listener.TransactionInformation;
 import com.github.suloginscene.accountant.testing.base.ControllerTest;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +21,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import java.time.LocalDate;
 import java.util.Map;
 
-import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
+import static com.github.suloginscene.accountant.report.listener.EventMappingUtils.mappedInformation;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.liability;
@@ -45,13 +48,19 @@ class ReportRestControllerTest extends ControllerTest {
     @DisplayName("장부 - 200")
     void getLedger_onSuccess_returns200() throws Exception {
         TransactionExecutedEvent event = transactionExecutedEvent();
-        DoubleTransaction doubleTransaction = toDoubleTransaction(event);
-        given(doubleTransaction.getDebit(), doubleTransaction.getCredit());
+        TransactionInformation information = mappedInformation(event);
+
+        DoubleTransactionType type = information.getType();
+        Account debit = information.getDebit();
+        Account credit = information.getCredit();
+        Money amount = information.getAmount();
+        String description = information.getDescription();
+        given(debit, credit);
 
         Ledger ledger = new Ledger(TESTING_HOLDER);
-        ledger.writeDoubleTransaction(toDoubleTransaction(event));
-        ledger.writeDoubleTransaction(toDoubleTransaction(event));
-        ledger.writeDoubleTransaction(toDoubleTransaction(event));
+        ledger.scribe(type, debit, credit, amount, description);
+        ledger.scribe(type, debit, credit, amount, description);
+        ledger.scribe(type, debit, credit, amount, description);
         given(ledger);
 
         ResultActions when = mockMvc.perform(

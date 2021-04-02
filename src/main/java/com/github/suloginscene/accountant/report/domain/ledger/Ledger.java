@@ -1,6 +1,8 @@
 package com.github.suloginscene.accountant.report.domain.ledger;
 
+import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Holder;
+import com.github.suloginscene.accountant.common.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -8,7 +10,6 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,7 @@ public class Ledger {
     @Getter
     private Holder holder;
 
-    @OneToMany(cascade = ALL, orphanRemoval = true)
-    @JoinColumn(name = "holder_id")
+    @OneToMany(mappedBy = "ledger", cascade = ALL, orphanRemoval = true)
     @BatchSize(size = 100)
     private final List<DoubleTransaction> doubleTransactions = new ArrayList<>();
 
@@ -36,8 +36,13 @@ public class Ledger {
         this.holder = holder;
     }
 
-    public void writeDoubleTransaction(DoubleTransaction doubleTransaction) {
-        doubleTransactions.add(doubleTransaction);
+    public void scribe(DoubleTransactionType type,
+                       Account debit,
+                       Account credit,
+                       Money amount,
+                       String description) {
+        doubleTransactions.add(
+                new DoubleTransaction(this, type, debit, credit, amount, description));
     }
 
     public List<DoubleTransaction> readDoubleTransactions() {

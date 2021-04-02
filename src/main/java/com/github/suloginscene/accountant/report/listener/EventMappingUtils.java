@@ -2,16 +2,15 @@ package com.github.suloginscene.accountant.report.listener;
 
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Money;
-import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransactionType;
 import com.github.suloginscene.accountant.transaction.domain.AccountPair;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import com.github.suloginscene.accountant.transaction.domain.TransactionType;
 
 
-public class EventTransformUtils {
+public class EventMappingUtils {
 
-    public static DoubleTransaction toDoubleTransaction(TransactionExecutedEvent event) {
+    public static TransactionInformation mappedInformation(TransactionExecutedEvent event) {
         DoubleTransactionType type = mapType(event.getType());
 
         AccountPair pair = event.getPair();
@@ -21,7 +20,7 @@ public class EventTransformUtils {
         Money amount = event.getAmount();
         String description = event.getDescription();
 
-        return new DoubleTransaction(type, debit, credit, amount, description);
+        return new TransactionInformation(type, debit, credit, amount, description);
     }
 
     private static DoubleTransactionType mapType(TransactionType type) {

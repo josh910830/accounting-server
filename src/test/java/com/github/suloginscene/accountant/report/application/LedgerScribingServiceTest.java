@@ -1,14 +1,14 @@
 package com.github.suloginscene.accountant.report.application;
 
-import com.github.suloginscene.accountant.report.domain.ledger.DoubleTransaction;
 import com.github.suloginscene.accountant.report.domain.ledger.Ledger;
+import com.github.suloginscene.accountant.report.listener.TransactionInformation;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import com.github.suloginscene.accountant.transaction.domain.TransactionExecutedEvent;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.suloginscene.accountant.report.listener.EventTransformUtils.toDoubleTransaction;
+import static com.github.suloginscene.accountant.report.listener.EventMappingUtils.mappedInformation;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
 import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,13 +24,13 @@ class LedgerScribingServiceTest extends IntegrationTest {
     @DisplayName("정상 - 거래 기록")
     void scribe_onSuccess_writesTransaction() {
         TransactionExecutedEvent event = transactionExecutedEvent();
-        DoubleTransaction doubleTransaction = toDoubleTransaction(event);
-        given(doubleTransaction.getDebit(), doubleTransaction.getCredit());
+        TransactionInformation information = mappedInformation(event);
+        given(information.getDebit(), information.getCredit());
 
         Ledger ledger = new Ledger(TESTING_HOLDER);
         given(ledger);
 
-        ledgerScribingService.scribeLedger(TESTING_HOLDER, doubleTransaction);
+        ledgerScribingService.scribeLedger(TESTING_HOLDER, information);
 
         ledger = sync(ledger);
         assertThat(ledger.readDoubleTransactions()).hasSize(1);

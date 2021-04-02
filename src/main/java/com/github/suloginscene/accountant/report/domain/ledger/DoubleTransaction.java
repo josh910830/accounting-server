@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
@@ -25,6 +26,10 @@ public class DoubleTransaction {
     @Id @GeneratedValue
     @Column(name = "double_transaction_id")
     private Long id;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "ledger_holder")
+    private Ledger ledger;
 
     @Enumerated(STRING)
     @Getter
@@ -48,11 +53,13 @@ public class DoubleTransaction {
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
-    public DoubleTransaction(DoubleTransactionType type,
+    public DoubleTransaction(Ledger ledger,
+                             DoubleTransactionType type,
                              Account debit,
                              Account credit,
                              Money amount,
                              String description) {
+        this.ledger = ledger;
         this.type = type;
         this.debit = debit;
         this.credit = credit;
