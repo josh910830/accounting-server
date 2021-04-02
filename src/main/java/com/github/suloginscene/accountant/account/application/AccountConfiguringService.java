@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.AccountRepository;
 import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.account.domain.Stock;
+import com.github.suloginscene.accountant.common.Holder;
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.exception.RequestException;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +34,12 @@ public class AccountConfiguringService {
         flow.changeBudget(newBudget);
     }
 
+
     public void delete(Long id) {
         Account account = accountRepository.findById(id);
         checkDeletable(account);
         accountRepository.deleteById(id);
     }
-
 
     private void checkDeletable(Account account) {
         if (!isDeletable(account)) {
@@ -51,6 +52,11 @@ public class AccountConfiguringService {
 
         Stock stock = toStock(account);
         return stock.hasEmptyBalance();
+    }
+
+
+    public void deleteByHolder(Holder holder) {
+        accountRepository.deleteByHolder(holder);
     }
 
 }

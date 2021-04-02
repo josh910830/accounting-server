@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountant.report.domain.ledger;
 
 import com.github.suloginscene.accountant.common.Holder;
+import com.github.suloginscene.exception.NotFoundException;
 import com.github.suloginscene.profile.ProfileChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,20 @@ public class LedgerRepository {
         }
     }
 
+    public boolean existsById(Holder holder) {
+        return ledgerJpaRepository.existsById(holder);
+    }
+
+    public void deleteById(Holder holder) {
+        ledgerJpaRepository.deleteById(holder);
+    }
+
+
+    public Ledger findById(Holder holder) {
+        profileChecker.checkTest();
+        return ledgerJpaRepository.findById(holder)
+                .orElseThrow(() -> new NotFoundException(Ledger.class, holder));
+    }
 
     public void save(Ledger ledger) {
         profileChecker.checkTest();

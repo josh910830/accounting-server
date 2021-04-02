@@ -2,6 +2,7 @@ package com.github.suloginscene.accountant.root.api.representation;
 
 import com.github.suloginscene.accountant.account.api.AccountRestController;
 import com.github.suloginscene.accountant.report.api.ReportRestController;
+import com.github.suloginscene.accountant.root.api.RootRestController;
 import com.github.suloginscene.accountant.transaction.api.TransactionRestController;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -23,6 +24,8 @@ public class IndexRepresentation extends RepresentationModel<IndexRepresentation
         add(linkTo(ReportRestController.class).slash("ledger").withRel("getLedger"));
         add(linkTo(ReportRestController.class).slash("balance-sheet").withRel("getBalanceSheet"));
         add(linkTo(ReportRestController.class).slash("income-statement").withRel("getIncomeStatement"));
+
+        add(linkTo(RootRestController.class).withRel("clear"));
 
     }
 

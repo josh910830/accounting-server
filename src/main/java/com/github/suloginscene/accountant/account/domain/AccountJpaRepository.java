@@ -10,4 +10,6 @@ interface AccountJpaRepository extends JpaRepository<Account, Long> {
 
     List<Account> findByHolder(Holder holder);
 
+    void deleteByHolder(Holder holder);
+
 }

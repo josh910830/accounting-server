@@ -77,7 +77,8 @@
 거래 실행 +
 장부 조회 +
 손익계산서 조회 +
-재무상태표 조회
+재무상태표 조회 +
+정리
 | 계정 목록 -> | 계정 조회
 | 계정 조회 -> |계정 이름 변경 +
 계정 예산 변경 +
@@ -96,6 +97,13 @@
 서비스의 진입점으로, 이용할 수 있는 링크들을 나열한다.
 
 operation::index[snippets='http-request,http-response']
+
+[[representation-root-clear]]
+==== 정리
+
+인증된 사용자에 관한 모든 정보를 삭제한다.
+
+operation::clear[snippets='http-request,http-response']
 
 [[representation-account]]
 === 계정

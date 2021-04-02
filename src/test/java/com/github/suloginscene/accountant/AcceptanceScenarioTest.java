@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.suloginscene.test.RequestBuilder.ofDelete;
 import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.test.RequestBuilder.ofPost;
 import static com.github.suloginscene.test.RequestBuilder.ofPut;
@@ -307,6 +308,22 @@ public class AcceptanceScenarioTest {
 
         List<Object> expenses = (List<Object>) resultMap.get("expenses");
         assertThat(expenses.size()).isEqualTo(2);
+    }
+
+
+    @Order(10)
+    @Test
+    @DisplayName("정리 - 204")
+    void clear() throws Exception {
+        String url = relPathMap.get("clear");
+
+        ResultActions clear = mockMvc.perform(ofDelete(url).jwt(jwt).build());
+
+        clear.andExpect(status().isNoContent());
+
+        MvcResult accountsResult = mockMvc.perform(ofGet(relPathMap.get("getAccounts")).jwt(jwt).build()).andReturn();
+        List<Object> accounts = (List<Object>) toResponseAsJsonMap(accountsResult).get("accounts");
+        assertThat(accounts).hasSize(0);
     }
 
 }

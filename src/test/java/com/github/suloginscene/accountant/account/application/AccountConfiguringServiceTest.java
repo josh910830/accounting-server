@@ -3,6 +3,8 @@ package com.github.suloginscene.accountant.account.application;
 import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.account.domain.Flow;
 import com.github.suloginscene.accountant.account.domain.Stock;
+import com.github.suloginscene.accountant.account.domain.concrete.Asset;
+import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
 import com.github.suloginscene.exception.NotFoundException;
@@ -14,7 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.expense;
+import static com.github.suloginscene.accountant.testing.data.TestingAccountFactory.revenue;
+import static com.github.suloginscene.accountant.testing.data.TestingConstants.DESCRIPTION;
+import static com.github.suloginscene.accountant.testing.data.TestingConstants.MONEY_ONE;
+import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -68,7 +75,9 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     @Test
     @DisplayName("계정 삭제 - 삭제")
     void deleteAccount_onSuccess_removesAccount() {
-        Account account = asset(0);
+        Asset account = asset(0);
+        account.increase(MONEY_ONE, DESCRIPTION);
+        account.decrease(MONEY_ONE, DESCRIPTION);
         given(account);
 
         Long id = account.getId();
@@ -88,6 +97,33 @@ class AccountConfiguringServiceTest extends IntegrationTest {
         Executable action = () -> accountConfiguringService.delete(id);
 
         assertThrows(RequestException.class, action);
+    }
+
+    @Test
+    @DisplayName("전체 삭제(계정 존재) - 성공")
+    void deleteAccounts_onExistent_deletes() {
+        Asset asset = asset(0);
+        asset.increase(MONEY_ONE, DESCRIPTION);
+        asset.decrease(MONEY_ONE, DESCRIPTION);
+        Revenue revenue = revenue();
+        revenue.occur(MONEY_ONE, DESCRIPTION);
+        given(asset, revenue);
+
+        accountConfiguringService.deleteByHolder(TESTING_HOLDER);
+
+        Executable findAsset = () -> sync(asset);
+        Executable findRevenue = () -> sync(revenue);
+        assertThrows(NotFoundException.class, findAsset);
+        assertThrows(NotFoundException.class, findRevenue);
+    }
+
+
+    @Test
+    @DisplayName("삭제(계정 없음) - 성공")
+    void deleteAccounts_onNonExistent_deletes() {
+        Executable action = () -> accountConfiguringService.deleteByHolder(TESTING_HOLDER);
+
+        assertDoesNotThrow(action);
     }
 
 }

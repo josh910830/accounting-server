@@ -4,6 +4,7 @@ import com.github.suloginscene.accountant.common.Holder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,6 +28,7 @@ public class Ledger {
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "holder_id")
+    @BatchSize(size = 100)
     private final List<DoubleTransaction> doubleTransactions = new ArrayList<>();
 
 

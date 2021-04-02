@@ -37,6 +37,10 @@ public class AccountRepository {
         accountJpaRepository.deleteById(id);
     }
 
+    public void deleteByHolder(Holder holder) {
+        accountJpaRepository.deleteByHolder(holder);
+    }
+
 
     public void deleteAll() {
         profileChecker.checkTest();
