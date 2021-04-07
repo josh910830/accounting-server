@@ -25,8 +25,10 @@ import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.test.RequestBuilder.ofPost;
 import static com.github.suloginscene.test.RequestBuilder.ofPut;
 import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -84,7 +86,13 @@ class AccountRestControllerTest extends ControllerTest {
         ResultActions when = mockMvc.perform(
                 ofGet(URL).jwt(jwt).build());
 
-        ResultActions then = when.andExpect(status().isOk());
+        ResultActions then = when.andExpect(status().isOk())
+                .andExpect(jsonPath("accounts").isArray())
+                .andExpect(jsonPath("accounts", hasSize(4)))
+                .andExpect(jsonPath("accounts[0].id").exists())
+                .andExpect(jsonPath("accounts[0].name").exists())
+                .andExpect(jsonPath("accounts[0].type").exists())
+                .andExpect(jsonPath("accounts[0]._links.self").exists());
 
         then.andDo(document("get-accounts"));
     }
@@ -102,7 +110,20 @@ class AccountRestControllerTest extends ControllerTest {
         ResultActions when = mockMvc.perform(
                 ofGet(URL, asset.getId()).jwt(jwt).build());
 
-        ResultActions then = when.andExpect(status().isOk());
+        ResultActions then = when.andExpect(status().isOk())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("type").exists())
+                .andExpect(jsonPath("moneyAmount").exists())
+                .andExpect(jsonPath("_links.changeName").exists())
+                .andExpect(jsonPath("_links.changeBudget").exists())
+                .andExpect(jsonPath("_links.deleteAccount").exists())
+                .andExpect(jsonPath("singleTransactions").isArray())
+                .andExpect(jsonPath("singleTransactions", hasSize(3)))
+                .andExpect(jsonPath("singleTransactions[0].type").exists())
+                .andExpect(jsonPath("singleTransactions[0].amount").exists())
+                .andExpect(jsonPath("singleTransactions[0].description").exists())
+                .andExpect(jsonPath("singleTransactions[0].createdAt").exists());
 
         then.andDo(document("get-account"));
     }

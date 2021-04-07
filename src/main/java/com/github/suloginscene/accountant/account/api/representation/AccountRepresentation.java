@@ -12,7 +12,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 @Data @EqualsAndHashCode(callSuper = false)
-public class AccountRepresentation extends RepresentationModel<AccountsRepresentation> {
+public class AccountRepresentation extends RepresentationModel<AccountRepresentation> {
 
     private final Long id;
     private final String name;

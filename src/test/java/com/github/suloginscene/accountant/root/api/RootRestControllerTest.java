@@ -9,6 +9,7 @@ import static com.github.suloginscene.test.RequestBuilder.ofDelete;
 import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -26,7 +27,14 @@ class RootRestControllerTest extends ControllerTest {
 
         ResultActions then = when.andExpect(status().isOk());
 
-        then.andDo(document("index"));
+        then.andDo(document("index"))
+                .andExpect(jsonPath("_links.postAccount").exists())
+                .andExpect(jsonPath("_links.getAccounts").exists())
+                .andExpect(jsonPath("_links.executeTransaction").exists())
+                .andExpect(jsonPath("_links.getLedger").exists())
+                .andExpect(jsonPath("_links.getBalanceSheet").exists())
+                .andExpect(jsonPath("_links.getIncomeStatement").exists())
+                .andExpect(jsonPath("_links.clear").exists());
     }
 
 
