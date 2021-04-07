@@ -37,7 +37,7 @@ class IncomeStatementAssemblingServiceTest extends IntegrationTest {
         DateRange duringToday = DateRange.today();
         IncomeStatementData incomeStatement = incomeStatementAssemblingService.assembleIncomeStatement(TESTING_HOLDER, duringToday);
 
-        assertThat(incomeStatement.getTotal().get("PROFIT")).isEqualTo(2 - 1);
+        assertThat(incomeStatement.getTotal().get("profit")).isEqualTo(2 - 1);
     }
 
 }

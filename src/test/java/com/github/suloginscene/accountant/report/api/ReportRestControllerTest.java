@@ -33,8 +33,10 @@ import static com.github.suloginscene.accountant.testing.data.TestingEventFactor
 import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
 import static com.github.suloginscene.time.DateTimeFormatters.DATE;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -66,7 +68,15 @@ class ReportRestControllerTest extends ControllerTest {
         ResultActions when = mockMvc.perform(
                 ofGet(URL, "ledger").jwt(jwt).build());
 
-        ResultActions then = when.andExpect(status().isOk());
+        ResultActions then = when.andExpect(status().isOk())
+                .andExpect(jsonPath("doubleTransactions").isArray())
+                .andExpect(jsonPath("doubleTransactions", hasSize(3)))
+                .andExpect(jsonPath("doubleTransactions[0].type").exists())
+                .andExpect(jsonPath("doubleTransactions[0].amount").exists())
+                .andExpect(jsonPath("doubleTransactions[0].debit").exists())
+                .andExpect(jsonPath("doubleTransactions[0].credit").exists())
+                .andExpect(jsonPath("doubleTransactions[0].description").exists())
+                .andExpect(jsonPath("doubleTransactions[0].createdAt").exists());
 
         then.andDo(document("get-ledger"));
     }
@@ -83,7 +93,21 @@ class ReportRestControllerTest extends ControllerTest {
         ResultActions when = mockMvc.perform(
                 ofGet(URL, "balance-sheet").jwt(jwt).build());
 
-        ResultActions then = when.andExpect(status().isOk());
+        ResultActions then = when.andExpect(status().isOk())
+                .andExpect(jsonPath("total").isMap())
+                .andExpect(jsonPath("total.net").exists())
+                .andExpect(jsonPath("total.assetSum").exists())
+                .andExpect(jsonPath("total.liabilitySum").exists())
+                .andExpect(jsonPath("assets").isArray())
+                .andExpect(jsonPath("assets", hasSize(2)))
+                .andExpect(jsonPath("assets[0].id").exists())
+                .andExpect(jsonPath("assets[0].name").exists())
+                .andExpect(jsonPath("assets[0].balance").exists())
+                .andExpect(jsonPath("liabilities").isArray())
+                .andExpect(jsonPath("liabilities", hasSize(2)))
+                .andExpect(jsonPath("liabilities[0].id").exists())
+                .andExpect(jsonPath("liabilities[0].name").exists())
+                .andExpect(jsonPath("liabilities[0].balance").exists());
 
         then.andDo(document("get-balance-sheet"));
     }
@@ -104,7 +128,26 @@ class ReportRestControllerTest extends ControllerTest {
         ResultActions when = mockMvc.perform(
                 ofGet(URL, "income-statement").jwt(jwt).json(request).build());
 
-        ResultActions then = when.andExpect(status().isOk());
+        ResultActions then = when.andExpect(status().isOk())
+                .andExpect(jsonPath("start").exists())
+                .andExpect(jsonPath("inclusiveEnd").exists())
+                .andExpect(jsonPath("days").exists())
+                .andExpect(jsonPath("total").isMap())
+                .andExpect(jsonPath("total.profit").exists())
+                .andExpect(jsonPath("total.revenueSum").exists())
+                .andExpect(jsonPath("total.expenseSum").exists())
+                .andExpect(jsonPath("revenues").isArray())
+                .andExpect(jsonPath("revenues", hasSize(1)))
+                .andExpect(jsonPath("revenues[0].id").exists())
+                .andExpect(jsonPath("revenues[0].name").exists())
+                .andExpect(jsonPath("revenues[0].occurred").exists())
+                .andExpect(jsonPath("revenues[0].monthlyBudget").exists())
+                .andExpect(jsonPath("expenses").isArray())
+                .andExpect(jsonPath("expenses", hasSize(2)))
+                .andExpect(jsonPath("expenses[0].id").exists())
+                .andExpect(jsonPath("expenses[0].name").exists())
+                .andExpect(jsonPath("expenses[0].occurred").exists())
+                .andExpect(jsonPath("expenses[0].monthlyBudget").exists());
 
         then.andDo(document("get-income-statement"));
     }

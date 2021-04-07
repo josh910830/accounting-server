@@ -32,7 +32,7 @@ public class IncomeStatementData {
 
         total = new HashMap<>();
         incomeStatement.getTotal()
-                .forEach((k, v) -> total.put(k.name(), v));
+                .forEach((k, v) -> total.put(k.toCamel(), v));
 
         revenues = incomeStatement.getRevenues().stream()
                 .map(FlowInformation::new)

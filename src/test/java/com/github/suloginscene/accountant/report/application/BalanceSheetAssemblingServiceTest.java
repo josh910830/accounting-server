@@ -30,7 +30,7 @@ class BalanceSheetAssemblingServiceTest extends IntegrationTest {
 
         BalanceSheetData balanceSheet = balanceSheetAssemblingService.assembleBalanceSheet(TESTING_HOLDER);
 
-        assertThat(balanceSheet.getTotal().get("NET")).isEqualTo(2 - 1);
+        assertThat(balanceSheet.getTotal().get("net")).isEqualTo(2 - 1);
     }
 
 }

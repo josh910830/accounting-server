@@ -265,9 +265,9 @@ public class AcceptanceScenarioTest {
         Map<String, Object> resultMap = toResponseAsJsonMap(result);
 
         Map<String, Object> total = (Map<String, Object>) resultMap.get("total");
-        assertThat(total.get("NET")).isEqualTo(net);
-        assertThat(total.get("ASSET_SUM")).isEqualTo(asset);
-        assertThat(total.get("LIABILITY_SUM")).isEqualTo(liability);
+        assertThat(total.get("net")).isEqualTo(net);
+        assertThat(total.get("assetSum")).isEqualTo(asset);
+        assertThat(total.get("liabilitySum")).isEqualTo(liability);
 
         List<Object> assets = (List<Object>) resultMap.get("assets");
         assertThat(assets.size()).isEqualTo(2);
@@ -299,9 +299,9 @@ public class AcceptanceScenarioTest {
         Map<String, Object> resultMap = toResponseAsJsonMap(result);
 
         Map<String, Object> total = (Map<String, Object>) resultMap.get("total");
-        assertThat(total.get("PROFIT")).isEqualTo(profit);
-        assertThat(total.get("REVENUE_SUM")).isEqualTo(revenue);
-        assertThat(total.get("EXPENSE_SUM")).isEqualTo(expense);
+        assertThat(total.get("profit")).isEqualTo(profit);
+        assertThat(total.get("revenueSum")).isEqualTo(revenue);
+        assertThat(total.get("expenseSum")).isEqualTo(expense);
 
         List<Object> revenues = (List<Object>) resultMap.get("revenues");
         assertThat(revenues.size()).isEqualTo(1);

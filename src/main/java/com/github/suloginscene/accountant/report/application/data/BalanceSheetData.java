@@ -22,7 +22,7 @@ public class BalanceSheetData {
     public BalanceSheetData(BalanceSheet balanceSheet) {
         total = new HashMap<>();
         balanceSheet.getTotal()
-                .forEach((k, v) -> total.put(k.name(), v));
+                .forEach((k, v) -> total.put(k.toCamel(), v));
 
         assets = balanceSheet.getAssets().stream()
                 .map(StockInformation::new)
