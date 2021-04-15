@@ -17,7 +17,7 @@ public class AccountCreationRequest {
     private final String type;
 
     @NotNull
-    @Pattern(regexp = NAME_REGEXP, message =NAME_MESSAGE)
+    @Pattern(regexp = NAME_REGEXP, message = NAME_MESSAGE)
     private final String name;
 
     @NotNull
