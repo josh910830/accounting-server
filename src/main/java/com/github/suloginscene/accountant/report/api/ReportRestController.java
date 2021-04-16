@@ -13,7 +13,6 @@ import com.github.suloginscene.time.DateRange;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,7 +47,7 @@ public class ReportRestController {
     }
 
     @GetMapping("/income-statement")
-    ResponseEntity<IncomeStatementData> getIncomeStatement(@RequestBody @Valid IncomeStatementRequest request,
+    ResponseEntity<IncomeStatementData> getIncomeStatement(@Valid IncomeStatementRequest request,
                                                            @Authenticated Long memberId) {
         Holder holder = new Holder(memberId);
         DateRange dateRange = toDateRange(request);

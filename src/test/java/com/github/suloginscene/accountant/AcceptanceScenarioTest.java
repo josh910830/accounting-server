@@ -31,7 +31,6 @@ import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.test.RequestBuilder.ofPost;
 import static com.github.suloginscene.test.RequestBuilder.ofPut;
 import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
-import static com.github.suloginscene.time.DateTimeFormatters.DATE;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -296,9 +295,9 @@ public class AcceptanceScenarioTest {
     void getIncomeStatement() throws Exception {
         String url = relPathMap.get("getIncomeStatement");
 
-        String today = LocalDate.now().format(DATE);
-        ResultActions getIncomeStatement = mockMvc.perform(
-                ofGet(url).jwt(jwt).json(new IncomeStatementRequest(today, today)).build());
+        LocalDate today = LocalDate.now();
+        String queryString = IncomeStatementRequest.queryString(today, today);
+        ResultActions getIncomeStatement = mockMvc.perform(ofGet(url + queryString).jwt(jwt).build());
 
         MvcResult result = getIncomeStatement.andExpect(status().isOk()).andReturn();
 

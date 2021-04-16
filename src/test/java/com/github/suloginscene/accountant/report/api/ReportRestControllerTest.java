@@ -32,7 +32,6 @@ import static com.github.suloginscene.accountant.testing.data.TestingConstants.T
 import static com.github.suloginscene.accountant.testing.data.TestingEventFactory.transactionExecutedEvent;
 import static com.github.suloginscene.test.RequestBuilder.ofGet;
 import static com.github.suloginscene.test.ResultParser.toResponseAsJsonMap;
-import static com.github.suloginscene.time.DateTimeFormatters.DATE;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -123,10 +122,10 @@ class ReportRestControllerTest extends ControllerTest {
         e2.occur(MONEY_ONE, DESCRIPTION);
         given(r, e1, e2);
 
-        String todayString = LocalDate.now().format(DATE);
-        IncomeStatementRequest request = new IncomeStatementRequest(todayString, todayString);
+        LocalDate today = LocalDate.now();
+        String queryString = IncomeStatementRequest.queryString(today, today);
         ResultActions when = mockMvc.perform(
-                ofGet(URL, "income-statement").jwt(jwt).json(request).build());
+                ofGet(URL, "income-statement" + queryString).jwt(jwt).build());
 
         ResultActions then = when.andExpect(status().isOk())
                 .andExpect(jsonPath("start").exists())
@@ -158,9 +157,9 @@ class ReportRestControllerTest extends ControllerTest {
         String begin = "yyyy-MM-dd";
         String end = "19910830";
 
-        IncomeStatementRequest request = new IncomeStatementRequest(begin, end);
+        String queryString = IncomeStatementRequest.queryString(begin, end);
         ResultActions when = mockMvc.perform(
-                ofGet(URL, "income-statement").jwt(jwt).json(request).build());
+                ofGet(URL, "income-statement" + queryString).jwt(jwt).build());
 
         when.andExpect(status().isBadRequest())
                 .andExpect(hasTwoSentencesInErrorDescription());

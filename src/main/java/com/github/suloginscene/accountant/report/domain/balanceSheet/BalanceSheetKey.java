@@ -1,6 +1,6 @@
 package com.github.suloginscene.accountant.report.domain.balanceSheet;
 
-import com.github.suloginscene.enumeration.CamelEnum;
+import com.github.suloginscene.string.CamelEnum;
 
 
 public enum BalanceSheetKey implements CamelEnum {
