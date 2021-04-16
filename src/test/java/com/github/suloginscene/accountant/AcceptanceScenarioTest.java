@@ -226,10 +226,21 @@ public class AcceptanceScenarioTest {
         nameIdMap.put(newKey, value);
     }
 
-
     @Order(7)
     @Test
-    @DisplayName("장부 조회 - 200: 복식 거래기록 개수 일치")
+    @DisplayName("계정 삭제: 월급 - 204")
+    void deleteAccount() throws Exception {
+        String url = relPathMap.get("postAccount") + "/" + nameIdMap.get("월급");
+
+        ResultActions deleteAccount = mockMvc.perform(ofDelete(url).jwt(jwt).build());
+
+        deleteAccount.andExpect(status().isNoContent());
+    }
+
+
+    @Order(8)
+    @Test
+    @DisplayName("장부 조회 - 200: 복식 거래기록 개수 일치 / 계정 변경&삭제 영향 없음")
     void getLedger() throws Exception {
         String url = relPathMap.get("getLedger");
 
@@ -237,12 +248,15 @@ public class AcceptanceScenarioTest {
 
         MvcResult result = getLedger.andExpect(status().isOk()).andReturn();
 
-        Map<String, Object> resultMap = toResponseAsJsonMap(result);
-        List<Object> doubleTransactions = (List<Object>) resultMap.get("doubleTransactions");
-        assertThat(doubleTransactions.size()).isEqualTo(6);
+        List<Object> list = (List<Object>) toResponseAsJsonMap(result).get("doubleTransactions");
+        assertThat(list.size()).isEqualTo(6);
+
+        List<Map<String, String>> doubleTransactions = list.stream().map(o -> (Map<String, String>) o).collect(toList());
+        assertThat(doubleTransactions.stream().anyMatch(t -> t.get("debit").equals("식비"))).isTrue();
+        assertThat(doubleTransactions.stream().anyMatch(t -> t.get("credit").equals("월급"))).isTrue();
     }
 
-    @Order(8)
+    @Order(9)
     @Test
     @DisplayName("재무상태표 조회 - 200: 잔액 일치")
     void getBalanceSheet() throws Exception {
@@ -276,9 +290,9 @@ public class AcceptanceScenarioTest {
         assertThat(liabilities.size()).isEqualTo(2);
     }
 
-    @Order(9)
+    @Order(10)
     @Test
-    @DisplayName("손익계산서 조회 - 200: 발생량 일치")
+    @DisplayName("손익계산서 조회 - 200: 발생량 일치 / 삭제된 계정 미포함")
     void getIncomeStatement() throws Exception {
         String url = relPathMap.get("getIncomeStatement");
 
@@ -288,7 +302,7 @@ public class AcceptanceScenarioTest {
 
         MvcResult result = getIncomeStatement.andExpect(status().isOk()).andReturn();
 
-        int revenue = 3_000_000;
+        int revenue = 0;
 
         int food = 50_000;
         int etc = 20_000;
@@ -304,14 +318,14 @@ public class AcceptanceScenarioTest {
         assertThat(total.get("expenseSum")).isEqualTo(expense);
 
         List<Object> revenues = (List<Object>) resultMap.get("revenues");
-        assertThat(revenues.size()).isEqualTo(1);
+        assertThat(revenues.size()).isEqualTo(0);
 
         List<Object> expenses = (List<Object>) resultMap.get("expenses");
         assertThat(expenses.size()).isEqualTo(2);
     }
 
 
-    @Order(10)
+    @Order(11)
     @Test
     @DisplayName("정리 - 204")
     void clear() throws Exception {

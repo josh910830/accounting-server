@@ -41,8 +41,9 @@ public class Ledger {
                        Account credit,
                        Money amount,
                        String description) {
-        doubleTransactions.add(
-                new DoubleTransaction(this, type, debit, credit, amount, description));
+        DoubleTransaction doubleTransaction = new DoubleTransaction(
+                this, type, debit.getName(), credit.getName(), amount, description);
+        doubleTransactions.add(doubleTransaction);
     }
 
     public List<DoubleTransaction> readDoubleTransactions() {

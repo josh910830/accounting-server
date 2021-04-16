@@ -7,6 +7,8 @@ import com.github.suloginscene.accountant.account.domain.concrete.Asset;
 import com.github.suloginscene.accountant.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountant.common.Money;
 import com.github.suloginscene.accountant.testing.base.IntegrationTest;
+import com.github.suloginscene.accountant.transaction.application.TransactionExecutingService;
+import com.github.suloginscene.accountant.transaction.application.input.TransactionExecutionInput;
 import com.github.suloginscene.exception.NotFoundException;
 import com.github.suloginscene.exception.RequestException;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +22,7 @@ import static com.github.suloginscene.accountant.testing.data.TestingAccountFact
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.DESCRIPTION;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.MONEY_ONE;
 import static com.github.suloginscene.accountant.testing.data.TestingConstants.TESTING_HOLDER;
+import static com.github.suloginscene.accountant.transaction.domain.TransactionType.TRANSFER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,6 +32,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AccountConfiguringServiceTest extends IntegrationTest {
 
     @Autowired AccountConfiguringService accountConfiguringService;
+
+    @Autowired TransactionExecutingService transactionExecutingService;
 
 
     @Test
@@ -76,11 +81,16 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     @DisplayName("계정 삭제 - 삭제")
     void deleteAccount_onSuccess_removesAccount() {
         Asset account = asset(0);
-        account.increase(MONEY_ONE, DESCRIPTION);
-        account.decrease(MONEY_ONE, DESCRIPTION);
-        given(account);
+        Asset other = asset(1);
+        given(account, other);
 
         Long id = account.getId();
+        Long o = other.getId();
+        transactionExecutingService.executeTransaction(
+                new TransactionExecutionInput(TRANSFER, o, id, MONEY_ONE, DESCRIPTION));
+        transactionExecutingService.executeTransaction(
+                new TransactionExecutionInput(TRANSFER, id, o, MONEY_ONE, DESCRIPTION));
+
         accountConfiguringService.delete(id);
 
         Executable findingAction = () -> sync(account);

@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountant.report.domain.ledger;
 
-import com.github.suloginscene.accountant.account.domain.Account;
 import com.github.suloginscene.accountant.common.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,13 +34,11 @@ public class DoubleTransaction {
     @Getter
     private DoubleTransactionType type;
 
-    @ManyToOne(fetch = LAZY)
     @Getter
-    private Account debit;
+    private String debit;
 
-    @ManyToOne(fetch = LAZY)
     @Getter
-    private Account credit;
+    private String credit;
 
     @Getter
     private Money amount;
@@ -55,8 +52,8 @@ public class DoubleTransaction {
 
     public DoubleTransaction(Ledger ledger,
                              DoubleTransactionType type,
-                             Account debit,
-                             Account credit,
+                             String debit,
+                             String credit,
                              Money amount,
                              String description) {
         this.ledger = ledger;

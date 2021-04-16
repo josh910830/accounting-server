@@ -37,8 +37,8 @@ public class LedgerData {
         public DoubleTransactionData(DoubleTransaction doubleTransaction) {
             type = doubleTransaction.getType().name();
             amount = doubleTransaction.getAmount().get();
-            debit = doubleTransaction.getDebit().getName();
-            credit = doubleTransaction.getCredit().getName();
+            debit = doubleTransaction.getDebit();
+            credit = doubleTransaction.getCredit();
             description = doubleTransaction.getDescription();
             createdAt = doubleTransaction.getCreatedAt().format(DATE_TIME);
         }
