@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.suloginscene</groupId>
-    <artifactId>accountant</artifactId>
+    <artifactId>accounting-server</artifactId>
     <version>0.0.1</version>
-    <name>accountant</name>
-    <description>Accountant Server</description>
+    <name>accounting-server</name>
+    <description>Accounting Server</description>
     <properties>
         <java.version>11</java.version>
     </properties>
