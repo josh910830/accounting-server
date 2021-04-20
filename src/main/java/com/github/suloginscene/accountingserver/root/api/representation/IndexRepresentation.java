@@ -4,9 +4,10 @@ import com.github.suloginscene.accountingserver.account.api.AccountRestControlle
 import com.github.suloginscene.accountingserver.report.api.ReportRestController;
 import com.github.suloginscene.accountingserver.root.api.RootRestController;
 import com.github.suloginscene.accountingserver.transaction.api.TransactionRestController;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static com.github.suloginscene.string.HrefAssembleUtil.href;
 
 
 public class IndexRepresentation extends RepresentationModel<IndexRepresentation> {
@@ -16,16 +17,16 @@ public class IndexRepresentation extends RepresentationModel<IndexRepresentation
 
     private IndexRepresentation() {
 
-        add(linkTo(AccountRestController.class).withRel("postAccount"));
-        add(linkTo(AccountRestController.class).withRel("getAccounts"));
+        add(Link.of(href(AccountRestController.PATH)).withRel("postAccount"));
+        add(Link.of(href(AccountRestController.PATH)).withRel("getAccounts"));
 
-        add(linkTo(TransactionRestController.class).withRel("executeTransaction"));
+        add(Link.of(href(TransactionRestController.PATH)).withRel("executeTransaction"));
 
-        add(linkTo(ReportRestController.class).slash("ledger").withRel("getLedger"));
-        add(linkTo(ReportRestController.class).slash("balance-sheet").withRel("getBalanceSheet"));
-        add(linkTo(ReportRestController.class).slash("income-statement").withRel("getIncomeStatement"));
+        add(Link.of(href(ReportRestController.PATH + "/ledger")).withRel("getLedger"));
+        add(Link.of(href(ReportRestController.PATH + "/balance-sheet")).withRel("getBalanceSheet"));
+        add(Link.of(href(ReportRestController.PATH + "/income-statement")).withRel("getIncomeStatement"));
 
-        add(linkTo(RootRestController.class).withRel("clear"));
+        add(Link.of(href(RootRestController.PATH)).withRel("clear"));
 
     }
 

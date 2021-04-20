@@ -25,6 +25,8 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class ReportRestController {
 
+    public static final String PATH = "/api/reports";
+
     private final LedgerFindingService ledgerFindingService;
     private final BalanceSheetAssemblingService balanceSheetAssemblingService;
     private final IncomeStatementAssemblingService incomeStatementAssemblingService;

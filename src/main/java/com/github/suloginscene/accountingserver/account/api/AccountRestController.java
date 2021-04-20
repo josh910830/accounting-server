@@ -18,6 +18,7 @@ import com.github.suloginscene.accountingserver.common.Holder;
 import com.github.suloginscene.accountingserver.common.Money;
 import com.github.suloginscene.security.Authenticated;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -26,13 +27,15 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static com.github.suloginscene.string.HrefAssembleUtil.href;
 
 
 @RestController
 @RequestMapping("/api/accounts")
 @RequiredArgsConstructor
 public class AccountRestController {
+
+    public static final String PATH = "/api/accounts";
 
     private final AccountAuthorityChecker accountAuthorityChecker;
 
@@ -55,7 +58,7 @@ public class AccountRestController {
         AccountCreationInput input = toInput(request, memberId);
         Long id = accountCreatingService.createAccount(input);
 
-        URI uri = linkTo(this.getClass()).slash(id).toUri();
+        URI uri = Link.of(href(PATH + "/" + id)).toUri();
         return ResponseEntity.created(uri).build();
     }
 

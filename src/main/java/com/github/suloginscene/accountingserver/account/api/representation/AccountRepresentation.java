@@ -4,11 +4,12 @@ import com.github.suloginscene.accountingserver.account.api.AccountRestControlle
 import com.github.suloginscene.accountingserver.account.application.data.AccountData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static com.github.suloginscene.string.HrefAssembleUtil.href;
 
 
 @Data @EqualsAndHashCode(callSuper = false)
@@ -28,9 +29,9 @@ public class AccountRepresentation extends RepresentationModel<AccountRepresenta
         moneyAmount = account.getMoneyAmount();
         singleTransactions = account.getSingleTransactions();
 
-        add(linkTo(AccountRestController.class).slash(id).slash("name").withRel("changeName"));
-        add(linkTo(AccountRestController.class).slash(id).slash("budget").withRel("changeBudget"));
-        add(linkTo(AccountRestController.class).slash(id).withRel("deleteAccount"));
+        add(Link.of(href(AccountRestController.PATH + "/" + id + "/name")).withRel("changeName"));
+        add(Link.of(href(AccountRestController.PATH + "/" + id + "/budget")).withRel("changeBudget"));
+        add(Link.of(href(AccountRestController.PATH + "/" + id)).withRel("deleteAccount"));
     }
 
 }

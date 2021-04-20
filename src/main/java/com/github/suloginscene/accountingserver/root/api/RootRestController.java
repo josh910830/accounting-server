@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RootRestController {
 
+    public static final String PATH = "/api";
+
     private final RootClearingService rootClearingService;
 
 

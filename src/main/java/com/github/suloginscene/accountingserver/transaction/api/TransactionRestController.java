@@ -25,6 +25,8 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class TransactionRestController {
 
+    public static final String PATH = "/api/transactions";
+
     private final AccountAuthorityChecker accountAuthorityChecker;
 
     private final TransactionExecutingService transactionExecutingService;

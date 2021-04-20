@@ -4,12 +4,13 @@ import com.github.suloginscene.accountingserver.account.api.AccountRestControlle
 import com.github.suloginscene.accountingserver.account.application.data.AccountSimpleData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static com.github.suloginscene.string.HrefAssembleUtil.href;
 
 
 @Data @EqualsAndHashCode(callSuper = false)
@@ -38,7 +39,7 @@ public class AccountsRepresentation extends RepresentationModel<AccountsRepresen
             name = account.getName();
             type = account.getType();
 
-            add(linkTo(AccountRestController.class).slash(id).withSelfRel());
+            add(Link.of(href(AccountRestController.PATH + "/" + id)).withSelfRel());
         }
 
     }
