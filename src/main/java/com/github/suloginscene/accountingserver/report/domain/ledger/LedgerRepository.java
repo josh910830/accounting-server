@@ -6,8 +6,6 @@ import com.github.suloginscene.profile.ProfileChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 
 @Component
 @RequiredArgsConstructor
@@ -17,19 +15,21 @@ public class LedgerRepository {
     private final ProfileChecker profileChecker;
 
 
-    public Ledger findByIdOrElseNewSaved(Holder holder) {
-        Optional<Ledger> optionalLedger = ledgerJpaRepository.findById(holder);
-
-        if (optionalLedger.isPresent()) {
-            return optionalLedger.get();
-        } else {
-            Ledger ledger = new Ledger(holder);
-            return ledgerJpaRepository.save(ledger);
-        }
-    }
-
     public boolean existsById(Holder holder) {
         return ledgerJpaRepository.existsById(holder);
+    }
+
+    public Ledger findById(Holder holder) {
+        return ledgerJpaRepository.findById(holder)
+                .orElseThrow(() -> new NotFoundException(Ledger.class, holder));
+    }
+
+    public Ledger save(Ledger ledger) {
+        return ledgerJpaRepository.save(ledger);
+    }
+
+    public Ledger findByIdOrElseNewSaved(Holder holder) {
+        return existsById(holder) ? findById(holder) : save(new Ledger(holder));
     }
 
     public void deleteWithChildren(Holder holder) {
@@ -38,17 +38,6 @@ public class LedgerRepository {
         ledgerJpaRepository.delete(ledger);
     }
 
-
-    public Ledger findById(Holder holder) {
-        profileChecker.checkTest();
-        return ledgerJpaRepository.findById(holder)
-                .orElseThrow(() -> new NotFoundException(Ledger.class, holder));
-    }
-
-    public void save(Ledger ledger) {
-        profileChecker.checkTest();
-        ledgerJpaRepository.save(ledger);
-    }
 
     public void deleteAll() {
         profileChecker.checkTest();

@@ -1,1 +1,88 @@
-# TODO
+### index
+GET localhost:8081/api
+Origin: http://localhost:3000
+
+### clear
+DELETE localhost:8081/api
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+
+
+### post account 1
+POST localhost:8081/api/accounts
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+Content-Type: application/json
+
+{
+  "type": "REVENUE",
+  "name": "revenue",
+  "money": 1
+}
+
+### post account 2
+POST localhost:8081/api/accounts
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+Content-Type: application/json
+
+{
+  "type": "ASSET",
+  "name": "asset",
+  "money": 1
+}
+
+
+### execute transaction
+POST localhost:8081/api/transactions
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+Content-Type: application/json
+
+{
+  "type": "SELL",
+  "sourceId": 27,
+  "destinationId": 28,
+  "amount": 1,
+  "description": "description"
+}
+
+
+### get ledger
+GET localhost:8081/api/reports/ledger
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+
+### get balance sheet
+GET localhost:8081/api/reports/balance-sheet
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+
+### get income statement
+GET localhost:8081/api/reports/income-statement?beginDate=2021-04-21&inclusiveEndDate=2021-04-21
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+
+
+### get accounts
+GET localhost:8081/api/accounts
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+
+### get account
+GET localhost:8081/api/accounts/27
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+
+### put account name
+PUT localhost:8081/api/accounts/27/name
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+Content-Type: application/json
+
+{
+  "newName": "newName"
+}
+
+### put account budget
+PUT localhost:8081/api/accounts/27/budget
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
+Content-Type: application/json
+
+{
+  "newBudget": 2
+}
+
+### delete account
+DELETE localhost:8081/api/accounts/27
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIiwiaWF0IjoxNjE5MDEzOTEzLCJleHAiOjE2MTkwMTc1MTN9.JQhmqIn4ZEr2ANyOC3T80IuNGZCjh-R1SU5ML1e6mKI
