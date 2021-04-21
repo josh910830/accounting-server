@@ -2,7 +2,7 @@ package com.github.suloginscene.accountingserver.account.application;
 
 import com.github.suloginscene.accountingserver.account.application.data.AccountData;
 import com.github.suloginscene.accountingserver.account.application.data.AccountSimpleData;
-import com.github.suloginscene.accountingserver.account.domain.concrete.Asset;
+import com.github.suloginscene.accountingserver.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountingserver.testing.base.IntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,11 +39,11 @@ class AccountFindingServiceTest extends IntegrationTest {
     @Test
     @DisplayName("계정 - 계정 데이터 반환")
     void findOne_onSuccess_returnsData() {
-        Asset asset = asset();
-        asset.increase(MONEY_ONE, DESCRIPTION);
-        given(asset);
+        Revenue revenue = revenue();
+        revenue.occur(MONEY_ONE, DESCRIPTION);
+        given(revenue);
 
-        AccountData account = accountFindingService.findAccount(asset.getId());
+        AccountData account = accountFindingService.findAccount(revenue.getId());
 
         assertThat(account.getSingleTransactions()).hasSize(1);
     }

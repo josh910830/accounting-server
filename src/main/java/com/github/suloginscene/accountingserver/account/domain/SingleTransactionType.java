@@ -3,6 +3,6 @@ package com.github.suloginscene.accountingserver.account.domain;
 
 public enum SingleTransactionType {
 
-    INCREASE, DECREASE, OCCUR
+    CREATE, INCREASE, DECREASE, OCCUR
 
 }

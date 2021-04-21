@@ -42,7 +42,7 @@ class TransactionExecutingServiceTest extends IntegrationTest {
         revenue = sync(revenue);
         asset = sync(asset);
         assertThat(revenue.readSingleTransactions()).hasSize(1);
-        assertThat(asset.readSingleTransactions()).hasSize(1);
+        assertThat(asset.readSingleTransactions()).hasSize(1 + 1);
         then(eventPublisher).should().publish(any(TransactionExecutedEvent.class));
     }
 

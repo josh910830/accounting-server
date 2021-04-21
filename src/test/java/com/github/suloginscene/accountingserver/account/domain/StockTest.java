@@ -16,6 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class StockTest {
 
     @Test
+    @DisplayName("생성 - 초기 금액 기록")
+    void create_onSuccess_writeTransaction() {
+        int base = 1;
+        Stock stock = asset(base);
+
+        assertThat(stock.readSingleTransactions()).hasSize(1);
+    }
+
+    @Test
     @DisplayName("증가 정상 - 잔고 증가")
     void increase_onSuccess_increasesBalance() {
         int base = 1;

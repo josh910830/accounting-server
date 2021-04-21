@@ -9,6 +9,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import static com.github.suloginscene.accountingserver.account.domain.SingleTransactionType.CREATE;
 import static com.github.suloginscene.accountingserver.account.domain.SingleTransactionType.DECREASE;
 import static com.github.suloginscene.accountingserver.account.domain.SingleTransactionType.INCREASE;
 import static lombok.AccessLevel.PROTECTED;
@@ -26,6 +27,8 @@ public abstract class Stock extends Account {
     protected Stock(Holder holder, String name, Money balance) {
         super(holder, name);
         this.balance = balance;
+        writeSingleTransaction(
+                new SingleTransaction(this, CREATE, balance, name));
     }
 
 

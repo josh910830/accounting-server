@@ -177,10 +177,11 @@ public class AcceptanceScenarioTest {
     @Test
     @DisplayName("계정 조회 - 200: 단식 거래기록 개수 일치")
     void getAccount() throws Exception {
-        assertAccountHasTransactions("저축 계좌", 2);
-        assertAccountHasTransactions("생활비 계좌", 4);
-        assertAccountHasTransactions("비상금 카드", 2);
-        assertAccountHasTransactions("김철수 채무", 1);
+        int stockInitLog = 1;
+        assertAccountHasTransactions("저축 계좌", stockInitLog + 2);
+        assertAccountHasTransactions("생활비 계좌", stockInitLog + 4);
+        assertAccountHasTransactions("비상금 카드", stockInitLog + 2);
+        assertAccountHasTransactions("김철수 채무", stockInitLog + 1);
         assertAccountHasTransactions("월급", 1);
         assertAccountHasTransactions("식비", 1);
         assertAccountHasTransactions("기타", 1);

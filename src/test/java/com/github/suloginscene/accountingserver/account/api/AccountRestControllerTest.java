@@ -5,6 +5,7 @@ import com.github.suloginscene.accountingserver.account.api.request.AccountCreat
 import com.github.suloginscene.accountingserver.account.api.request.AccountNameChangeRequest;
 import com.github.suloginscene.accountingserver.account.domain.concrete.Asset;
 import com.github.suloginscene.accountingserver.account.domain.concrete.Expense;
+import com.github.suloginscene.accountingserver.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountingserver.testing.base.ControllerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -101,14 +102,14 @@ class AccountRestControllerTest extends ControllerTest {
     @Test
     @DisplayName("계정 조회(정상) - 200")
     void getAccount_onSuccess_returns200() throws Exception {
-        Asset asset = asset();
-        asset.increase(MONEY_ONE, DESCRIPTION);
-        asset.increase(MONEY_ONE, DESCRIPTION);
-        asset.increase(MONEY_ONE, DESCRIPTION);
-        given(asset);
+        Revenue revenue = revenue();
+        revenue.occur(MONEY_ONE, DESCRIPTION);
+        revenue.occur(MONEY_ONE, DESCRIPTION);
+        revenue.occur(MONEY_ONE, DESCRIPTION);
+        given(revenue);
 
         ResultActions when = mockMvc.perform(
-                ofGet(URL, asset.getId()).jwt(jwt).build());
+                ofGet(URL, revenue.getId()).jwt(jwt).build());
 
         ResultActions then = when.andExpect(status().isOk())
                 .andExpect(jsonPath("id").exists())
@@ -131,12 +132,12 @@ class AccountRestControllerTest extends ControllerTest {
     @Test
     @DisplayName("계정 조회(권한) - 403")
     void getAccount_onNotOwner_returns403() throws Exception {
-        Asset asset = asset();
-        given(asset);
+        Revenue revenue = revenue();
+        given(revenue);
 
         String notOwnerJwt = jwtFactory.create(Long.MAX_VALUE);
         ResultActions when = mockMvc.perform(
-                ofGet(URL, asset.getId()).jwt(notOwnerJwt).build());
+                ofGet(URL, revenue.getId()).jwt(notOwnerJwt).build());
 
         when.andExpect(status().isForbidden());
     }
