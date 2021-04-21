@@ -9,6 +9,7 @@ import com.github.suloginscene.accountingserver.transaction.domain.impl.Transfer
 import com.github.suloginscene.exception.InternalException;
 
 
+// TODO select factory or map after thinking about multi threading
 public class TransactionServiceFactory {
 
     public static TransactionService create(TransactionType type) {

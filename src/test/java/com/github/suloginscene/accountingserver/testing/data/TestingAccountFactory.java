@@ -19,7 +19,7 @@ import static com.github.suloginscene.accountingserver.testing.data.TestingConst
 public class TestingAccountFactory {
 
     public static Asset asset() {
-        return asset(1);
+        return asset(0);
     }
 
     public static Asset asset(int balance) {
@@ -28,7 +28,7 @@ public class TestingAccountFactory {
 
 
     public static Liability liability() {
-        return liability(1);
+        return liability(0);
     }
 
     public static Liability liability(int balance) {
@@ -37,7 +37,7 @@ public class TestingAccountFactory {
 
 
     public static Revenue revenue() {
-        return revenue(1);
+        return revenue(0);
     }
 
     public static Revenue revenue(int budget) {
@@ -46,7 +46,7 @@ public class TestingAccountFactory {
 
 
     public static Expense expense() {
-        return expense(1);
+        return expense(0);
     }
 
     public static Expense expense(int budget) {
