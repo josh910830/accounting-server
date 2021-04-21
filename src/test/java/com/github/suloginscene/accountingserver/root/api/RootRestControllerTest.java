@@ -37,7 +37,6 @@ class RootRestControllerTest extends ControllerTest {
                 .andExpect(jsonPath("_links.clear").exists());
     }
 
-
     @Test
     @DisplayName("정리")
     void clear() throws Exception {
@@ -47,6 +46,20 @@ class RootRestControllerTest extends ControllerTest {
         ResultActions then = when.andExpect(status().isNoContent());
 
         then.andDo(document("clear"));
+    }
+
+    @Test
+    @DisplayName("오류")
+    void error() throws Exception {
+        mockMvc.perform(ofGet("/error").build())
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("파비콘")
+    void favicon() throws Exception {
+        mockMvc.perform(ofGet("/favicon.ico").build())
+                .andExpect(status().isOk());
     }
 
 }
