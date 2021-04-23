@@ -30,8 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web
                 .ignoring()
-                .mvcMatchers(GET, "/docs/index.html")
-                .mvcMatchers(GET, "/error")
+                .mvcMatchers(GET, "/", "/error")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
