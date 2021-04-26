@@ -32,11 +32,6 @@ public abstract class Stock extends Account {
     }
 
 
-    public boolean hasEmptyBalance() {
-        return balance.get() == 0;
-    }
-
-
     public void increase(Money amount, String description) {
         balance = Money.add(balance, amount);
 
@@ -49,6 +44,13 @@ public abstract class Stock extends Account {
 
         writeSingleTransaction(
                 new SingleTransaction(this, DECREASE, amount, description));
+    }
+
+
+    public void checkEmpty() {
+        if (balance.get() != 0) {
+            throw new StockNotEmptyException(balance);
+        }
     }
 
 }

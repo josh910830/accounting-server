@@ -43,8 +43,8 @@ public class TransactionRestController {
     @PostMapping
     ResponseEntity<Void> executeTransaction(@RequestBody @Valid TransactionExecutionRequest request,
                                             @Authenticated Long memberId) {
-        Long sourceId = request.getSourceId();
-        accountAuthorityChecker.checkAuthority(sourceId, memberId);
+        accountAuthorityChecker.checkAuthority(request.getSourceId(), memberId);
+        accountAuthorityChecker.checkAuthority(request.getDestinationId(), memberId);
 
         TransactionExecutionInput input = toInput(request);
         transactionExecutingService.executeTransaction(input);

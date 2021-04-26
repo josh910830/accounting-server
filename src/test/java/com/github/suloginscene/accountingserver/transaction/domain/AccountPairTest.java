@@ -7,7 +7,7 @@ import com.github.suloginscene.accountingserver.account.domain.concrete.Asset;
 import com.github.suloginscene.accountingserver.account.domain.concrete.Expense;
 import com.github.suloginscene.accountingserver.account.domain.param.AccountCreationParameter;
 import com.github.suloginscene.accountingserver.common.Holder;
-import com.github.suloginscene.exception.RequestException;
+import com.github.suloginscene.exception.InternalException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -36,13 +36,13 @@ class AccountPairTest {
     }
 
     @Test
-    @DisplayName("계정 주인 불일치 - 요청 예외")
+    @DisplayName("계정 주인 불일치 - 서버 예외")
     void create_onHolderNotMatch_throwsException() {
         Account source = createAccount(ASSET, 1L);
         Account destination = createAccount(EXPENSE, 2L);
         Executable action = () -> AccountPair.of(source, destination);
 
-        assertThrows(RequestException.class, action);
+        assertThrows(InternalException.class, action);
     }
 
     private Account createAccount(AccountType type, long holderId) {

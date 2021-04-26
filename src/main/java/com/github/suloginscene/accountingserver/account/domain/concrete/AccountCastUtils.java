@@ -3,7 +3,6 @@ package com.github.suloginscene.accountingserver.account.domain.concrete;
 import com.github.suloginscene.accountingserver.account.domain.Account;
 import com.github.suloginscene.accountingserver.account.domain.Flow;
 import com.github.suloginscene.accountingserver.account.domain.Stock;
-import com.github.suloginscene.exception.RequestException;
 
 
 public class AccountCastUtils {
@@ -40,9 +39,9 @@ public class AccountCastUtils {
     }
 
 
-    private static void checkAssignable(Account object, Class<? extends Account> targetClass) {
-        if (!targetClass.isAssignableFrom(object.getClass())) {
-            throw new RequestException("account cannot cast to target type");
+    private static void checkAssignable(Account account, Class<? extends Account> targetClass) {
+        if (!targetClass.isAssignableFrom(account.getClass())) {
+            throw new AccountCastingException(account.getId(), targetClass.getSimpleName());
         }
     }
 

@@ -6,7 +6,6 @@ import com.github.suloginscene.accountingserver.account.domain.Flow;
 import com.github.suloginscene.accountingserver.account.domain.Stock;
 import com.github.suloginscene.accountingserver.common.Holder;
 import com.github.suloginscene.accountingserver.common.Money;
-import com.github.suloginscene.exception.RequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,16 +41,10 @@ public class AccountConfiguringService {
     }
 
     private void checkDeletable(Account account) {
-        if (!isDeletable(account)) {
-            throw new RequestException("account is not deletable");
-        }
-    }
-
-    private boolean isDeletable(Account account) {
-        if (account instanceof Flow) return true;
+        if (account instanceof Flow) return;
 
         Stock stock = toStock(account);
-        return stock.hasEmptyBalance();
+        stock.checkEmpty();
     }
 
 

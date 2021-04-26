@@ -1,6 +1,5 @@
 package com.github.suloginscene.accountingserver.common;
 
-import com.github.suloginscene.exception.RequestException;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -20,7 +19,7 @@ public class Money {
 
     private Money(int amount) {
         if (amount < 0) {
-            throw new RequestException("money amount is negative");
+            throw new NegativeMoneyException(amount);
         }
         this.amount = amount;
     }
