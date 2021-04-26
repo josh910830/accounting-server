@@ -1,9 +1,14 @@
 package com.github.suloginscene.accountingserver.filter;
 
-import com.github.suloginscene.accountingserver.testing.base.ControllerTest;
+import com.github.suloginscene.jwt.JwtFactory;
+import com.github.suloginscene.property.SecurityProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.suloginscene.test.RequestBuilder.ofGet;
@@ -14,15 +19,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @DisplayName("CORS 필터")
-public class CorsFilterTest extends ControllerTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+public class CorsFilterTest {
 
     static final String URL = "/404";
 
+    @Autowired MockMvc mockMvc;
+    @Autowired JwtFactory jwtFactory;
+    @Autowired SecurityProperties securityProperties;
+
+    String jwt;
     String validOrigin;
     String invalidOrigin;
 
     @BeforeEach
     void setup() {
+        jwt = jwtFactory.create(1L);
         validOrigin = securityProperties.getOrigins().split(",")[0];
         invalidOrigin = "https://invalid.com";
     }

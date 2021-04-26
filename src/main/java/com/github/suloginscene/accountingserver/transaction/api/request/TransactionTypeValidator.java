@@ -34,8 +34,8 @@ public class TransactionTypeValidator extends AbstractValidator {
     }
 
     @Override
-    protected String rejectedReason() {
-        return "부적절한 거래 유형";
+    protected String rejectMessage() {
+        return "부적절한 거래 유형입니다.";
     }
 
     @Override

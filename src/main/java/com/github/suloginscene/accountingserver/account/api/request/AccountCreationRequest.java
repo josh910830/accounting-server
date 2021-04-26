@@ -13,15 +13,15 @@ import static com.github.suloginscene.accountingserver.account.api.request.Accou
 @Data
 public class AccountCreationRequest {
 
-    @NotNull
+    @NotNull(message = "계정 유형을 입력하십시오.")
     private final String type;
 
-    @NotNull
+    @NotNull(message = "계정 이름을 입력하십시오.")
     @Pattern(regexp = NAME_REGEXP, message = NAME_MESSAGE)
     private final String name;
 
     @NotNull
-    @Min(value = 0, message = "최소 0")
+    @Min(value = 0, message = "금액은 음수일 수 없습니다.")
     private final Integer money;
 
 }

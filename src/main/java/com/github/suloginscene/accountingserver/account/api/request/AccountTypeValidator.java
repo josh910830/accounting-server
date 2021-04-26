@@ -34,8 +34,8 @@ public class AccountTypeValidator extends AbstractValidator {
     }
 
     @Override
-    protected String rejectedReason() {
-        return "부적절한 계정 유형";
+    protected String rejectMessage() {
+        return "부적절한 계정 유형입니다.";
     }
 
     @Override

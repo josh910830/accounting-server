@@ -17,7 +17,7 @@ import static com.github.suloginscene.accountingserver.account.api.request.Accou
 @NoArgsConstructor @AllArgsConstructor
 public class AccountNameChangeRequest {
 
-    @NotNull
+    @NotNull(message = "새 계정 이름을 입력하십시오.")
     @Pattern(regexp = NAME_REGEXP, message = NAME_MESSAGE)
     @Getter
     private String newName;

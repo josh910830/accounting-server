@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor @AllArgsConstructor
 public class AccountBudgetChangeRequest {
 
-    @NotNull
-    @Min(value = 0, message = "최소 0")
+    @NotNull(message = "새 예산을 입력하십시오.")
+    @Min(value = 0, message = "예산은 음수일 수 없습니다.")
     @Getter
     private Integer newBudget;
 
