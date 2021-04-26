@@ -12,8 +12,7 @@ import com.github.suloginscene.accountingserver.report.listener.TransactionInfor
 import com.github.suloginscene.accountingserver.testing.base.IntegrationTest;
 import com.github.suloginscene.accountingserver.transaction.domain.AccountPair;
 import com.github.suloginscene.accountingserver.transaction.domain.TransactionExecutedEvent;
-import com.github.suloginscene.accountingserver.transaction.domain.TransactionService;
-import com.github.suloginscene.accountingserver.transaction.domain.TransactionServiceFactory;
+import com.github.suloginscene.accountingserver.transaction.domain.impl.SellTransactionService;
 import com.github.suloginscene.accountingserver.transaction.domain.param.TransactionExecutionParameter;
 import com.github.suloginscene.exception.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +27,6 @@ import static com.github.suloginscene.accountingserver.testing.data.TestingAccou
 import static com.github.suloginscene.accountingserver.testing.data.TestingConstants.DESCRIPTION;
 import static com.github.suloginscene.accountingserver.testing.data.TestingConstants.MONEY_ONE;
 import static com.github.suloginscene.accountingserver.testing.data.TestingConstants.TESTING_HOLDER;
-import static com.github.suloginscene.accountingserver.transaction.domain.TransactionType.SELL;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.then;
 
@@ -49,8 +47,7 @@ class RootClearingServiceTest extends IntegrationTest {
         Revenue revenue = revenue();
         AccountPair pair = AccountPair.of(revenue, asset);
         TransactionExecutionParameter param = new TransactionExecutionParameter(pair, MONEY_ONE, DESCRIPTION);
-        TransactionService sell = TransactionServiceFactory.create(SELL);
-        TransactionExecutedEvent event = sell.execute(param);
+        TransactionExecutedEvent event = new SellTransactionService().execute(param);
         given(asset, revenue);
 
         TransactionInformation information = mappedInformation(event);
