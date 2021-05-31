@@ -98,18 +98,6 @@ class AccountConfiguringServiceTest extends IntegrationTest {
     }
 
     @Test
-    @DisplayName("계정 삭제(저량 계정 잔고 남음) - 요청 예외")
-    void deleteAccount_onBalanceRemain_throwsException() {
-        Account account = asset(1);
-        given(account);
-
-        Long id = account.getId();
-        Executable action = () -> accountConfiguringService.delete(id);
-
-        assertThrows(RequestException.class, action);
-    }
-
-    @Test
     @DisplayName("소유자 전 계정 강제 삭제(계정 존재) - 성공")
     void deleteAccounts_onExistent_deletes() {
         Asset asset = asset(0);

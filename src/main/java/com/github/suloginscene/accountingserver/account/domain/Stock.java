@@ -46,11 +46,4 @@ public abstract class Stock extends Account {
                 new SingleTransaction(this, DECREASE, amount, description));
     }
 
-
-    public void checkEmpty() {
-        if (balance.get() != 0) {
-            throw new StockNotEmptyException(balance);
-        }
-    }
-
 }

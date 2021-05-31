@@ -9,7 +9,6 @@ import org.junit.jupiter.api.function.Executable;
 import static com.github.suloginscene.accountingserver.testing.data.TestingAccountFactory.asset;
 import static com.github.suloginscene.accountingserver.testing.data.TestingConstants.DESCRIPTION;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -59,28 +58,6 @@ class StockTest {
         Executable action = () -> stock.decrease(Money.of(amount), DESCRIPTION);
 
         assertThrows(RequestException.class, action);
-    }
-
-    @Test
-    @DisplayName("잔액 없음 확인 정상 - 예외 미발생")
-    void checkEmpty_onSuccess_doesNotThrowException() {
-        int base = 0;
-        Stock stock = asset(base);
-
-        Executable executable = stock::checkEmpty;
-
-        assertDoesNotThrow(executable);
-    }
-
-    @Test
-    @DisplayName("잔액 없음 확인 실패 - 요청 예외")
-    void checkEmpty_onFail_throwsException() {
-        int base = 1;
-        Stock stock = asset(base);
-
-        Executable executable = stock::checkEmpty;
-
-        assertThrows(RequestException.class, executable);
     }
 
 }
