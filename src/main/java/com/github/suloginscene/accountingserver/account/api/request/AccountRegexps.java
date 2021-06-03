@@ -1,6 +1,11 @@
 package com.github.suloginscene.accountingserver.account.api.request;
 
+import lombok.NoArgsConstructor;
 
+import static lombok.AccessLevel.PRIVATE;
+
+
+@NoArgsConstructor(access = PRIVATE)
 public class AccountRegexps {
 
     public static final String NAME_REGEXP = "^[가-힣a-zA-Z0-9\\s]{1,8}$";

@@ -3,8 +3,12 @@ package com.github.suloginscene.accountingserver.account.domain.concrete;
 import com.github.suloginscene.accountingserver.account.domain.Account;
 import com.github.suloginscene.accountingserver.account.domain.Flow;
 import com.github.suloginscene.accountingserver.account.domain.Stock;
+import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
 
 
+@NoArgsConstructor(access = PRIVATE)
 public class AccountCastUtils {
 
     public static Asset toAsset(Account account) {

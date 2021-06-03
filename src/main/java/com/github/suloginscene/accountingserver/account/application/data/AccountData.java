@@ -5,7 +5,6 @@ import com.github.suloginscene.accountingserver.account.domain.Flow;
 import com.github.suloginscene.accountingserver.account.domain.SingleTransaction;
 import com.github.suloginscene.accountingserver.account.domain.Stock;
 import com.github.suloginscene.accountingserver.common.Money;
-import com.github.suloginscene.exception.InternalException;
 import lombok.Data;
 
 import java.util.List;
@@ -38,12 +37,10 @@ public class AccountData {
         if (account instanceof Stock) {
             Stock stock = (Stock) account;
             return stock.getBalance();
-        }
-        if (account instanceof Flow) {
+        } else {
             Flow flow = (Flow) account;
             return flow.getBudget();
         }
-        throw new InternalException("account is nor stock or flow");
     }
 
 

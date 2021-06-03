@@ -7,9 +7,15 @@ import com.github.suloginscene.accountingserver.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountingserver.account.domain.param.AccountCreationParameter;
 import com.github.suloginscene.accountingserver.common.Holder;
 import com.github.suloginscene.accountingserver.common.Money;
-import com.github.suloginscene.exception.InternalException;
+import lombok.NoArgsConstructor;
+
+import static com.github.suloginscene.accountingserver.account.domain.AccountType.ASSET;
+import static com.github.suloginscene.accountingserver.account.domain.AccountType.LIABILITY;
+import static com.github.suloginscene.accountingserver.account.domain.AccountType.REVENUE;
+import static lombok.AccessLevel.PRIVATE;
 
 
+@NoArgsConstructor(access = PRIVATE)
 public class AccountFactory {
 
     public static Account create(AccountCreationParameter parameters) {
@@ -17,18 +23,11 @@ public class AccountFactory {
         Holder holder = parameters.getHolder();
         String name = parameters.getName();
         Money money = parameters.getMoney();
-        switch (type) {
-            case ASSET:
-                return new Asset(holder, name, money);
-            case LIABILITY:
-                return new Liability(holder, name, money);
-            case REVENUE:
-                return new Revenue(holder, name, money);
-            case EXPENSE:
-                return new Expense(holder, name, money);
-            default:
-                throw new InternalException("enum is not handled");
-        }
+
+        if (type.equals(ASSET)) return new Asset(holder, name, money);
+        if (type.equals(LIABILITY)) return new Liability(holder, name, money);
+        if (type.equals(REVENUE)) return new Revenue(holder, name, money);
+        return new Expense(holder, name, money);
     }
 
 }

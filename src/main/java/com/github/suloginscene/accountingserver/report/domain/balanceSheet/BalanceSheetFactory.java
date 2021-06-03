@@ -4,6 +4,7 @@ import com.github.suloginscene.accountingserver.account.domain.Stock;
 import com.github.suloginscene.accountingserver.account.domain.concrete.Asset;
 import com.github.suloginscene.accountingserver.account.domain.concrete.Liability;
 import com.github.suloginscene.accountingserver.common.Money;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.Map;
 import static com.github.suloginscene.accountingserver.report.domain.balanceSheet.BalanceSheetKey.ASSET_SUM;
 import static com.github.suloginscene.accountingserver.report.domain.balanceSheet.BalanceSheetKey.LIABILITY_SUM;
 import static com.github.suloginscene.accountingserver.report.domain.balanceSheet.BalanceSheetKey.NET;
+import static lombok.AccessLevel.PRIVATE;
 
 
+@NoArgsConstructor(access = PRIVATE)
 public class BalanceSheetFactory {
 
     public static BalanceSheet create(List<Asset> assets, List<Liability> liabilities) {

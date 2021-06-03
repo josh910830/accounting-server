@@ -5,7 +5,6 @@ import com.github.suloginscene.accountingserver.common.Holder;
 import com.github.suloginscene.accountingserver.common.Money;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Entity;
@@ -20,7 +19,6 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-@ToString(of = "holder")
 public class Ledger {
 
     @Id

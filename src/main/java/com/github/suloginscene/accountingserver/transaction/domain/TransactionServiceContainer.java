@@ -6,7 +6,6 @@ import com.github.suloginscene.accountingserver.transaction.domain.impl.Purchase
 import com.github.suloginscene.accountingserver.transaction.domain.impl.RepayTransactionService;
 import com.github.suloginscene.accountingserver.transaction.domain.impl.SellTransactionService;
 import com.github.suloginscene.accountingserver.transaction.domain.impl.TransferTransactionService;
-import com.github.suloginscene.exception.InternalException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -37,9 +36,7 @@ public class TransactionServiceContainer {
     }
 
     public TransactionService get(TransactionType type) {
-        TransactionService transactionService = map.get(type);
-        if (transactionService == null) throw new InternalException("none existent transaction type");
-        return transactionService;
+        return map.get(type);
     }
 
 }

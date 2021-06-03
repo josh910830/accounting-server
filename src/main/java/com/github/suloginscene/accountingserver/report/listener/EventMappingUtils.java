@@ -6,8 +6,12 @@ import com.github.suloginscene.accountingserver.report.domain.ledger.DoubleTrans
 import com.github.suloginscene.accountingserver.transaction.domain.AccountPair;
 import com.github.suloginscene.accountingserver.transaction.domain.TransactionExecutedEvent;
 import com.github.suloginscene.accountingserver.transaction.domain.TransactionType;
+import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
 
 
+@NoArgsConstructor(access = PRIVATE)
 public class EventMappingUtils {
 
     public static TransactionInformation mappedInformation(TransactionExecutedEvent event) {

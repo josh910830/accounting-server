@@ -6,12 +6,16 @@ import com.github.suloginscene.accountingserver.account.domain.concrete.Revenue;
 import com.github.suloginscene.accountingserver.common.Money;
 import com.github.suloginscene.time.DateRange;
 import com.github.suloginscene.time.TimeRange;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lombok.AccessLevel.PRIVATE;
 
+
+@NoArgsConstructor(access = PRIVATE)
 public class IncomeStatementFactory {
 
     public static IncomeStatement create(DateRange dateRange, List<Revenue> revenues, List<Expense> expenses) {
