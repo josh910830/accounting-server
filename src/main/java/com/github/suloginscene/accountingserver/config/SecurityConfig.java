@@ -1,6 +1,7 @@
 package com.github.suloginscene.accountingserver.config;
 
 import com.github.suloginscene.jwt.JwtReader;
+import com.github.suloginscene.security.DefaultCorsConfigurationSource;
 import com.github.suloginscene.security.JwtSecurityFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -10,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 import static com.github.suloginscene.security.Authorities.MEMBER;
 import static org.springframework.http.HttpMethod.GET;
@@ -22,7 +22,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtReader jwtReader;
-    private final CorsConfigurationSource corsConfigurationSource;
+    private final DefaultCorsConfigurationSource corsConfigurationSource;
     private final AccessDeniedHandler accessDeniedHandler;
 
 

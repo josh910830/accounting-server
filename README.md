@@ -1,4 +1,7 @@
-# 회계 서버 [![Build Status](https://travis-ci.com/suloginscene/accounting-server.svg?branch=master)](https://travis-ci.com/suloginscene/accounting-server)
+# 회계 서버
+
+[![Build Status](https://travis-ci.com/suloginscene/accounting-server.svg?branch=master)](https://travis-ci.com/suloginscene/accounting-server)
+[![Coverage Status](https://coveralls.io/repos/github/suloginscene/accounting-server/badge.svg?branch=master)](https://coveralls.io/github/suloginscene/accounting-server?branch=master)
 
 API 서버 / 개인 / 2021. 3 - 4 / [웹사이트](https://scene-cho.com) [API문서](https://accounting.scene-cho.com)  
 자바, 스프링, JPA / 도커, ec2, nginx, https
